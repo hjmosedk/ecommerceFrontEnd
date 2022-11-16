@@ -1,0 +1,21 @@
+<!-- carousel -->
+<div class="carouselContainer">
+  <div class="carousel">
+    <ng-container *ngFor="let content of content; let i = index">
+      <img
+        *ngIf="i === currentSlide"
+        [src]="content"
+        class="slide"
+        @carouselAnimation
+      />
+    </ng-container>
+
+    <!-- controls -->
+    <button mat-icon-button class="control prev" (click)="onPreviousClick()">
+      <mat-icon class="arrow left">chevron-right</mat-icon>
+    </button>
+    <button mat-icon-button class="control next" (click)="onNextClick()">
+      <mat-icon class="arrow right">chevron-left</mat-icon>
+    </button>
+  </div>
+</div>
