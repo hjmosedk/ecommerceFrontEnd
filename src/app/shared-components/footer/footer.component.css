@@ -1,0 +1,11 @@
+.spacer-small {
+  flex: 1 1 auto;
+}
+
+.alignRight {
+  align-content: flex-end;
+}
+
+a {
+  padding-left: 5px;
+}
