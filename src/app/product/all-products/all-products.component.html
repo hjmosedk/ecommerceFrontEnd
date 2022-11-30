@@ -1,0 +1,13 @@
+<app-carousel [content]="carouselContent"></app-carousel>
+<!-- * END RAINBOW BABY DRAGON CAROUSEL -->
+<!-- * RAINBOW BABY DRAGON SPLITTER BAR-->
+<app-splitterbar></app-splitterbar>
+<!-- * END RAINBOW BABY DRAGON SPLITTER BAR-->
+<!-- TODO FOR TESTING-->
+<div class="productRow">
+  <app-product-card
+    *ngFor="let product of allProduct"
+    [product]="product"
+  ></app-product-card>
+</div>
+<!-- catagary section start -->

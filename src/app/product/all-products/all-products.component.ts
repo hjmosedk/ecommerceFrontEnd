@@ -1,13 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Product } from 'src/types/productTypes';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
+  selector: 'app-all-products',
+  templateUrl: './all-products.component.html',
+  styleUrls: ['./all-products.component.css'],
 })
-export class AppComponent {
-  title = 'Rainbow Baby Dragon Shop';
-
+export class AllProductsComponent {
   image1 =
     'https://images.unsplash.com/photo-1567653418876-5bb0e566e1c2?ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80';
   image2 =
@@ -17,9 +16,9 @@ export class AppComponent {
   image4 =
     'https://images.unsplash.com/photo-1551410224-699683e15636?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2000&q=80';
 
-  carouselItems = [this.image1, this.image2, this.image3, this.image4];
+  carouselContent = [this.image1, this.image2, this.image3, this.image4];
 
-  allItems = [
+  allProduct = [
     {
       title: 'Mobile',
       image: 'assets/images/mobile-img.png',

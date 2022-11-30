@@ -1,0 +1,58 @@
+.cardContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.card {
+  height: 100%;
+  max-width: 350px;
+  margin: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cardHeader {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.spacer-small {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+img {
+  padding: 25px;
+  width: 300px;
+  height: 400px;
+}
+
+.cardContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.save {
+  background-color: coral;
+  text-align: center;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.save h1 {
+  margin: 0;
+}
+
+.price {
+  margin: 0;
+}
+
+.spacer {
+  height: 32px;
+}

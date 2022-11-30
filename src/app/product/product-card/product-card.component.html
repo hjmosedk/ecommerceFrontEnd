@@ -1,0 +1,30 @@
+<mat-card class="card">
+  <mat-card-header>
+    <div class="cardHeader">
+      <mat-card-title>{{ product.title }}</mat-card-title>
+      <mat-card-subtitle>{{ product.brand }}</mat-card-subtitle>
+    </div>
+  </mat-card-header>
+  <img mat-card-image [src]="product.image" [alt]="product.title" />
+  <mat-card-content>
+    <div class="cardContent">
+      <div *ngIf="product.onSale; else noSale" class="save">
+        <h1>Save 588</h1>
+      </div>
+      <ng-template #noSale> <div class="spacer"></div></ng-template>
+      <div class="price">
+        <h2>{{ product.price }}</h2>
+      </div>
+      <p>{{ product.description }}</p>
+    </div>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="primary">
+      Add To Cart <mat-icon>shopping_cart</mat-icon>
+    </button>
+    <span class="spacer-small"></span>
+    <button mat-raised-button color="accent">
+      Write Review <mat-icon>edit</mat-icon>
+    </button>
+  </mat-card-actions>
+</mat-card>

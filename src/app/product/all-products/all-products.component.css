@@ -1,0 +1,10 @@
+.mainContainer {
+  padding-right: 2em;
+  padding-left: 2em;
+  padding-top: 10px;
+}
+
+.productRow {
+  display: flex;
+  flex-direction: row;
+}

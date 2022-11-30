@@ -18,7 +18,7 @@ import { fadeIn, fadeOut } from './carousel.animations';
   ],
 })
 export class CarouselComponent {
-  @Input() content!: any[];
+  @Input() content!: string[];
 
   currentSlide = 0;
 
