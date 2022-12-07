@@ -1,11 +1,15 @@
 <mat-card class="card">
   <mat-card-header>
     <div class="cardHeader">
-      <mat-card-title>{{ product.title }}</mat-card-title>
+      <mat-card-title>{{ product.name }}</mat-card-title>
       <mat-card-subtitle>{{ product.brand }}</mat-card-subtitle>
     </div>
   </mat-card-header>
-  <img mat-card-image [src]="product.image" [alt]="product.title" />
+  <img
+    mat-card-image
+    src="assets/images/computer-img.png"
+    [alt]="product.name"
+  />
   <mat-card-content>
     <div class="cardContent">
       <div *ngIf="product.onSale; else noSale" class="save">
@@ -13,7 +17,7 @@
       </div>
       <ng-template #noSale> <div class="spacer"></div></ng-template>
       <div class="price">
-        <h2>{{ product.price }}</h2>
+        <h2>{{ calculatePrice(product.price, product.currency) }}</h2>
       </div>
       <p>{{ product.description }}</p>
     </div>
