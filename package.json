@@ -12,7 +12,9 @@
     "release:minor": "standard-version --release-as minor",
     "release:patch": "standard-version --release-as patch",
     "release:major": "standard-version --release-as major",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run"
   },
   "private": true,
   "dependencies": {
@@ -45,6 +47,7 @@
     "@types/jasmine": "~4.3.0",
     "@typescript-eslint/eslint-plugin": "^5.44.0",
     "@typescript-eslint/parser": "^5.44.0",
+    "cypress": "^11.2.0",
     "eslint": "^8.28.0",
     "husky": "^8.0.2",
     "jasmine-core": "~4.5.0",
