@@ -5,8 +5,5 @@
 <!-- * END RAINBOW BABY DRAGON SPLITTER BAR-->
 <!-- TODO FOR TESTING-->
 <div class="productRow">
-  <app-product-card
-    *ngFor="let product of allProduct"
-    [product]="product"
-  ></app-product-card>
+  <app-product-card [products]="allProducts$"></app-product-card>
 </div>

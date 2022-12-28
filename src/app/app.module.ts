@@ -4,11 +4,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 
-// Styling and components for frontend
-
 //Internal Modules
 import { ProductModule } from './product/product.module';
 import { SharedComponentsModule } from './shared-components/shared-components.module';
+
+import { EffectsModule } from '@ngrx/effects';
+
+//State Components
+import { StoreModule } from '@ngrx/store';
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,6 +21,8 @@ import { SharedComponentsModule } from './shared-components/shared-components.mo
     ProductModule,
     SharedComponentsModule,
     HttpClientModule,
+    StoreModule.forRoot({}),
+    EffectsModule.forRoot([]),
   ],
   providers: [],
   bootstrap: [AppComponent],

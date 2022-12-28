@@ -1,6 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Product } from 'src/types/productTypes';
+import { Component, Input, OnInit, Output } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Product } from 'src/app/product/types/productTypes';
 import { ProductService } from '../product.service';
+import { Observable } from 'rxjs';
+import { ProductsActions } from './state/all-products.actions';
+import { selectListOfAllProducts } from './state/all-products.selectors';
 
 @Component({
   selector: 'app-all-products',
@@ -8,7 +12,10 @@ import { ProductService } from '../product.service';
   styleUrls: ['./all-products.component.css'],
 })
 export class AllProductsComponent implements OnInit {
-  constructor(private productService: ProductService) {}
+  allProducts$: any;
+
+  constructor(private store: Store) {}
+
   image1 =
     'https://images.unsplash.com/photo-1567653418876-5bb0e566e1c2?ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80';
   image2 =
@@ -18,16 +25,10 @@ export class AllProductsComponent implements OnInit {
   image4 =
     'https://images.unsplash.com/photo-1551410224-699683e15636?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2000&q=80';
 
-  allProduct: Product[] = [];
+  //allProduct: Product[] = [];
   carouselContent = [this.image1, this.image2, this.image3, this.image4];
 
-  getProducts(): void {
-    this.productService
-      .getAllProducts()
-      .subscribe((product) => (this.allProduct = product));
-  }
-
   ngOnInit() {
-    this.getProducts();
+    this.store.dispatch(ProductsActions.get_all_products());
   }
 }
