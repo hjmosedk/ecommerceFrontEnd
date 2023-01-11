@@ -4,6 +4,7 @@ import { ProductsActions } from './all-products.actions';
 import { ProductService } from '../../product.service';
 import { of } from 'rxjs';
 import { catchError, mergeMap, switchMap, map } from 'rxjs/operators';
+import { Product } from '../../types/productTypes';
 
 @Injectable()
 export class AllProductsEffects {
@@ -18,18 +19,14 @@ export class AllProductsEffects {
       mergeMap(() =>
         this.productsService.getAllProducts().pipe(
           map(
-            (data: any) =>
+            (data: Product[]) =>
               ProductsActions.get_all_product_success({
-                payload: {
-                  products: data,
-                },
+                payload: data,
               }),
             catchError((error) =>
               of(
                 ProductsActions.get_all_product_error({
-                  payload: {
-                    products: [],
-                  },
+                  payload: error,
                 })
               )
             )

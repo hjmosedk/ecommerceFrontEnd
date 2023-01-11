@@ -1,5 +1,10 @@
-import { AllProductsState } from '../product/all-products/state/all-products';
+import { Product } from '../product/types/productTypes';
 
 export interface AppState {
-  allProducts: AllProductsState;
+  products: Products;
+}
+
+export interface Products {
+  product: Product | {};
+  productList: Product[] | [];
 }

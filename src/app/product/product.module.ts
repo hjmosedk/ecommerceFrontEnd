@@ -7,7 +7,7 @@ import { ProductCardComponent } from './product-card/product-card.component';
 import { MatCardModule } from '@angular/material/card';
 import { AllProductsComponent } from './all-products/all-products.component';
 import { StoreModule } from '@ngrx/store';
-import { allProductsReducer } from './all-products/state/all-products.reducers';
+import { productsFeature } from './all-products/state/all-products.reducers';
 import { EffectsModule } from '@ngrx/effects';
 import { AllProductsEffects } from './all-products/state/all-products.effect';
 
@@ -18,7 +18,7 @@ import { AllProductsEffects } from './all-products/state/all-products.effect';
     SharedComponentsModule,
     BrowserAnimationsModule,
     MatCardModule,
-    StoreModule.forFeature('allProducts', allProductsReducer),
+    StoreModule.forFeature(productsFeature),
     EffectsModule.forFeature([AllProductsEffects]),
   ],
   exports: [

@@ -5,5 +5,8 @@
 <!-- * END RAINBOW BABY DRAGON SPLITTER BAR-->
 <!-- TODO FOR TESTING-->
 <div class="productRow">
-  <app-product-card [products]="allProducts$"></app-product-card>
+  <app-product-card
+    *ngFor="let product of productList$ | async; index as i"
+    [product]="product"
+  ></app-product-card>
 </div>
