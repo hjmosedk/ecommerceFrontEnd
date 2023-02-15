@@ -8,19 +8,27 @@ import { MatCardModule } from '@angular/material/card';
 import { AllProductsComponent } from './all-products/all-products.component';
 import { StoreModule } from '@ngrx/store';
 import { productsFeature } from './state/all-products.reducers';
+import { productFeature } from './state/product.reducers';
 import { EffectsModule } from '@ngrx/effects';
+import { ProductEffects } from './state/product.effect';
 import { AllProductsEffects } from './state/all-products.effect';
 import { ProductComponent } from './product/product.component';
 
 @NgModule({
-  declarations: [CarouselComponent, ProductCardComponent, AllProductsComponent, ProductComponent],
+  declarations: [
+    CarouselComponent,
+    ProductCardComponent,
+    AllProductsComponent,
+    ProductComponent,
+  ],
   imports: [
     CommonModule,
     SharedComponentsModule,
     BrowserAnimationsModule,
     MatCardModule,
     StoreModule.forFeature(productsFeature),
-    EffectsModule.forFeature([AllProductsEffects]),
+    StoreModule.forFeature(productFeature),
+    EffectsModule.forFeature([AllProductsEffects, ProductEffects]),
   ],
   exports: [
     CarouselComponent,

@@ -6,9 +6,10 @@ export const initialState: ProductState = {
   product: {},
 };
 
-export const productsReducer = createReducer<ProductState>(
+export const productReducer = createReducer<ProductState>(
   initialState,
   on(ProductActions.getProductSuccess, (state, { payload }): ProductState => {
+    console.log(payload);
     const newState = { ...state };
     newState.product = payload;
     return newState;
@@ -21,10 +22,10 @@ export const productsReducer = createReducer<ProductState>(
   )
 );
 
-export const productsFeature = createFeature({
+export const productFeature = createFeature({
   name: 'product',
-  reducer: productsReducer,
+  reducer: productReducer,
 });
 
 export const { name, reducer, selectProduct, selectProductState } =
-  productsFeature;
+  productFeature;
