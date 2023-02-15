@@ -19,7 +19,7 @@ export class ProductCardComponent {
     picture: '',
     brand: '',
     quantity: 0,
-    percentage: '',
+    percentage: 25,
     onSale: false,
     currency: 'DKK',
   };

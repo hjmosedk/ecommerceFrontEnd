@@ -10,6 +10,6 @@ export interface Product {
   picture: string;
   quantity: number;
   brand: string;
-  percentage: string;
+  percentage: number;
   onSale: boolean;
 }

@@ -1,10 +1,8 @@
-import { Action, createReducer, on, createFeature } from '@ngrx/store';
+import { createReducer, on, createFeature } from '@ngrx/store';
 import { ProductsActions } from './all-products.actions';
-import { AppState } from 'src/app/state/app.state';
 import { Products } from 'src/app/state/app.state';
 
 export const initialState: Products = {
-  product: {},
   productList: [],
 };
 
@@ -31,10 +29,5 @@ export const productsFeature = createFeature({
   reducer: productsReducer,
 });
 
-export const {
-  name,
-  reducer,
-  selectProductList,
-  selectProduct,
-  selectProductsState,
-} = productsFeature;
+export const { name, reducer, selectProductList, selectProductsState } =
+  productsFeature;

@@ -29,4 +29,10 @@ export class ProductService {
       .get<Product[]>('http://192.168.1.90:3000/products')
       .pipe(catchError(this.handleError));
   }
+
+  getProduct(id: string): Observable<Product> {
+    return this.http
+      .get<Product>(`http://192.168.1.90:3000/products/${id}`)
+      .pipe(catchError(this.handleError));
+  }
 }
