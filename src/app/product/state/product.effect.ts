@@ -16,11 +16,11 @@ export class ProductEffects {
   getProductById = createEffect(() => {
     return this.actions.pipe(
       ofType(ProductActions.getProduct),
-      switchMap((action) =>
-        this.productsService.getProduct(action.id).pipe(
+      switchMap(({id}) =>
+        this.productsService.getProduct(id).pipe(
           map(
             (data: Product) =>
-              ProductActions.getProductSuccess({
+            ProductActions.getProductSuccess({
                 payload: data,
               }),
             catchError((error) =>
