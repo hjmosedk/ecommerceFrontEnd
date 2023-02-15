@@ -23,6 +23,6 @@ export class ProductComponent implements OnInit {
   ngOnInit(): void {
     this.getUrlParam();
     const id = !this.id ? '1' : this.id;
-    this.store.dispatch(ProductActions.getProduct(id));
+    this.store.dispatch(ProductActions.getProduct({id}));
   }
 }
