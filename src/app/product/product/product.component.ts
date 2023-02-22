@@ -12,7 +12,8 @@ import { ProductActions } from '../state/product.action';
   styleUrls: ['./product.component.css'],
 })
 export class ProductComponent implements OnInit {
-  public product$: Observable<{} | Product> = this.store.select(selectProduct);
+  public product$: Observable<Product | undefined> =
+    this.store.select(selectProduct);
   id: string | null = '1';
   constructor(private store: Store, private route: ActivatedRoute) {}
 

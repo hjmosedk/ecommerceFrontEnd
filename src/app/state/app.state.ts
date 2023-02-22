@@ -10,5 +10,5 @@ export interface Products {
 }
 
 export interface ProductState {
-  product: Product | {};
+  product: Product | undefined;
 }

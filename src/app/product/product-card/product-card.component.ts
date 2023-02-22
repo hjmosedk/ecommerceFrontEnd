@@ -11,7 +11,7 @@ import { Observable, of } from 'rxjs';
 export class ProductCardComponent {
   @Input()
   product: Product = {
-    id: 0,
+    id: '0',
     name: 'Hej med dej',
     sku: 'HMD',
     description: 'THis is an item',

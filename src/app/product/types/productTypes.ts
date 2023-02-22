@@ -1,7 +1,7 @@
 import { Currency } from 'dinero.js';
 
 export interface Product {
-  id: number;
+  id: string;
   name: string;
   sku: string;
   description: string;

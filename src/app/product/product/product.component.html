@@ -1,2 +1,3 @@
-<div *ngIf="product$ | async as product"></div>
-<div><p>test</p></div>
+<div *ngIf="product$ | async as product" class="card-container">
+  <app-product-card [product]="product"></app-product-card>
+</div>

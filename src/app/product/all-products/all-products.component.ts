@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Product } from '../types/productTypes';
-
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ProductsActions } from '../state/all-products.actions';
 import { selectProductList } from '../state/all-products.reducers';
@@ -13,7 +13,7 @@ import { selectProductList } from '../state/all-products.reducers';
 export class AllProductsComponent implements OnInit {
   productList$: Observable<Product[]> = this.store.select(selectProductList);
 
-  constructor(private store: Store) {}
+  constructor(private store: Store, private router: Router) {}
 
   image1 = 'assets/images/computer-img.png';
   image2 = 'assets/images/camera-img.png';
@@ -24,5 +24,9 @@ export class AllProductsComponent implements OnInit {
 
   ngOnInit() {
     this.store.dispatch(ProductsActions.get_all_products());
+  }
+
+  onClick(productId: string) {
+    this.router.navigate(['/product', productId]);
   }
 }

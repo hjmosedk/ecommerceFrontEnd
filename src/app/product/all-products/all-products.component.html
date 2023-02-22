@@ -6,6 +6,7 @@
 <!-- TODO FOR TESTING-->
 <div class="productRow">
   <app-product-card
+    (click)="onClick(product.id)"
     *ngFor="let product of productList$ | async; index as i"
     [product]="product"
   ></app-product-card>

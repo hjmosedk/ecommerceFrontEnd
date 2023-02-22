@@ -3,7 +3,7 @@ import { ProductActions } from './product.action';
 import { ProductState } from 'src/app/state/app.state';
 
 export const initialState: ProductState = {
-  product: {},
+  product: undefined,
 };
 
 export const productReducer = createReducer<ProductState>(
