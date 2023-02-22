@@ -14,7 +14,8 @@
     "release:major": "standard-version --release-as major",
     "lint": "ng lint",
     "cypress:open": "cypress open",
-    "cypress:run": "cypress run"
+    "cypress:run": "cypress run",
+    "e2e": "ng e2e"
   },
   "license": "AGPL-3.0-or-later",
   "private": true,
@@ -49,6 +50,7 @@
     "@angular-eslint/template-parser": "15.2.1",
     "@angular/cli": "~15.1.6",
     "@angular/compiler-cli": "^15.1.5",
+    "@cypress/schematic": "^2.5.0",
     "@ngrx/eslint-plugin": "^15.3.0",
     "@types/dinero.js": "^1.9.0",
     "@types/jasmine": "~4.3.1",
