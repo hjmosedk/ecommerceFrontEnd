@@ -1,6 +1,10 @@
 {
   "cSpell.words": [
+    "bazel",
+    "classpath",
     "commitlint",
+    "dccache",
+    "dcignore",
     "devkit",
     "Dinero",
     "ecommerce",
@@ -10,9 +14,12 @@
     "Højmose",
     "Iteams",
     "Kicthen",
+    "libpeerconnection",
     "metas",
     "ngrx",
     "Splitterbar",
+    "subdir",
+    "testem",
     "Watchs",
     "webshop"
   ]
