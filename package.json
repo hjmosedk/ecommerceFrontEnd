@@ -16,6 +16,7 @@
     "cypress:open": "cypress open",
     "cypress:run": "cypress run"
   },
+  "license": "AGPL-3.0-or-later",
   "private": true,
   "dependencies": {
     "@angular/animations": "^15.1.5",
