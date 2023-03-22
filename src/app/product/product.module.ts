@@ -5,6 +5,7 @@ import { SharedComponentsModule } from '../shared-components/shared-components.m
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProductCardComponent } from './product-card/product-card.component';
 import { MatCardModule } from '@angular/material/card';
+import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
 import { AllProductsComponent } from './all-products/all-products.component';
 import { StoreModule } from '@ngrx/store';
 import { productsFeature } from './state/all-products.reducers';
@@ -13,6 +14,8 @@ import { EffectsModule } from '@ngrx/effects';
 import { ProductEffects } from './state/product.effect';
 import { AllProductsEffects } from './state/all-products.effect';
 import { ProductComponent } from './product/product.component';
+import { CreateProductComponent } from './create-product/create-product.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -20,12 +23,15 @@ import { ProductComponent } from './product/product.component';
     ProductCardComponent,
     AllProductsComponent,
     ProductComponent,
+    CreateProductComponent,
   ],
   imports: [
     CommonModule,
     SharedComponentsModule,
     BrowserAnimationsModule,
     MatCardModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
     StoreModule.forFeature(productsFeature),
     StoreModule.forFeature(productFeature),
     EffectsModule.forFeature([AllProductsEffects, ProductEffects]),
@@ -35,6 +41,7 @@ import { ProductComponent } from './product/product.component';
     BrowserAnimationsModule,
     ProductCardComponent,
     AllProductsComponent,
+    CreateProductComponent,
   ],
 })
 export class ProductModule {}
