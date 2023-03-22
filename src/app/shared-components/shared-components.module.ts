@@ -6,6 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { SplitterbarComponent } from './splitterbar/splitterbar.component';
 import { FooterComponent } from './footer/footer.component';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   declarations: [NavbarComponent, SplitterbarComponent, FooterComponent],
@@ -14,8 +15,14 @@ import { FooterComponent } from './footer/footer.component';
     MatIconModule,
     MatButtonModule,
     SplitterbarComponent,
-    FooterComponent
+    FooterComponent,
   ],
-  imports: [CommonModule, MatToolbarModule, MatIconModule, MatButtonModule],
+  imports: [
+    CommonModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatButtonModule,
+    MatMenuModule,
+  ],
 })
 export class SharedComponentsModule {}

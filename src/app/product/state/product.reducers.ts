@@ -9,7 +9,6 @@ export const initialState: ProductState = {
 export const productReducer = createReducer<ProductState>(
   initialState,
   on(ProductActions.getProductSuccess, (state, { payload }): ProductState => {
-    console.log(payload);
     const newState = { ...state };
     newState.product = payload;
     return newState;

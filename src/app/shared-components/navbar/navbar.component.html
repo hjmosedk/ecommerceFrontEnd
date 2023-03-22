@@ -22,4 +22,13 @@
       <mat-icon>shopping_cart</mat-icon>
     </a></span
   >
+  <span>
+    <a mat-icon-button [matMenuTriggerFor]="settings">
+      <mat-icon>settings</mat-icon>
+    </a></span
+  >
+  <mat-menu #settings="matMenu">
+    <button mat-menu-item>Add New Product</button>
+    <button mat-menu-item>View All Products</button>
+  </mat-menu>
 </mat-toolbar>
