@@ -5,7 +5,11 @@ import { SharedComponentsModule } from '../shared-components/shared-components.m
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProductCardComponent } from './product-card/product-card.component';
 import { MatCardModule } from '@angular/material/card';
-import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatButtonModule } from '@angular/material/button';
+import { NgxMatFileInputModule } from '@angular-material-components/file-input';
 import { AllProductsComponent } from './all-products/all-products.component';
 import { StoreModule } from '@ngrx/store';
 import { productsFeature } from './state/all-products.reducers';
@@ -32,6 +36,10 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatCardModule,
     ReactiveFormsModule,
     MatFormFieldModule,
+    MatInputModule,
+    MatSlideToggleModule,
+    NgxMatFileInputModule,
+    MatButtonModule,
     StoreModule.forFeature(productsFeature),
     StoreModule.forFeature(productFeature),
     EffectsModule.forFeature([AllProductsEffects, ProductEffects]),

@@ -1,10 +1,74 @@
-<form>
-  <mat-form-field>
-    <mat-label>Name</mat-label>
-    <input
-      matInput
-      placeholder="'Enter the name of the product"
-      [formControl]="name"
-    />
-  </mat-form-field>
-</form>
+<div class="container">
+  <form
+    class="inputForm"
+    [formGroup]="productData"
+    enctype="multipart/form-data"
+    method="post"
+  >
+    <mat-form-field class="inputField">
+      <mat-label for="bane">Name</mat-label>
+      <input type="text" matInput formControlName="name" id="name" />
+      <mat-hint>Give the new product a name</mat-hint>
+    </mat-form-field>
+    <br />
+    <mat-form-field class="inputField">
+      <mat-label>SKU</mat-label>
+      <input type="text" matInput formControlName="sku" />
+      <mat-hint>Give the new product a SKU</mat-hint>
+    </mat-form-field>
+    <br />
+    <mat-form-field class="inputField">
+      <mat-label>Description</mat-label>
+      <textarea
+        matInput
+        formControlName="description"
+        rows="4"
+        cols="12"
+      ></textarea>
+      <mat-hint>Give the new product a description</mat-hint>
+    </mat-form-field>
+    <br />
+    <mat-form-field class="inputField">
+      <mat-label>Brand</mat-label>
+      <input type="text" matInput formControlName="brand" />
+      <mat-hint>Please describe the brand</mat-hint>
+    </mat-form-field>
+    <br />
+    <mat-form-field class="inputField">
+      <ngx-mat-file-input formControlName="picture"></ngx-mat-file-input>
+      <mat-hint>Select a picture of the product</mat-hint>
+    </mat-form-field>
+    <div formGroupName="financialData">
+      <mat-form-field class="inputField">
+        <mat-label>Price</mat-label>
+        <input type="number" matInput formControlName="price" />
+        <mat-hint>Give the new product a price</mat-hint>
+      </mat-form-field>
+      <br />
+      <mat-form-field class="inputField">
+        <mat-label>Currency</mat-label>
+        <input type="text" matInput formControlName="currency" />
+        <mat-hint>Give the new product a currency</mat-hint>
+      </mat-form-field>
+
+      <mat-form-field class="inputField">
+        <mat-label>Quantity</mat-label>
+        <input type="number" matInput formControlName="quantity" />
+        <mat-hint>Input the quantity of the product</mat-hint>
+      </mat-form-field>
+
+      <br />
+      <mat-form-field class="inputField">
+        <mat-label>Sales Percentage</mat-label>
+        <input type="number" matInput formControlName="percentage" />
+        <mat-hint>Please input the percentage the product is on sale</mat-hint>
+      </mat-form-field>
+      <br />
+      <div class="slider">
+        <mat-slide-toggle formControlName="onSale"> On sale?</mat-slide-toggle>
+      </div>
+      <br />
+    </div>
+    <button mat-button color="primary" (click)="onSubmit()">Submit</button>
+  </form>
+</div>
