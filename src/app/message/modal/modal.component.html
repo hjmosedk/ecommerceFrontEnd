@@ -1,1 +1,11 @@
-<p>modal works!</p>
+<div>
+  <div *ngIf="data.type === messageType.success" class="success">
+    <h1 mat-dialog-title>{{ data.title }}</h1>
+    <div mat-dialog-content>{{ data.message }}</div>
+  </div>
+  <div *ngIf="data.type === messageType.error" class="error">
+    <h1 mat-dialog-title>{{ data.title }}</h1>
+    <div mat-dialog-content>{{ data.message }}</div>
+  </div>
+  <div *ngIf="data.type === null" hidden></div>
+</div>

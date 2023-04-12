@@ -15,7 +15,7 @@ export class ProductCardComponent {
     name: 'Hej med dej',
     sku: 'HMD',
     description: 'THis is an item',
-    price: 0,
+    price: 2500,
     picture: '',
     brand: '',
     quantity: 0,
@@ -24,7 +24,7 @@ export class ProductCardComponent {
     currency: 'DKK',
   };
 
-  calculatePrice(price: number, currency: Currency) {
+  calculatePrice(price: number = 2500, currency: Currency = 'DKK') {
     return Dinero({ amount: price, currency: currency }).toFormat();
   }
 }

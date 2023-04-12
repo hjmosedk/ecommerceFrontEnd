@@ -11,6 +11,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatButtonModule } from '@angular/material/button';
 import { NgxMatFileInputModule } from '@angular-material-components/file-input';
 import { AllProductsComponent } from './all-products/all-products.component';
+import { MessageModule } from '../message/message.module';
 import { StoreModule } from '@ngrx/store';
 import { productsFeature } from './state/all-products.reducers';
 import { productFeature } from './state/product.reducers';
@@ -40,6 +41,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatSlideToggleModule,
     NgxMatFileInputModule,
     MatButtonModule,
+    MessageModule,
     StoreModule.forFeature(productsFeature),
     StoreModule.forFeature(productFeature),
     EffectsModule.forFeature([AllProductsEffects, ProductEffects]),

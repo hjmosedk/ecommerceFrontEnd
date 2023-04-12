@@ -13,11 +13,14 @@
     />
     <mat-card-content>
       <div class="cardContent">
-        <div *ngIf="product.onSale; else noSale" class="save">
+        <div
+          *ngIf="product.onSale && product.percentage; else noSale"
+          class="save"
+        >
           <h1>Save {{ product.percentage.toString() }} %</h1>
         </div>
         <ng-template #noSale> <div class="spacer"></div></ng-template>
-        <div class="price">
+        <div class="price" *ngIf="product.price && product.currency">
           <h2>{{ calculatePrice(product.price, product.currency) }}</h2>
         </div>
         <p>{{ product.description }}</p>

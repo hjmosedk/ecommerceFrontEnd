@@ -1,15 +1,17 @@
 import { Currency } from 'dinero.js';
 
 export interface Product {
-  id: string;
-  name: string;
-  sku: string;
-  description: string;
-  price: number;
-  currency: Currency;
-  picture: string;
-  quantity: number;
-  brand: string;
-  percentage: number;
-  onSale: boolean;
+  id?: string | undefined | null;
+  name?: string | undefined | null;
+  sku?: string | undefined | null;
+  description?: string | undefined | null;
+  price?: number | undefined | null;
+  currency?: Currency | undefined | null;
+  picture?: string | undefined | null;
+  quantity?: number | undefined | null;
+  brand?: string | undefined | null;
+  percentage?: number | undefined | null;
+  onSale?: boolean | undefined | null;
 }
+
+export type newProduct = Omit<Product, 'id'>;
