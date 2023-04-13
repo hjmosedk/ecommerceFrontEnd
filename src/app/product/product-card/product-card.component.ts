@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Product } from 'src/app/product/types/productTypes';
 import Dinero, { Currency } from 'dinero.js';
-import { Observable, of } from 'rxjs';
+import { CurrencyType } from 'src/app/product/types/productTypes';
 
 @Component({
   selector: 'app-product-card',
@@ -21,10 +21,10 @@ export class ProductCardComponent {
     quantity: 0,
     percentage: 25,
     onSale: false,
-    currency: 'DKK',
+    currency: CurrencyType.DKK,
   };
 
-  calculatePrice(price: number = 2500, currency: Currency = 'DKK') {
+  calculatePrice(price: number = 2500, currency: Currency) {
     return Dinero({ amount: price, currency: currency }).toFormat();
   }
 }

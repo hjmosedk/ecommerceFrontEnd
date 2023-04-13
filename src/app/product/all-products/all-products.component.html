@@ -4,15 +4,11 @@
 <app-splitterbar></app-splitterbar>
 <!-- * END RAINBOW BABY DRAGON SPLITTER BAR-->
 <!-- TODO FOR TESTING-->
-<div class="productRow">
+<div *ngIf="!productList$">Loading...</div>
+<div class="productRow" *ngIf="productList$">
   <app-product-card
     *ngFor="let product of productList$ | async; index as i"
     [product]="product"
+    (click)="onClick(product.id)"
   ></app-product-card>
 </div>
-<!--
-TODO: use this click once you know it works!
-(click)="onClick(product.id)"
-
-
--->

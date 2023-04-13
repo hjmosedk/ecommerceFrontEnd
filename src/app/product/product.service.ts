@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Product, newProduct } from 'src/app/product/types/productTypes';
+import { Product, NewProduct } from 'src/app/product/types/productTypes';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map, retry } from 'rxjs/operators';
 
@@ -35,7 +35,7 @@ export class ProductService {
     //.pipe(catchError(this.handleError));
   }
 
-  createProduct(product: newProduct): Observable<Product> {
+  createProduct(product: NewProduct): Observable<Product> {
     return this.http.post<Product>(
       `http://192.168.1.90:3000/products`,
       product

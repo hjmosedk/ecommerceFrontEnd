@@ -7,7 +7,9 @@
     { "type": "style", "hidden": true },
     { "type": "refactor", "hidden": true },
     { "type": "perf", "hidden": true },
-    { "type": "test", "section": "Test" }
+    { "type": "test", "section": "Test" },
+    { "type": "build", "section": "Infrastructure" },
+    { "type": "ci", "section": "CI-CD" }
   ],
   "commitUrlFormat": "https://codeberg.org/hjmosedk/ecommerceFrontEnd/commits/{{hash}}",
   "compareUrlFormat": "https://codeberg.org/hjmosedk/ecommerceFrontEnd/compare/{{previousTag}}...{{currentTag}}"

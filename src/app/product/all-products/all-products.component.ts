@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Product } from '../types/productTypes';
 import { Router } from '@angular/router';
+import { ProductsActions } from '../state/actions';
+import { selectAllProducts } from '../state/selectors';
 import { Observable } from 'rxjs';
-import { ProductsActions } from '../state/all-products.actions';
-import { selectProductList } from '../state/all-products.reducers';
+import { Product } from '../types/productTypes';
 @Component({
   selector: 'app-all-products',
   templateUrl: './all-products.component.html',
   styleUrls: ['./all-products.component.css'],
 })
 export class AllProductsComponent implements OnInit {
-  productList$: Observable<Product[]> = this.store.select(selectProductList);
+  productList$: Observable<Product[]> = this.store.select(selectAllProducts);
 
   constructor(private store: Store, private router: Router) {}
 
@@ -23,7 +23,7 @@ export class AllProductsComponent implements OnInit {
   carouselContent = [this.image1, this.image2, this.image3, this.image4];
 
   ngOnInit() {
-    this.store.dispatch(ProductsActions.get_all_products());
+    this.store.dispatch(ProductsActions.loadAllProducts());
   }
 
   onClick(productId: string) {
