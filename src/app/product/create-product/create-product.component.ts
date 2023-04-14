@@ -7,8 +7,9 @@ import {
 } from '@angular/forms';
 import { MessageService } from 'src/app/message/message.service';
 import { MessageType } from 'src/app/message/modal/modal.component';
-import { ProductService } from '../product.service';
 import { CurrencyType } from '../types/productTypes';
+import { Store } from '@ngrx/store';
+import { ProductsActions } from '../state/actions';
 
 @Component({
   selector: 'app-create-product',
@@ -20,21 +21,18 @@ export class CreateProductComponent implements OnInit {
 
   acceptableCurrencies: string[] = Object.values(CurrencyType);
 
-  constructor(
-    private messageService: MessageService,
-    private productService: ProductService
-  ) {}
+  constructor(private messageService: MessageService, private store: Store) {}
 
   onSubmit() {
+    this.store.dispatch(
+      ProductsActions.createProduct(this.productDataForm.getRawValue())
+    );
     this.productDataForm.reset();
-    this.productService
-      .createProduct(this.productDataForm.getRawValue())
-      .subscribe();
-    /*this.messageService.sendSystemMessage({
+    this.messageService.sendSystemMessage({
       type: MessageType.success,
       title: 'Success',
       message: JSON.stringify(this.productDataForm.getRawValue()),
-    })*/
+    });
   }
 
   get formData(): { [key: string]: AbstractControl } {

@@ -34,12 +34,12 @@ import { ProductsEffects } from './product/state/effects';
     StoreRouterConnectingModule.forRoot(),
   ],
   providers: [
-    { provide: ErrorHandler, useClass: GlobalErrorHandler },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: ServerErrorInterceptor,
       multi: true,
     },
+    { provide: ErrorHandler, useClass: GlobalErrorHandler },
   ],
   bootstrap: [AppComponent],
 })

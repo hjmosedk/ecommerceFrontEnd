@@ -2,18 +2,18 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { ProductsActions } from './actions';
 import { ProductService } from '../product.service';
-import { of } from 'rxjs';
+import { MessageService } from '../../message/message.service';
+import { throwError } from 'rxjs';
 import { catchError, mergeMap, switchMap, map, filter } from 'rxjs/operators';
 import { Product } from '../types/productTypes';
 import { routerNavigatedAction } from '@ngrx/router-store';
-import { Store } from '@ngrx/store';
 
 @Injectable()
 export class ProductsEffects {
   constructor(
     private actions: Actions,
     private productsService: ProductService,
-    private store: Store
+    private messageService: MessageService
   ) {}
 
   getAllProducts = createEffect(() => {
@@ -26,13 +26,7 @@ export class ProductsEffects {
               products,
             })
           ),
-          catchError((error) =>
-            of(
-              ProductsActions.loadAllProductsError({
-                error,
-              })
-            )
-          )
+          catchError((error) => throwError(() => error))
         )
       )
     );
@@ -52,9 +46,23 @@ export class ProductsEffects {
         }
         return this.productsService.getProduct(id).pipe(
           map((product) => ProductsActions.loadProductSuccess({ product })),
-          catchError((error) => of(ProductsActions.loadProductError({ error })))
+          catchError((error) => throwError(() => error))
         );
       })
     );
+  });
+
+  createNewProduct = createEffect(() => {
+    {
+      return this.actions.pipe(
+        ofType(ProductsActions.createProduct),
+        mergeMap(({ product }) => {
+          return this.productsService.createProduct(product).pipe(
+            map((product) => ProductsActions.createProductSuccess({ product })),
+            catchError((error) => throwError(() => error))
+          );
+        })
+      );
+    }
   });
 }
