@@ -19,6 +19,7 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { productsReducer } from './product/state/reducer';
 import { routerReducer } from '@ngrx/router-store';
 import { ProductsEffects } from './product/state/effects';
+import { MessageEffects } from './message/state/effects';
 
 @NgModule({
   declarations: [AppComponent],
@@ -28,17 +29,18 @@ import { ProductsEffects } from './product/state/effects';
     SharedComponentsModule,
     HttpClientModule,
     StoreModule.forRoot({ products: productsReducer, router: routerReducer }),
-    EffectsModule.forRoot([ProductsEffects]),
+    EffectsModule.forRoot([ProductsEffects, MessageEffects]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
     ProductModule,
     StoreRouterConnectingModule.forRoot(),
   ],
   providers: [
-    {
+    /*  {
       provide: HTTP_INTERCEPTORS,
       useClass: ServerErrorInterceptor,
       multi: true,
     },
+    */
     { provide: ErrorHandler, useClass: GlobalErrorHandler },
   ],
   bootstrap: [AppComponent],

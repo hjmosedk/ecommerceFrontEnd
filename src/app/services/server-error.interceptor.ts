@@ -19,7 +19,8 @@ export class ServerErrorInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(
       retry(2),
       catchError((error: HttpErrorResponse) => {
-        return throwError(() => error);
+        //console.log(error.error);
+        return throwError(() => error.error as HttpErrorResponse);
       })
     );
   }

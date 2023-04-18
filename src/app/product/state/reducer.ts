@@ -1,7 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { ProductsActions } from './actions';
 import { productsAdapter } from './state';
-import { throwError } from 'rxjs';
 
 export const productsReducer = createReducer(
   productsAdapter.getInitialState(),

@@ -2,8 +2,7 @@ import { Injectable, ErrorHandler, Injector } from '@angular/core';
 import { ErrorService } from './services/error.service';
 import { MessageService } from './message/message.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { DialogData, MessageType } from './message/modal/modal.component';
-
+import { MessageData, MessageType } from './message/types/message.model';
 @Injectable({
   providedIn: 'root',
 })
@@ -20,10 +19,10 @@ export class GlobalErrorHandler implements ErrorHandler {
 
     if (error instanceof HttpErrorResponse) {
       systemError = errorService.getServerSideError(error);
-      const serverErrorMessage: DialogData = {
+      const serverErrorMessage: MessageData = {
         type: MessageType.error,
-        title: `Oops - ${systemError.status} error have occurred`,
-        message: systemError.message,
+        title: `Oops - An error of ${systemError.statusText} - ${systemError.status} have occurred`,
+        messageText: systemError.message,
         status: systemError.status,
         statusText: systemError.statusText,
       };
@@ -31,10 +30,10 @@ export class GlobalErrorHandler implements ErrorHandler {
     } else {
       systemMessage = errorService.getClientSideErrorMessage(error);
       stackTrace = errorService.getClientSideStack(error);
-      const clientErrorMessage: DialogData = {
+      const clientErrorMessage: MessageData = {
         type: MessageType.error,
         title: 'Oops - Something went wrong on your end!',
-        message: systemMessage,
+        messageText: systemMessage,
         stackTrace: stackTrace,
       };
 

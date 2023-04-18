@@ -36,11 +36,10 @@ export class ErrorService {
         message: 'Connection to the server cannot be established',
       };
     }
-
     return {
       status: error.status,
       statusText: error.statusText,
-      message: error.message,
+      message: error.error.message,
     };
   }
 }

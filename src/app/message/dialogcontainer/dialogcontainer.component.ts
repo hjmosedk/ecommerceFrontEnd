@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalComponent } from '../modal/modal.component';
-import { DialogData, MessageType } from '../modal/modal.component';
+import { MessageData, MessageType } from '../types/message.model';
+import { createEffect, ofType } from '@ngrx/effects';
+import { MessageActions } from '../state/actions';
 
 @Component({
   selector: 'app-dialogcontainer',
@@ -23,10 +25,9 @@ export class DialogcontainerComponent {
 
   constructor(public dialog: MatDialog) {}
 
-  openDialog(message: DialogData) {
+  openDialog(message: MessageData) {
     this.dialog.open(ModalComponent, {
       data: message,
     });
-    console.log(message);
   }
 }

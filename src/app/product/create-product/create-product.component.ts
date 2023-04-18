@@ -6,7 +6,7 @@ import {
   AbstractControl,
 } from '@angular/forms';
 import { MessageService } from 'src/app/message/message.service';
-import { MessageType } from 'src/app/message/modal/modal.component';
+import { MessageType } from 'src/app/message/types/message.model';
 import { CurrencyType } from '../types/productTypes';
 import { Store } from '@ngrx/store';
 import { ProductsActions } from '../state/actions';
@@ -25,14 +25,9 @@ export class CreateProductComponent implements OnInit {
 
   onSubmit() {
     this.store.dispatch(
-      ProductsActions.createProduct(this.productDataForm.getRawValue())
+      ProductsActions.createProduct(this.productDataForm.value)
     );
     this.productDataForm.reset();
-    this.messageService.sendSystemMessage({
-      type: MessageType.success,
-      title: 'Success',
-      message: JSON.stringify(this.productDataForm.getRawValue()),
-    });
   }
 
   get formData(): { [key: string]: AbstractControl } {

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalComponent } from './modal/modal.component';
-import { DialogData } from './modal/modal.component';
+import { MessageData } from './types/message.model';
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +9,7 @@ import { DialogData } from './modal/modal.component';
 export class MessageService {
   constructor(private dialog: MatDialog) {}
 
-  sendSystemMessage(message: DialogData) {
+  sendSystemMessage(message: MessageData) {
     this.dialog.open(ModalComponent, { data: message });
   }
 }

@@ -1,18 +1,6 @@
 import { Component, Inject, Optional } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-
-export enum MessageType {
-  success = 'success',
-  error = 'error',
-}
-export interface DialogData {
-  type: MessageType | null;
-  title: string;
-  message: string;
-  status?: number;
-  statusText?: string;
-  stackTrace?: string | void;
-}
+import { MessageData, MessageType } from '../types/message.model';
 
 @Component({
   selector: 'app-modal',
@@ -23,6 +11,6 @@ export class ModalComponent {
   messageType = MessageType;
 
   constructor(
-    @Optional() @Inject(MAT_DIALOG_DATA) @Optional() public data: DialogData
+    @Optional() @Inject(MAT_DIALOG_DATA) @Optional() public data: MessageData
   ) {}
 }
