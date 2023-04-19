@@ -1,0 +1,9 @@
+.striped {
+  background-color: #673ab7;
+  color: white;
+  font-weight: bold;
+}
+
+th.mat.header-cell {
+  color: white;
+}

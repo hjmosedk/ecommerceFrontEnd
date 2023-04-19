@@ -16,6 +16,9 @@ import { MessageModule } from '../message/message.module';
 import { ProductComponent } from './product/product.component';
 import { CreateProductComponent } from './create-product/create-product.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { ProductListComponent } from './product-list/product-list.component';
+import { MatTableModule } from '@angular/material/table';
 @NgModule({
   declarations: [
     CarouselComponent,
@@ -23,6 +26,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     AllProductsComponent,
     ProductComponent,
     CreateProductComponent,
+    ProductListComponent,
   ],
   imports: [
     CommonModule,
@@ -37,6 +41,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatButtonModule,
     MessageModule,
     MatSelectModule,
+    MatGridListModule,
+    MatTableModule,
   ],
   exports: [
     CarouselComponent,

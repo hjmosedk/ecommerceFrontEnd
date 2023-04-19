@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -9,5 +10,13 @@ export class NavbarComponent {
   @Input()
   title: string = '';
 
-  constructor() {}
+  constructor(private router: Router) {}
+
+  createNewProduct() {
+    this.router.navigate(['/newProduct']);
+  }
+
+  viewAllProducts() {
+    this.router.navigate(['/products/admin']);
+  }
 }

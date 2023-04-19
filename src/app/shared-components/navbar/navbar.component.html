@@ -28,7 +28,7 @@
     </a></span
   >
   <mat-menu #settings="matMenu">
-    <button mat-menu-item>Add New Product</button>
-    <button mat-menu-item>View All Products</button>
+    <button mat-menu-item (click)="createNewProduct()">Add New Product</button>
+    <button mat-menu-item (click)="viewAllProducts()">View All Products</button>
   </mat-menu>
 </mat-toolbar>

@@ -12,7 +12,6 @@ import { Product } from '../types/productTypes';
 })
 export class AllProductsComponent implements OnInit {
   productList$: Observable<Product[]> = this.store.select(selectAllProducts);
-
   constructor(private store: Store, private router: Router) {}
 
   image1 = 'assets/images/computer-img.png';
