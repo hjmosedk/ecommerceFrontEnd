@@ -26,18 +26,18 @@ export class ProductService {
   }
 */
   getAllProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>('http://192.168.1.90:3000/products');
+    return this.http.get<Product[]>('http://192.168.1.135:3000/products');
     //.pipe(catchError(this.handleError));
   }
 
   getProduct(id: string): Observable<Product> {
-    return this.http.get<Product>(`http://192.168.1.90:3000/products/${id}`);
+    return this.http.get<Product>(`http://192.168.1.135:3000/products/${id}`);
     //.pipe(catchError(this.handleError));
   }
 
   createProduct(product: NewProduct): Observable<Product> {
     return this.http.post<Product>(
-      `http://192.168.1.90:3000/products`,
+      `http://192.168.1.135:3000/products`,
       product
     );
     //.pipe(catchError(this.handleError));
