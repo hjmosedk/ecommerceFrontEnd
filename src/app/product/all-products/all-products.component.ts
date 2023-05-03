@@ -5,6 +5,8 @@ import { ProductsActions } from '../state/actions';
 import { selectAllProducts } from '../state/selectors';
 import { Observable } from 'rxjs';
 import { Product } from '../types/productTypes';
+import { ViewportScroller } from '@angular/common';
+
 @Component({
   selector: 'app-all-products',
   templateUrl: './all-products.component.html',
@@ -12,7 +14,11 @@ import { Product } from '../types/productTypes';
 })
 export class AllProductsComponent implements OnInit {
   productList$: Observable<Product[]> = this.store.select(selectAllProducts);
-  constructor(private store: Store, private router: Router) {}
+  constructor(
+    private store: Store,
+    private router: Router,
+    private viewportScroller: ViewportScroller
+  ) {}
 
   image1 = 'assets/images/computer-img.png';
   image2 = 'assets/images/camera-img.png';
@@ -21,11 +27,16 @@ export class AllProductsComponent implements OnInit {
 
   carouselContent = [this.image1, this.image2, this.image3, this.image4];
 
+  scrollToTop() {
+    this.viewportScroller.scrollToPosition([0, 0]);
+  }
+
   ngOnInit() {
     this.store.dispatch(ProductsActions.loadAllProducts());
   }
 
   onClick(productId: string) {
+    this.scrollToTop();
     this.router.navigate(['/product', productId]);
   }
 }

@@ -5,10 +5,27 @@
 <!-- * END RAINBOW BABY DRAGON SPLITTER BAR-->
 <!-- TODO FOR TESTING-->
 <div *ngIf="!productList$">Loading...</div>
+<div class="mainContainer">
+  <mat-grid-list
+    cols="5"
+    gutterSize="16px"
+    rowHeight="400px"
+    class="gridContainer"
+  >
+    <mat-grid-tile *ngFor="let product of productList$ | async; index as i">
+      <app-product-card
+        [product]="product"
+        (click)="onClick(product.id)"
+      ></app-product-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>
+
+<!-- 
 <div class="productRow" *ngIf="productList$">
   <app-product-card
     *ngFor="let product of productList$ | async; index as i"
     [product]="product"
     (click)="onClick(product.id)"
   ></app-product-card>
-</div>
+</div> -->

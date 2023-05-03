@@ -10,7 +10,6 @@ import { ProductModule } from './product/product.module';
 import { SharedComponentsModule } from './shared-components/shared-components.module';
 
 import { EffectsModule } from '@ngrx/effects';
-
 //State Components
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';

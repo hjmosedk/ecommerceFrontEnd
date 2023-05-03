@@ -1,60 +1,73 @@
-.cardContainer {
-  display: flex;
-  flex-direction: row;
+.mat-card {
+  height: 500px; /* set a fixed height for the card */
 }
 
-.card {
-  height: 100%;
-  max-width: 350px;
-  margin: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.cardHeader {
+.mat-card-header {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  height: 100px; /* set a fixed height for the header */
 }
 
-.spacer-small {
-  padding-left: 10px;
-  padding-right: 10px;
-}
-
-img {
-  padding: 25px;
-  width: 300px;
-  height: 400px;
-}
-
-.cardContent {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+.mat-card-title {
+  font-weight: bold;
   text-align: center;
+}
+
+.mat-card-image {
+  display: block;
+  margin: 0 auto;
+  width: 150px;
   height: 150px;
-  overflow-wrap: normal;
 }
 
-.save {
-  background-color: coral;
-  text-align: center;
-  padding-left: 8px;
-  padding-right: 8px;
+.mat-card-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: calc(
+    100% - 250px
+  ); /* set the height to accommodate for the header and actions */
+  overflow: hidden; /* hide overflow text */
 }
 
-.save h1 {
-  margin: 0;
+.description {
+  text-overflow: ellipsis; /* add ellipsis for overflow text */
+  overflow: hidden; /* hide overflow text */
 }
 
 .price {
-  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px; /* set a fixed height for the price section */
+  color: #3f51b5;
+  font-weight: bold;
 }
 
-.spacer {
-  height: 32px;
+.on-sale .price {
+  background-color: coral; /* set background color for the price section on sale */
+  color: white; /* set text color for the price section on sale */
+  position: absolute; /* position the price section on sale */
+  bottom: 10px;
+  right: 10px;
+  padding: 5px;
+}
+
+.sale-badge {
+  background-color: gold; /* set background color for the sale badge */
+  color: white; /* set text color for the sale badge */
+  display: inline-block;
+  padding: 5px;
+}
+
+.percentage {
+  font-weight: bold;
+  margin-left: 5px;
+}
+
+.mat-card-actions {
+  display: flex;
+  justify-content: center;
 }

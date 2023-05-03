@@ -19,6 +19,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { ProductListComponent } from './product-list/product-list.component';
 import { MatTableModule } from '@angular/material/table';
+import { FlexLayoutModule } from '@angular/flex-layout';
 @NgModule({
   declarations: [
     CarouselComponent,
@@ -43,6 +44,7 @@ import { MatTableModule } from '@angular/material/table';
     MatSelectModule,
     MatGridListModule,
     MatTableModule,
+    FlexLayoutModule,
   ],
   exports: [
     CarouselComponent,

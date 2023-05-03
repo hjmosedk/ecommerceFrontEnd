@@ -1,39 +1,42 @@
-<div>
-  <mat-card class="card">
-    <mat-card-header>
-      <div class="cardHeader">
-        <mat-card-title>{{ product.name }}</mat-card-title>
-        <mat-card-subtitle>{{ product.brand }}</mat-card-subtitle>
-      </div>
-    </mat-card-header>
-    <img
-      mat-card-image
-      src="assets/images/computer-img.png"
-      [alt]="product.name"
-    />
-    <mat-card-content>
-      <div class="cardContent">
-        <div
-          *ngIf="product.onSale && product.percentage; else noSale"
-          class="save"
-        >
-          <h1>Save {{ product.percentage.toString() }} %</h1>
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>{{ product.name }}</mat-card-title>
+    <mat-card-subtitle>{{ product.brand }}</mat-card-subtitle>
+  </mat-card-header>
+  <img
+    mat-card-image
+    src="assets/images/computer-img.png"
+    width="150px"
+    height="150px"
+  />
+  <mat-card-content>
+    <div
+      *ngIf="product.onSale; then onSaleTemplate; else defaultTemplate"
+    ></div>
+    <ng-template #onSaleTemplate>
+      <div class="on-sale">
+        <div class="sale-badge">
+          <span>SALE</span>
+          <span class="percentage">{{ product.percentage }}%</span>
         </div>
-        <ng-template #noSale> <div class="spacer"></div></ng-template>
-        <div class="price" *ngIf="product.price && product.currency">
-          <h2>{{ calculatePrice(product.price, product.currency) }}</h2>
+        <div class="price">
+          <span class="currency">{{
+            calculatePrice(product.price, product.currency)
+          }}</span>
         </div>
-        <p>{{ product.description }}</p>
       </div>
-    </mat-card-content>
-    <mat-card-actions>
-      <button mat-raised-button color="primary">
-        Add To Cart <mat-icon>shopping_cart</mat-icon>
-      </button>
-      <span class="spacer-small"></span>
-      <button mat-raised-button color="accent">
-        Write Review <mat-icon>edit</mat-icon>
-      </button>
-    </mat-card-actions>
-  </mat-card>
-</div>
+    </ng-template>
+    <ng-template #defaultTemplate>
+      <div class="price">
+        <span class="currency">{{
+          calculatePrice(product.price, product.currency)
+        }}</span>
+      </div>
+    </ng-template>
+    <p class="description">{{ product.description }}</p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="primary">Add to Cart</button>
+    <button mat-raised-button color="accent">Write Review</button>
+  </mat-card-actions>
+</mat-card>
