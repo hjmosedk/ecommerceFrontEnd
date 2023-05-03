@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { Product } from 'src/app/product/types/productTypes';
 import Dinero, { Currency } from 'dinero.js';
 import { CurrencyType } from 'src/app/product/types/productTypes';
+import { PriceService } from '../price.service';
 
 @Component({
   selector: 'app-product-card',
@@ -9,6 +10,8 @@ import { CurrencyType } from 'src/app/product/types/productTypes';
   styleUrls: ['./product-card.component.css'],
 })
 export class ProductCardComponent {
+  constructor(private priceService: PriceService) {}
+
   @Input()
   product: Product = {
     id: '0',
@@ -25,6 +28,6 @@ export class ProductCardComponent {
   };
 
   calculatePrice(price: number = 2500, currency: Currency) {
-    return Dinero({ amount: price, currency: currency }).toFormat();
+    return this.priceService.calculatePrice(price, currency);
   }
 }

@@ -1,4 +1,5 @@
 <!-- carousel -->
+<!--
 <div class="carouselContainer">
   <div class="carousel">
     <ng-container *ngFor="let content of content; let i = index">
@@ -9,13 +10,42 @@
         @carouselAnimation
       />
     </ng-container>
-
-    <!-- controls -->
+-->
+<!-- controls -->
+<!--
     <button mat-icon-button class="control prev" (click)="onPreviousClick()">
       <mat-icon class="arrow left">chevron-right</mat-icon>
     </button>
     <button mat-icon-button class="control next" (click)="onNextClick()">
       <mat-icon class="arrow right">chevron-left</mat-icon>
+    </button>
+  </div>
+</div>
+-->
+
+<div class="carousel-wrapper">
+  <div class="carousel">
+    <button mat-icon-button class="carousel-button" (click)="onSlidePrev()">
+      <mat-icon>chevron_left</mat-icon>
+    </button>
+    <ng-container *ngFor="let product of products">
+      <div
+        class="carousel-item"
+        [style.background-image]="'url(' + product.picture + ')'"
+        (click)="navigateToProduct(product.id)"
+      >
+        <div class="price-container">
+          <div *ngIf="product.onSale" class="sale-badge">
+            <span>SAVE {{ product.percentage }}%</span>
+          </div>
+          <div class="price">
+            {{ calculatePrice(product.price, product.currency) }}
+          </div>
+        </div>
+      </div>
+    </ng-container>
+    <button mat-icon-button class="carousel-button" (click)="onSlideNext()">
+      <mat-icon>chevron_right</mat-icon>
     </button>
   </div>
 </div>

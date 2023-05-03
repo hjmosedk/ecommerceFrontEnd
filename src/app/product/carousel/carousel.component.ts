@@ -1,38 +1,68 @@
-import { Component, Input } from '@angular/core';
-import { trigger, transition, useAnimation } from '@angular/animations';
-import { fadeIn, fadeOut } from './carousel.animations';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Product } from '../types/productTypes';
+import { ProductService } from '../product.service';
+import { Router } from '@angular/router';
+import { Currency } from 'dinero.js';
+import { PriceService } from '../price.service';
 
 @Component({
   selector: 'app-carousel',
   templateUrl: './carousel.component.html',
   styleUrls: ['./carousel.component.css'],
-  animations: [
-    trigger('carouselAnimation', [
-      transition('void => *', [
-        useAnimation(fadeIn, { params: { time: '1300ms' } }),
-      ]),
-      transition('* => void', [
-        useAnimation(fadeOut, { params: { time: '1300ms' } }),
-      ]),
-    ]),
-  ],
 })
-export class CarouselComponent {
-  @Input() content!: string[];
+export class CarouselComponent implements OnInit {
+  @ViewChild('carouselWrapper')
+  carouselWrapper!: ElementRef;
+  products: Product[] = [];
 
-  currentSlide = 0;
+  currentSlideIndex = 0;
+  carouselWrapperWidth = 0;
+  slideWidth = 0;
+  slideMarginRight = 0;
 
-  constructor() {}
+  constructor(
+    private productService: ProductService,
+    private router: Router,
+    private priceService: PriceService
+  ) {}
 
-  onPreviousClick() {
-    const previous = this.currentSlide - 1;
-    this.currentSlide = previous < 0 ? this.content.length - 1 : previous;
-    console.log('Previous clicked, new current slide is: ', this.currentSlide);
+  ngOnInit(): void {
+    this.productService.getAllProducts().subscribe((data) => {
+      this.products = data;
+    });
   }
 
-  onNextClick() {
-    const next = this.currentSlide + 1;
-    this.currentSlide = next === this.content.length ? 0 : next;
-    console.log('Next clicked, new current slide is: ', this.currentSlide);
+  onSlideNext(): void {
+    this.currentSlideIndex++;
+    if (this.currentSlideIndex >= this.products.length) {
+      this.currentSlideIndex = 0;
+    }
+  }
+
+  onSlidePrev(): void {
+    this.currentSlideIndex--;
+    if (this.currentSlideIndex < 0) {
+      this.currentSlideIndex = this.products.length - 1;
+    }
+  }
+
+  getSlideTransformStyle(): string {
+    return `translateX(-${
+      this.currentSlideIndex * (this.slideWidth + this.slideMarginRight)
+    }px)`;
+  }
+
+  onResize(): void {
+    this.carouselWrapperWidth = this.carouselWrapper.nativeElement.offsetWidth;
+    this.slideWidth = Math.floor(this.carouselWrapperWidth * 0.7);
+    this.slideMarginRight = Math.floor(this.carouselWrapperWidth * 0.05);
+  }
+
+  navigateToProduct(productId: string) {
+    this.router.navigate(['/product', productId]);
+  }
+
+  calculatePrice(price: number, currency: Currency) {
+    return this.priceService.calculatePrice(price, currency);
   }
 }
