@@ -10,7 +10,6 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatButtonModule } from '@angular/material/button';
-import { NgxMatFileInputModule } from '@angular-material-components/file-input';
 import { AllProductsComponent } from './all-products/all-products.component';
 import { MessageModule } from '../message/message.module';
 import { ProductComponent } from './product/product.component';
@@ -38,7 +37,6 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatFormFieldModule,
     MatInputModule,
     MatSlideToggleModule,
-    NgxMatFileInputModule,
     MatButtonModule,
     MessageModule,
     MatSelectModule,

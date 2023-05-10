@@ -38,6 +38,31 @@
       >
     </mat-form-field>
     <br />
+    <mat-label for="image">Image</mat-label>
+    <input
+      type="file"
+      class="file-input"
+      (change)="onFileSelected($event)"
+      #fileUpload
+      name="image"
+      id="image"
+      required
+    />
+    <div class="file-upload">
+      {{ fileName || "Select a image for your product." }}
+
+      <button
+        type="button"
+        mat-mini-fab
+        color="primary"
+        class="upload-btn"
+        (click)="fileUpload.click()"
+      >
+        <mat-icon>attach_file</mat-icon>
+      </button>
+    </div>
+    <br />
+    <br />
     <mat-form-field class="inputField">
       <mat-label>Brand</mat-label>
       <input type="text" matInput formControlName="brand" />
@@ -47,13 +72,6 @@
       >
     </mat-form-field>
     <br />
-    <mat-form-field class="inputField">
-      <ngx-mat-file-input formControlName="picture"></ngx-mat-file-input>
-      <mat-hint>Select a picture of the product</mat-hint>
-      <mat-error *ngIf="formData['picture'].errors?.['required']"
-        >A Product must have a picture</mat-error
-      >
-    </mat-form-field>
     <mat-form-field class="inputField">
       <mat-label>Price</mat-label>
       <input type="number" matInput formControlName="price" required />
@@ -80,7 +98,6 @@
       </mat-select>
       <mat-hint>Give the new product a currency</mat-hint>
     </mat-form-field>
-
     <mat-form-field class="inputField">
       <mat-label>Quantity</mat-label>
       <input type="number" matInput formControlName="quantity" required />
@@ -89,7 +106,6 @@
         >You cannot create a product with no quantity></mat-error
       >
     </mat-form-field>
-
     <br />
     <mat-form-field class="inputField">
       <mat-label>Sales Percentage</mat-label>
@@ -112,3 +128,28 @@
     </button>
   </form>
 </div>
+<!--
+
+      <input
+        formControlName="picture"
+        type="file"
+        class="file-input"
+        (change)="onFileSelected($event)"
+        #fileUpload
+      />
+      <div class="file-upload">
+        {{ fileName || "No File have been uploaded yet" }}
+      </div>
+      <button
+        mat-mini-fab
+        color="primary"
+        class="upload-btn"
+        (click)="fileUpload.click()"
+      >
+        <mat-icon>attach_file</mat-icon>
+      </button>
+      <mat-hint>Select a picture of the product</mat-hint>
+      <mat-error *ngIf="formData['picture'].errors?.['required']"
+        >A Product must have a picture</mat-error
+      >
+-->

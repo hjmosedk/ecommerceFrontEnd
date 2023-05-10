@@ -11,3 +11,7 @@
 .inputField {
   width: 75%;
 }
+
+.file-input {
+  display: none;
+}

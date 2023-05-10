@@ -5,11 +5,11 @@ import {
   Validators,
   AbstractControl,
 } from '@angular/forms';
-import { MessageService } from 'src/app/message/message.service';
-import { MessageType } from 'src/app/message/types/message.model';
+
 import { CurrencyType } from '../types/productTypes';
 import { Store } from '@ngrx/store';
 import { ProductsActions } from '../state/actions';
+import { v4 as uuid } from 'uuid';
 
 @Component({
   selector: 'app-create-product',
@@ -18,10 +18,11 @@ import { ProductsActions } from '../state/actions';
 })
 export class CreateProductComponent implements OnInit {
   productDataForm!: FormGroup;
-
   acceptableCurrencies: string[] = Object.values(CurrencyType);
+  uuid: string = '';
+  fileName: string = '';
 
-  constructor(private messageService: MessageService, private store: Store) {}
+  constructor(private store: Store) {}
 
   onSubmit() {
     this.store.dispatch(
@@ -48,7 +49,7 @@ export class CreateProductComponent implements OnInit {
         nonNullable: true,
         validators: [Validators.required],
       }),
-      picture: new FormControl('', {
+      image: new FormControl('', {
         nonNullable: true,
         validators: [Validators.required],
       }),
@@ -75,4 +76,19 @@ export class CreateProductComponent implements OnInit {
       }),
     });
   }
+
+  onFileSelected(event: any) {
+    const file: File = event.target.files[0];
+    if (file) {
+      const extension: string | undefined = file.name
+        .split('?')[0]
+        .split('.')
+        .pop();
+      this.fileName = file.name;
+      const formData = new FormData();
+      formData.append('image', file, `${uuid()}.${extension}`);
+    }
+  }
 }
+
+// TODO Change fileUpload to be more like the one used in this example, and get rid of dependency "Angular-Material-Component/file-input, it is blocking for angular update - https://blog.angular-university.io/angular-file-upload/"
