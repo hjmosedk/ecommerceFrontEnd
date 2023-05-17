@@ -12,9 +12,9 @@ export interface Product {
   description: string;
   price: number;
   currency: CurrencyType;
-  picture: string;
+  image: string;
   quantity: number;
-  brand: string;
+  category: string;
   percentage: number | undefined | null;
   onSale: boolean;
 }

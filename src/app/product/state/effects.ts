@@ -56,7 +56,6 @@ export class ProductsEffects {
       return this.actions.pipe(
         ofType(ProductsActions.createProduct),
         switchMap((action) => {
-          console.log(action);
           return this.productsService.createProduct(action).pipe(
             map((product) => ProductsActions.createProductSuccess({ product })),
             catchError((error) => throwError(() => error))

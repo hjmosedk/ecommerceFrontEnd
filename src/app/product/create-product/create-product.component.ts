@@ -10,7 +10,8 @@ import { CurrencyType } from '../types/productTypes';
 import { Store } from '@ngrx/store';
 import { ProductsActions } from '../state/actions';
 import { v4 as uuid } from 'uuid';
-
+import { ProductService } from '../product.service';
+import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-create-product',
   templateUrl: './create-product.component.html',
@@ -19,10 +20,16 @@ import { v4 as uuid } from 'uuid';
 export class CreateProductComponent implements OnInit {
   productDataForm!: FormGroup;
   acceptableCurrencies: string[] = Object.values(CurrencyType);
-  uuid: string = '';
   fileName: string = '';
+  imageId?: string | undefined;
 
-  constructor(private store: Store) {}
+  imageString: string = `http://192.168.1.135:3000/products/file/${this.imageId}`;
+
+  constructor(
+    private store: Store,
+    private productService: ProductService,
+    private http: HttpClient
+  ) {}
 
   onSubmit() {
     this.store.dispatch(
@@ -51,9 +58,8 @@ export class CreateProductComponent implements OnInit {
       }),
       image: new FormControl('', {
         nonNullable: true,
-        validators: [Validators.required],
       }),
-      brand: new FormControl('', {
+      category: new FormControl('', {
         nonNullable: true,
         validators: [Validators.required],
       }),
@@ -85,8 +91,14 @@ export class CreateProductComponent implements OnInit {
         .split('.')
         .pop();
       this.fileName = file.name;
-      const formData = new FormData();
-      formData.append('image', file, `${uuid()}.${extension}`);
+      const uploadImage = new FormData();
+      uploadImage.append('image', file, `${uuid()}.${extension}`);
+      console.log(uploadImage.get('image'));
+      const test = this.http.post<{ name: string }>(
+        'http://192.168.1.135:3000/products/upload',
+        uploadImage
+      );
+      test.subscribe((image) => (this.imageId = image.name));
     }
   }
 }

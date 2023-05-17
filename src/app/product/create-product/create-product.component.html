@@ -38,7 +38,7 @@
       >
     </mat-form-field>
     <br />
-    <mat-label for="image">Image</mat-label>
+    <mat-label for="image">Image*</mat-label>
     <input
       type="file"
       class="file-input"
@@ -62,13 +62,16 @@
       </button>
     </div>
     <br />
+    <mat-card *ngIf="imageId">
+      <img mat-card-lg-image src="{{ imageString }}" />
+    </mat-card>
     <br />
     <mat-form-field class="inputField">
-      <mat-label>Brand</mat-label>
-      <input type="text" matInput formControlName="brand" />
-      <mat-hint>Please describe the brand</mat-hint>
-      <mat-error *ngIf="formData['brand'].errors?.['required']"
-        >A Product must have a Brand</mat-error
+      <mat-label>Category</mat-label>
+      <input type="text" matInput formControlName="category" />
+      <mat-hint>Please describe the category</mat-hint>
+      <mat-error *ngIf="formData['category'].errors?.['required']"
+        >A Product must have a Category</mat-error
       >
     </mat-form-field>
     <br />
@@ -128,6 +131,7 @@
     </button>
   </form>
 </div>
+
 <!--
 
       <input
