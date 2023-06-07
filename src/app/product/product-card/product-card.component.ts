@@ -10,6 +10,8 @@ import { PriceService } from '../price.service';
   styleUrls: ['./product-card.component.css'],
 })
 export class ProductCardComponent {
+  baseUrl: string = 'http://192.168.1.135:3000';
+  imagePath: string = '/images/';
   constructor(private priceService: PriceService) {}
 
   @Input()

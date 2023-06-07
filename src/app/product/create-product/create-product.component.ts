@@ -10,7 +10,6 @@ import { CurrencyType } from '../types/productTypes';
 import { Store } from '@ngrx/store';
 import { ProductsActions } from '../state/actions';
 import { v4 as uuid } from 'uuid';
-import { ProductService } from '../product.service';
 import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-create-product',
@@ -23,19 +22,16 @@ export class CreateProductComponent implements OnInit {
   fileName: string = '';
   imageId?: string | undefined;
 
-  imageString: string = `http://192.168.1.135:3000/images/${this.imageId}`;
-
-  constructor(
-    private store: Store,
-    private productService: ProductService,
-    private http: HttpClient
-  ) {}
+  imageString: string = ``;
+  constructor(private store: Store, private http: HttpClient) {}
 
   onSubmit() {
-    this.store.dispatch(
-      ProductsActions.createProduct(this.productDataForm.value)
-    );
+    this.productDataForm.patchValue({ image: this.imageId });
+    const newProduct = this.productDataForm.value;
+    this.store.dispatch(ProductsActions.createProduct(newProduct));
     this.productDataForm.reset();
+    this.imageId = undefined;
+    this.fileName = '';
   }
 
   get formData(): { [key: string]: AbstractControl } {
@@ -93,12 +89,14 @@ export class CreateProductComponent implements OnInit {
       this.fileName = file.name;
       const uploadImage = new FormData();
       uploadImage.append('image', file, `${uuid()}.${extension}`);
-      console.log(uploadImage.get('image'));
-      const test = this.http.post<{ name: string }>(
+      const uploadedImage = this.http.post<{ name: string }>(
         'http://192.168.1.135:3000/images/upload',
         uploadImage
       );
-      test.subscribe((image) => (this.imageId = image.name));
+      uploadedImage.subscribe((image) => {
+        this.imageId = image.name;
+        this.imageString = `http://192.168.1.135:3000/images/${this.imageId}`;
+      });
     }
   }
 }
