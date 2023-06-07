@@ -23,7 +23,7 @@ export class CreateProductComponent implements OnInit {
   fileName: string = '';
   imageId?: string | undefined;
 
-  imageString: string = `http://192.168.1.135:3000/products/file/${this.imageId}`;
+  imageString: string = `http://192.168.1.135:3000/images/${this.imageId}`;
 
   constructor(
     private store: Store,
@@ -95,7 +95,7 @@ export class CreateProductComponent implements OnInit {
       uploadImage.append('image', file, `${uuid()}.${extension}`);
       console.log(uploadImage.get('image'));
       const test = this.http.post<{ name: string }>(
-        'http://192.168.1.135:3000/products/upload',
+        'http://192.168.1.135:3000/images/upload',
         uploadImage
       );
       test.subscribe((image) => (this.imageId = image.name));

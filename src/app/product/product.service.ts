@@ -44,6 +44,6 @@ export class ProductService {
   }
 
   uploadImage(image: any): void {
-    this.http.post(`http://192.168.1.135:3000/products/upload`, image);
+    this.http.post(`http://192.168.1.135:3000/images/upload`, image);
   }
 }
