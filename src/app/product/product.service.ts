@@ -1,13 +1,13 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Product, NewProduct } from 'src/app/product/types/productTypes';
-import { Observable, throwError } from 'rxjs';
-import { catchError, map, retry } from 'rxjs/operators';
-
+import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root',
 })
 export class ProductService {
+  baseUri = environment.baseUri;
   constructor(private http: HttpClient) {}
 
   /*
@@ -26,24 +26,21 @@ export class ProductService {
   }
 */
   getAllProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>('http://192.168.1.135:3000/products');
+    return this.http.get<Product[]>(`${this.baseUri}/products`);
     //.pipe(catchError(this.handleError));
   }
 
   getProduct(id: string): Observable<Product> {
-    return this.http.get<Product>(`http://192.168.1.135:3000/products/${id}`);
+    return this.http.get<Product>(`${this.baseUri}/products/${id}`);
     //.pipe(catchError(this.handleError));
   }
 
   createProduct(product: NewProduct): Observable<Product> {
-    return this.http.post<Product>(
-      `http://192.168.1.135:3000/products`,
-      product
-    );
+    return this.http.post<Product>(`${this.baseUri}/products`, product);
     //.pipe(catchError(this.handleError));
   }
 
   uploadImage(image: any): void {
-    this.http.post(`http://192.168.1.135:3000/images/upload`, image);
+    this.http.post(`${this.baseUri}/images/upload`, image);
   }
 }

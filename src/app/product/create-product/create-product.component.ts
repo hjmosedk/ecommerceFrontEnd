@@ -11,6 +11,7 @@ import { Store } from '@ngrx/store';
 import { ProductsActions } from '../state/actions';
 import { v4 as uuid } from 'uuid';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-create-product',
   templateUrl: './create-product.component.html',
@@ -21,8 +22,9 @@ export class CreateProductComponent implements OnInit {
   acceptableCurrencies: string[] = Object.values(CurrencyType);
   fileName: string = '';
   imageId?: string | undefined;
-
   imageString: string = ``;
+  baseUri = environment.baseUri;
+
   constructor(private store: Store, private http: HttpClient) {}
 
   onSubmit() {
@@ -90,12 +92,12 @@ export class CreateProductComponent implements OnInit {
       const uploadImage = new FormData();
       uploadImage.append('image', file, `${uuid()}.${extension}`);
       const uploadedImage = this.http.post<{ name: string }>(
-        'http://192.168.1.135:3000/images/upload',
+        `${this.baseUri}/images/upload`,
         uploadImage
       );
       uploadedImage.subscribe((image) => {
         this.imageId = image.name;
-        this.imageString = `http://192.168.1.135:3000/images/${this.imageId}`;
+        this.imageString = `${this.baseUri}/images/${this.imageId}`;
       });
     }
   }
