@@ -44,7 +44,7 @@ export class CreateProductComponent implements OnInit {
     this.productDataForm = new FormGroup({
       name: new FormControl('', {
         nonNullable: true,
-        validators: [Validators.required],
+        validators: [Validators.required, Validators.maxLength(14)],
       }),
       sku: new FormControl('', {
         nonNullable: true,

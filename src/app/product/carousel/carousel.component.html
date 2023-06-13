@@ -31,7 +31,9 @@
     <ng-container *ngFor="let product of products">
       <div
         class="carousel-item"
-        [style.background-image]="'url(' + product.image + ')'"
+        [style.background-image]="
+          'url(' + baseUri + '/images/' + product.image + ')'
+        "
         (click)="navigateToProduct(product.id)"
       >
         <div class="price-container">

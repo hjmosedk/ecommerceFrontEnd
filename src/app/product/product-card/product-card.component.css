@@ -1,8 +1,9 @@
-.mat-card {
+.mat-mdc-card .mdc-card {
   height: 500px; /* set a fixed height for the card */
 }
 
-.mat-card-header {
+.mat-card-header,
+.mat-mdc-card-header {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -10,16 +11,30 @@
   height: 100px; /* set a fixed height for the header */
 }
 
-.mat-card-title {
+.mat-card-title,
+.mat-mdc-card-title {
   font-weight: bold;
   text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: clip;
+  max-width: 100%;
 }
 
-.mat-card-image {
-  display: block;
-  margin: 0 auto;
+.mad-card-subtitle,
+.mat-mdc-card-subtitle {
+  text-align: center;
+  white-space: nowrap;
+}
+
+.mat-card-image,
+.mat-mdc-card-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 150px;
   height: 150px;
+  margin: 0 auto;
 }
 
 .mat-card-content {
@@ -35,6 +50,9 @@
 .description {
   text-overflow: ellipsis; /* add ellipsis for overflow text */
   overflow: hidden; /* hide overflow text */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
 }
 
 .price {
@@ -44,6 +62,8 @@
   height: 50px; /* set a fixed height for the price section */
   color: #3f51b5;
   font-weight: bold;
+  margin: 0 auto;
+  text-align: center;
 }
 
 .on-sale .price {
@@ -67,7 +87,8 @@
   margin-left: 5px;
 }
 
-.mat-card-actions {
+.mat-card-actions,
+.mat-mdc-card-actions {
   display: flex;
   justify-content: center;
 }

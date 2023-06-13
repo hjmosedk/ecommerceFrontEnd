@@ -4,6 +4,7 @@ import { ProductService } from '../product.service';
 import { Router } from '@angular/router';
 import { Currency } from 'dinero.js';
 import { PriceService } from '../price.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-carousel',
@@ -14,7 +15,7 @@ export class CarouselComponent implements OnInit {
   @ViewChild('carouselWrapper')
   carouselWrapper!: ElementRef;
   products: Product[] = [];
-
+  baseUri = environment.baseUri;
   currentSlideIndex = 0;
   carouselWrapperWidth = 0;
   slideWidth = 0;

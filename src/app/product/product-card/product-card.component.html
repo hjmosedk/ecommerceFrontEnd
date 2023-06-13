@@ -1,11 +1,11 @@
 <mat-card>
   <mat-card-header>
-    <mat-card-title>{{ product.name }}</mat-card-title>
+    <mat-card-title>{{ trimName(product.name) }}</mat-card-title>
     <mat-card-subtitle>{{ product.category }}</mat-card-subtitle>
   </mat-card-header>
   <img
     mat-card-image
-    src="{{ baseUrl }}{{ imagePath }}{{ product.image }}"
+    src="{{ baseUrl }}/images/{{ product.image }}"
     width="150px"
     height="150px"
   />

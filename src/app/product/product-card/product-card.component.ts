@@ -3,6 +3,7 @@ import { Product } from 'src/app/product/types/productTypes';
 import Dinero, { Currency } from 'dinero.js';
 import { CurrencyType } from 'src/app/product/types/productTypes';
 import { PriceService } from '../price.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-product-card',
@@ -10,7 +11,7 @@ import { PriceService } from '../price.service';
   styleUrls: ['./product-card.component.css'],
 })
 export class ProductCardComponent {
-  baseUrl: string = 'http://192.168.1.135:3000';
+  baseUrl = environment.baseUri;
   imagePath: string = '/images/';
   constructor(private priceService: PriceService) {}
 
@@ -31,5 +32,14 @@ export class ProductCardComponent {
 
   calculatePrice(price: number = 2500, currency: Currency) {
     return this.priceService.calculatePrice(price, currency);
+  }
+
+  trimName(name: string) {
+    if (name.length > 14) {
+      const trimmedName = name.substring(0, 14);
+      return trimmedName;
+    }
+
+    return name;
   }
 }
