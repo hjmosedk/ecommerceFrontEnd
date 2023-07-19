@@ -15,7 +15,7 @@ export interface Product {
   image: string;
   quantity: number;
   category: string;
-  percentage: number | undefined | null;
+  percentage: number;
   onSale: boolean;
 }
 

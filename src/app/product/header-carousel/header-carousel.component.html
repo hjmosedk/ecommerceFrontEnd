@@ -1,0 +1,24 @@
+<div class="carousel-container">
+  <owl-carousel-o class="owl-theme" *ngIf="products">
+    <ng-container *ngFor="let product of products">
+      <div class="item">
+        <img [src]="getProductImageURL(product)" alt="Product Image" />
+        <div class="carousel-overlay">
+          <div class="product-details">
+            <h2>{{ product.name }}</h2>
+            <div class="price" *ngIf="product.onSale">
+              <span class="sale-percentage">{{ product.percentage }}% off</span>
+              <span class="original-price">{{ product.price }}</span>
+              <span class="sale-price">{{
+                calculateSalePrice(product.price, product.percentage)
+              }}</span>
+            </div>
+            <div class="price" *ngIf="!product.onSale">
+              <span class="regular-price">{{ product.price }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </owl-carousel-o>
+</div>

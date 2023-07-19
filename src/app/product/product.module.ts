@@ -19,6 +19,9 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { ProductListComponent } from './product-list/product-list.component';
 import { MatTableModule } from '@angular/material/table';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { HeaderCarouselComponent } from './header-carousel/header-carousel.component';
+import { CarouselModule } from 'ngx-owl-carousel-o';
+
 @NgModule({
   declarations: [
     CarouselComponent,
@@ -27,6 +30,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     ProductComponent,
     CreateProductComponent,
     ProductListComponent,
+    HeaderCarouselComponent,
   ],
   imports: [
     CommonModule,
@@ -43,6 +47,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatGridListModule,
     MatTableModule,
     FlexLayoutModule,
+    CarouselModule,
   ],
   exports: [
     CarouselComponent,
