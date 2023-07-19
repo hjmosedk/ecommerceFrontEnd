@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CarouselComponent } from './carousel/carousel.component';
 import { SharedComponentsModule } from '../shared-components/shared-components.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProductCardComponent } from './product-card/product-card.component';
@@ -19,18 +18,14 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { ProductListComponent } from './product-list/product-list.component';
 import { MatTableModule } from '@angular/material/table';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { HeaderCarouselComponent } from './header-carousel/header-carousel.component';
-import { CarouselModule } from 'ngx-owl-carousel-o';
 
 @NgModule({
   declarations: [
-    CarouselComponent,
     ProductCardComponent,
     AllProductsComponent,
     ProductComponent,
     CreateProductComponent,
     ProductListComponent,
-    HeaderCarouselComponent,
   ],
   imports: [
     CommonModule,
@@ -47,10 +42,8 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
     MatGridListModule,
     MatTableModule,
     FlexLayoutModule,
-    CarouselModule,
   ],
   exports: [
-    CarouselComponent,
     BrowserAnimationsModule,
     ProductCardComponent,
     AllProductsComponent,
