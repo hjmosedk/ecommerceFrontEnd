@@ -30,7 +30,7 @@ export class ProductService {
     //.pipe(catchError(this.handleError));
   }
 
-  getProduct(id: string): Observable<Product> {
+  getProduct(id: number): Observable<Product> {
     return this.http.get<Product>(`${this.baseUri}/products/${id}`);
     //.pipe(catchError(this.handleError));
   }

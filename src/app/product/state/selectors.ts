@@ -1,6 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { productsAdapter, ProductsState } from './state';
-import { getRouterSelectors } from '@ngrx/router-store';
 
 const selectProductsFeature = createFeatureSelector<ProductsState>('products');
 
@@ -16,10 +15,5 @@ export const selectEntities = createSelector(
   selectors.selectEntities
 );
 
-const { selectRouteParams } = getRouterSelectors();
-
-export const selectSingleProduct = createSelector(
-  selectEntities,
-  selectRouteParams,
-  (entities, { id }) => entities[id]
-);
+export const selectOneProduct = (productId: number) =>
+  createSelector(selectEntities, (entities) => entities[productId]);
