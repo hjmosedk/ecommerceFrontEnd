@@ -2,7 +2,7 @@ import { Injectable, ErrorHandler, Injector } from '@angular/core';
 import { ErrorService } from './services/error.service';
 import { MessageService } from './message/message.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { MessageData, MessageType } from './message/types/message.model';
+import { MessageData, MessageType } from './message/models/message.model';
 @Injectable({
   providedIn: 'root',
 })

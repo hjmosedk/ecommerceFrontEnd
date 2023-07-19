@@ -1,9 +1,12 @@
 .striped {
   background-color: #673ab7;
-  color: white;
-  font-weight: bold;
+  color: black;
 }
 
 th.mat.header-cell {
   color: white;
+}
+
+img {
+  padding-top: 5px;
 }

@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   baseUri: 'http://192.168.1.135:3000',
+  imagePath: '/images/',
 };
 
 /*

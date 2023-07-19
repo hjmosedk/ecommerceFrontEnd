@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SharedComponentsModule } from '../shared-components/shared-components.module';
+import { SharedModule } from '../shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProductCardComponent } from './product-card/product-card.component';
 import { MatCardModule } from '@angular/material/card';
@@ -29,7 +29,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
   ],
   imports: [
     CommonModule,
-    SharedComponentsModule,
+    SharedModule,
     BrowserAnimationsModule,
     MatCardModule,
     ReactiveFormsModule,

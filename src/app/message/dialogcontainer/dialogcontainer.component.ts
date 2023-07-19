@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalComponent } from '../modal/modal.component';
-import { MessageData, MessageType } from '../types/message.model';
+import { MessageData, MessageType } from '../models/message.model';
 import { createEffect, ofType } from '@ngrx/effects';
 import { MessageActions } from '../state/actions';
 

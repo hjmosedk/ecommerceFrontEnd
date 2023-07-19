@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Product, NewProduct } from 'src/app/product/types/productTypes';
+import { ProductModel, NewProductModel } from '../shared/models/product.model';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 @Injectable({
@@ -25,18 +25,18 @@ export class ProductService {
     );
   }
 */
-  getAllProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(`${this.baseUri}/products`);
+  getAllProducts(): Observable<ProductModel[]> {
+    return this.http.get<ProductModel[]>(`${this.baseUri}/products`);
     //.pipe(catchError(this.handleError));
   }
 
-  getProduct(id: number): Observable<Product> {
-    return this.http.get<Product>(`${this.baseUri}/products/${id}`);
+  getProduct(id: number): Observable<ProductModel> {
+    return this.http.get<ProductModel>(`${this.baseUri}/products/${id}`);
     //.pipe(catchError(this.handleError));
   }
 
-  createProduct(product: NewProduct): Observable<Product> {
-    return this.http.post<Product>(`${this.baseUri}/products`, product);
+  createProduct(product: NewProductModel): Observable<ProductModel> {
+    return this.http.post<ProductModel>(`${this.baseUri}/products`, product);
     //.pipe(catchError(this.handleError));
   }
 

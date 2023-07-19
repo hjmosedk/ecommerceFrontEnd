@@ -1,17 +1,17 @@
-export enum CurrencyType {
+export enum CurrencyEnum {
   DKK = 'DKK',
   USD = 'USD',
   EUR = 'EUR',
   GBP = 'GBP',
 }
 
-export interface Product {
+export interface ProductModel {
   id: string;
   name: string;
   sku: string;
   description: string;
   price: number;
-  currency: CurrencyType;
+  currency: CurrencyEnum;
   image: string;
   quantity: number;
   category: string;
@@ -19,4 +19,4 @@ export interface Product {
   onSale: boolean;
 }
 
-export type NewProduct = Omit<Product, 'id'>;
+export type NewProductModel = Omit<ProductModel, 'id'>;

@@ -6,7 +6,7 @@ import {
   AbstractControl,
 } from '@angular/forms';
 
-import { CurrencyType } from '../types/productTypes';
+import { CurrencyEnum } from 'src/app/shared/models/product.model';
 import { Store } from '@ngrx/store';
 import { ProductsActions } from '../state/actions';
 import { v4 as uuid } from 'uuid';
@@ -19,7 +19,7 @@ import { environment } from 'src/environments/environment';
 })
 export class CreateProductComponent implements OnInit {
   productDataForm!: FormGroup;
-  acceptableCurrencies: string[] = Object.values(CurrencyType);
+  acceptableCurrencies: string[] = Object.values(CurrencyEnum);
   fileName: string = '';
   imageId?: string | undefined;
   imageString: string = ``;
@@ -65,7 +65,7 @@ export class CreateProductComponent implements OnInit {
         nonNullable: true,
         validators: [Validators.required, Validators.min(100)],
       }),
-      currency: new FormControl(CurrencyType.DKK, {
+      currency: new FormControl(CurrencyEnum.DKK, {
         nonNullable: true,
         validators: [Validators.required],
       }),

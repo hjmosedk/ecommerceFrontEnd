@@ -1,6 +1,6 @@
 import { Component, Inject, Optional } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { MessageData, MessageType } from '../types/message.model';
+import { MessageData, MessageType } from '../models/message.model';
 
 @Component({
   selector: 'app-modal',

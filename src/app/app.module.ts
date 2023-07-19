@@ -7,7 +7,7 @@ import { GlobalErrorHandler } from './global-error-handler';
 
 //Internal Modules
 import { ProductModule } from './product/product.module';
-import { SharedComponentsModule } from './shared-components/shared-components.module';
+import { SharedModule } from './shared/shared.module';
 
 import { EffectsModule } from '@ngrx/effects';
 //State Components
@@ -23,7 +23,7 @@ import { MessageEffects } from './message/state/effects';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    SharedComponentsModule,
+    SharedModule,
     HttpClientModule,
     StoreModule.forRoot({ products: productsReducer, router: routerReducer }),
     EffectsModule.forRoot([ProductsEffects, MessageEffects]),

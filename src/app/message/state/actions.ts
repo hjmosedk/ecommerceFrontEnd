@@ -1,5 +1,5 @@
 import { createActionGroup, props } from '@ngrx/store';
-import { MessageData } from '../types/message.model';
+import { MessageData } from '../models/message.model';
 
 export const MessageActions = createActionGroup({
   source: 'Message',

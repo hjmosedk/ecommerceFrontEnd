@@ -1,13 +1,19 @@
 <div>
   <div *ngIf="data.type === messageType.success" class="success">
     <h1 mat-dialog-title>{{ data.title }}</h1>
-    <div mat-dialog-content>{{ data.messageText }}</div>
+    <mat-dialog-content>{{ data.messageText }} </mat-dialog-content>
+    <mat-dialog-actions align="center">
+      <button mat-raised-button color="primary">Close</button>
+    </mat-dialog-actions>
   </div>
   <div *ngIf="data.type === messageType.error" class="error">
     <h1 mat-dialog-title>{{ data.title }}</h1>
-    <div mat-dialog-content>
+    <mat-dialog-content>
       The error have the following message: <br />{{ data.messageText }}
-    </div>
+    </mat-dialog-content>
+    <mat-dialog-actions align="center">
+      <button mat-raised-button mat-dialog-close color="warn">Close</button>
+    </mat-dialog-actions>
   </div>
   <div *ngIf="data.type === null" hidden></div>
 </div>

@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { ProductsActions } from '../state/actions';
 import { selectAllProducts } from '../state/selectors';
 import { Observable } from 'rxjs';
-import { Product } from '../types/productTypes';
+import { ProductModel } from 'src/app/shared/models/product.model';
 import { ViewportScroller } from '@angular/common';
 
 @Component({
@@ -13,7 +13,8 @@ import { ViewportScroller } from '@angular/common';
   styleUrls: ['./all-products.component.css'],
 })
 export class AllProductsComponent implements OnInit {
-  productList$: Observable<Product[]> = this.store.select(selectAllProducts);
+  productList$: Observable<ProductModel[]> =
+    this.store.select(selectAllProducts);
   constructor(
     private store: Store,
     private router: Router,

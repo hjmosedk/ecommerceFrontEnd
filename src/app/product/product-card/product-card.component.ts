@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
-import { Product } from 'src/app/product/types/productTypes';
-import Dinero, { Currency } from 'dinero.js';
-import { CurrencyType } from 'src/app/product/types/productTypes';
+import { ProductModel } from 'src/app/shared/models/product.model';
+import { Currency } from 'dinero.js';
+import { CurrencyEnum } from 'src/app/shared/models/product.model';
 import { PriceService } from '../price.service';
 import { environment } from 'src/environments/environment';
 
@@ -16,7 +16,7 @@ export class ProductCardComponent {
   constructor(private priceService: PriceService) {}
 
   @Input()
-  product: Product = {
+  product: ProductModel = {
     id: '0',
     name: 'Hej med dej',
     sku: 'HMD',
@@ -27,7 +27,7 @@ export class ProductCardComponent {
     quantity: 0,
     percentage: 25,
     onSale: false,
-    currency: CurrencyType.DKK,
+    currency: CurrencyEnum.DKK,
   };
 
   calculatePrice(price: number = 2500, currency: Currency) {

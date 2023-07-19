@@ -5,7 +5,7 @@ import { ProductService } from '../product.service';
 
 import { throwError } from 'rxjs';
 import { catchError, mergeMap, switchMap, map, filter } from 'rxjs/operators';
-import { Product } from '../types/productTypes';
+import { ProductModel } from 'src/app/shared/models/product.model';
 import { routerNavigatedAction } from '@ngrx/router-store';
 import { error } from 'cypress/types/jquery';
 
@@ -21,7 +21,7 @@ export class ProductsEffects {
       ofType(ProductsActions.loadAllProducts),
       mergeMap(() =>
         this.productsService.getAllProducts().pipe(
-          map((products: Product[]) =>
+          map((products: ProductModel[]) =>
             ProductsActions.loadAllProductsSuccess({
               products,
             })

@@ -5,7 +5,7 @@ import { createEffect, ofType, Actions } from '@ngrx/effects';
 import { MessageActions } from '../state/actions';
 import { map } from 'rxjs';
 import { ProductsActions } from 'src/app/product/state/actions';
-import { MessageType } from '../types/message.model';
+import { MessageType } from '../models/message.model';
 
 @Injectable()
 export class MessageEffects {

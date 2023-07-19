@@ -1,6 +1,6 @@
 import { EntityState, createEntityAdapter } from '@ngrx/entity';
-import { Product } from '../types/productTypes';
+import { ProductModel } from 'src/app/shared/models/product.model';
 
-export interface ProductsState extends EntityState<Product> {}
+export interface ProductsState extends EntityState<ProductModel> {}
 
-export const productsAdapter = createEntityAdapter<Product>();
+export const productsAdapter = createEntityAdapter<ProductModel>();
