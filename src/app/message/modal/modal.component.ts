@@ -1,5 +1,5 @@
 import { Component, Inject, Optional } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { MessageData, MessageType } from '../models/message.model';
 
 @Component({
@@ -11,6 +11,11 @@ export class ModalComponent {
   messageType = MessageType;
 
   constructor(
-    @Optional() @Inject(MAT_DIALOG_DATA) @Optional() public data: MessageData
+    @Optional() @Inject(MAT_DIALOG_DATA) @Optional() public data: MessageData,
+    private dialog: MatDialog
   ) {}
+
+  onClose() {
+    this.dialog.closeAll();
+  }
 }
