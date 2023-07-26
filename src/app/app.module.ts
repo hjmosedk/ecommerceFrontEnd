@@ -13,10 +13,7 @@ import { EffectsModule } from '@ngrx/effects';
 //State Components
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { productsReducer } from './product/state/reducer';
-import { routerReducer } from '@ngrx/router-store';
-import { ProductsEffects } from './product/state/effects';
-import { MessageEffects } from './message/state/effects';
+import { MessageModule } from './message/message.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -25,10 +22,11 @@ import { MessageEffects } from './message/state/effects';
     AppRoutingModule,
     SharedModule,
     HttpClientModule,
-    StoreModule.forRoot({ products: productsReducer, router: routerReducer }),
-    EffectsModule.forRoot([ProductsEffects, MessageEffects]),
+    StoreModule.forRoot(),
+    EffectsModule.forRoot(),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
     ProductModule,
+    MessageModule,
   ],
   providers: [{ provide: ErrorHandler, useClass: GlobalErrorHandler }],
   bootstrap: [AppComponent],

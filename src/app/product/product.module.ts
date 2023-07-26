@@ -10,7 +10,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatButtonModule } from '@angular/material/button';
 import { AllProductsComponent } from './all-products/all-products.component';
-import { MessageModule } from '../message/message.module';
 import { ProductComponent } from './product/product.component';
 import { CreateProductComponent } from './create-product/create-product.component';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -20,7 +19,10 @@ import { MatTableModule } from '@angular/material/table';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ProductFormComponent } from '../product-form/product-form.component';
 import { FileUploadComponent } from './file-upload/file-upload.component';
-
+import { ProductsEffects } from './state/effects';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
+import { productsReducer } from './state/reducer';
 @NgModule({
   declarations: [
     ProductCardComponent,
@@ -41,17 +43,20 @@ import { FileUploadComponent } from './file-upload/file-upload.component';
     MatInputModule,
     MatSlideToggleModule,
     MatButtonModule,
-    MessageModule,
     MatSelectModule,
     MatGridListModule,
     MatTableModule,
     FlexLayoutModule,
+    EffectsModule.forFeature([ProductsEffects]),
+    StoreModule.forFeature('products', productsReducer),
   ],
   exports: [
     BrowserAnimationsModule,
     ProductCardComponent,
     AllProductsComponent,
     CreateProductComponent,
+    ProductFormComponent,
+    FileUploadComponent,
   ],
 })
 export class ProductModule {}
