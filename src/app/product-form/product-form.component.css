@@ -1,0 +1,17 @@
+.container {
+  padding-top: 2.5%;
+  padding-left: 15%;
+}
+
+.inputForm {
+  min-width: 25%;
+  max-width: 100%;
+}
+
+.inputField {
+  width: 75%;
+}
+
+.file-input {
+  display: none;
+}

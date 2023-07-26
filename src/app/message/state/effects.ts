@@ -16,7 +16,6 @@ export class MessageEffects {
       return this.actions.pipe(
         ofType(ProductsActions.createProductSuccess),
         map(({ product }) => {
-          console.log(product);
           this.dialog.open(ModalComponent, {
             data: {
               type: MessageType.success,

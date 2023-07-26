@@ -1,0 +1,113 @@
+<div class="container">
+  <form
+    class="inputForm"
+    [formGroup]="productDataForm"
+    enctype="multipart/form-data"
+    method="post"
+    (ngSubmit)="onSubmit()"
+  >
+    <mat-form-field class="inputField">
+      <mat-label for="name">Name</mat-label>
+      <input type="text" matInput formControlName="name" id="name" required />
+      <mat-hint>Give the new product a name</mat-hint>
+      <mat-error *ngIf="formData['name'].errors?.['required']"
+        >A Product must have a name</mat-error
+      >
+    </mat-form-field>
+    <br />
+    <mat-form-field class="inputField">
+      <mat-label>SKU</mat-label>
+      <input type="text" matInput formControlName="sku" required />
+      <mat-hint>Give the new product a SKU</mat-hint>
+      <mat-error *ngIf="formData['sku'].errors?.['required']"
+        >A Product must have a SKU(Item number)</mat-error
+      >
+    </mat-form-field>
+    <br />
+    <mat-form-field class="inputField">
+      <mat-label>Description</mat-label>
+      <textarea
+        matInput
+        formControlName="description"
+        rows="4"
+        cols="12"
+      ></textarea>
+      <mat-hint>Give the new product a description</mat-hint>
+      <mat-error *ngIf="formData['description'].errors?.['required']"
+        >A Product must have a description</mat-error
+      >
+    </mat-form-field>
+    <br />
+    <app-file-upload
+      [baseUri]="baseUri"
+      (imageMetaData)="getImageMetaData($event)"
+    ></app-file-upload>
+    <mat-card *ngIf="imageId">
+      <img mat-card-lg-image src="{{ imageString }}" />
+    </mat-card>
+    <br />
+    <mat-form-field class="inputField">
+      <mat-label>Category</mat-label>
+      <input type="text" matInput formControlName="category" />
+      <mat-hint>Please describe the category</mat-hint>
+      <mat-error *ngIf="formData['category'].errors?.['required']"
+        >A Product must have a Category</mat-error
+      >
+    </mat-form-field>
+    <br />
+    <mat-form-field class="inputField">
+      <mat-label>Price</mat-label>
+      <input type="number" matInput formControlName="price" required />
+      <mat-hint
+        >Give the new product a price, must be in lowest coinage e.g. cent for
+        USD, EUR or øre for DKK, and pence for GBP</mat-hint
+      >
+      <mat-error *ngIf="formData['price'].errors?.['required']"
+        >A Product must have a price</mat-error
+      >
+      <mat-error *ngIf="formData['price'].errors?.['min']"
+        >The price must be at least 1 DKK, USD, GBP or EUR (100)</mat-error
+      >
+    </mat-form-field>
+    <br />
+    <mat-form-field class="inputField">
+      <mat-label>Currency</mat-label>
+      <mat-select type="text" matInput formControlName="currency" required>
+        <mat-option
+          *ngFor="let currency of acceptableCurrencies"
+          [value]="currency"
+          >{{ currency }}</mat-option
+        >
+      </mat-select>
+      <mat-hint>Give the new product a currency</mat-hint>
+    </mat-form-field>
+    <mat-form-field class="inputField">
+      <mat-label>Quantity</mat-label>
+      <input type="number" matInput formControlName="quantity" required />
+      <mat-hint>Input the quantity of the product</mat-hint>
+      <mat-error *ngIf="formData['quantity'].errors?.['required']"
+        >You cannot create a product with no quantity></mat-error
+      >
+    </mat-form-field>
+    <br />
+    <mat-form-field class="inputField">
+      <mat-label>Sales Percentage</mat-label>
+      <input type="number" matInput formControlName="percentage" />
+      <mat-hint>Please input the percentage the product is on sale</mat-hint>
+    </mat-form-field>
+    <br />
+    <div class="slider">
+      <mat-slide-toggle formControlName="onSale"> On sale?</mat-slide-toggle>
+    </div>
+    <br />
+    <p>Complete the form to enable the button</p>
+    <button
+      type="submit"
+      mat-button
+      color="primary"
+      [disabled]="!productDataForm.valid"
+    >
+      Submit
+    </button>
+  </form>
+</div>
