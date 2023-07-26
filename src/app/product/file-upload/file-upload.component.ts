@@ -37,5 +37,6 @@ export class FileUploadComponent {
         });
       });
     }
+    event.target.reset;
   }
 }

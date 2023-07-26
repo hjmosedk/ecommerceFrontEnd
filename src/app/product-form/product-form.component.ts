@@ -10,7 +10,6 @@ import {
   CurrencyEnum,
   ProductModel,
 } from 'src/app/shared/models/product.model';
-import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-product-form',
   templateUrl: './product-form.component.html',
@@ -23,6 +22,7 @@ export class ProductFormComponent implements OnInit {
     new EventEmitter<ProductModel>();
   acceptableCurrencies: string[] = Object.values(CurrencyEnum);
   fileName: string = '';
+  reset: boolean = false;
   @Input() imageId?: string | undefined;
   @Input() imageString: string = ``;
   @Input() baseUri: string = '';
@@ -36,6 +36,7 @@ export class ProductFormComponent implements OnInit {
     this.productDataForm.reset();
     this.imageId = undefined;
     this.fileName = '';
+    this.reset = true;
   }
 
   get formData(): { [key: string]: AbstractControl } {
@@ -75,7 +76,7 @@ export class ProductFormComponent implements OnInit {
         nonNullable: true,
         validators: [Validators.required, Validators.min(1)],
       }),
-      percentage: new FormControl(this.product?.percentage),
+      percentage: new FormControl(this.product?.percentage || 0),
       onSale: new FormControl(this.product?.onSale, {
         nonNullable: true,
         validators: [Validators.required],
