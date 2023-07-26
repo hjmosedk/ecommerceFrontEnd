@@ -6,12 +6,17 @@ import { MessageActions } from '../state/actions';
 import { map } from 'rxjs';
 import { ProductsActions } from 'src/app/product/state/actions';
 import { MessageType } from '../models/message.model';
+import { MessageService } from '../message.service';
 
 @Injectable()
 export class MessageEffects {
-  constructor(private actions: Actions, public dialog: MatDialog) {}
+  constructor(
+    private actions: Actions,
+    public dialog: MatDialog,
+    private messageService: MessageService
+  ) {}
 
-  sendSystemMessage = createEffect(
+  /*sendSystemMessage = createEffect(
     () => {
       return this.actions.pipe(
         ofType(ProductsActions.createProductSuccess),
@@ -22,6 +27,23 @@ export class MessageEffects {
               title: 'Success',
               messageText: `You have successfully added the product ${product.name} with SKU: ${product.sku}`,
             },
+          });
+        })
+      );
+    },
+    { dispatch: false }
+  );
+*/
+
+  sendSystemMessage = createEffect(
+    () => {
+      return this.actions.pipe(
+        ofType(ProductsActions.createProductSuccess),
+        map(({ product }) => {
+          this.messageService.sendSystemMessage({
+            type: MessageType.success,
+            title: 'Success',
+            messageText: `You have successfully added the product ${product.name} with SKU: ${product.sku}`,
           });
         })
       );

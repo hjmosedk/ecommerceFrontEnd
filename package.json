@@ -40,7 +40,6 @@
     "@ngrx/store-devtools": "^16.1.0",
     "dinero.js": "^1.9.1",
     "hammerjs": "^2.0.8",
-    "ngx-owl-carousel-o": "^16.0.0",
     "rxjs": "~7.8.1",
     "tslib": "^2.6.1",
     "uuid": "^9.0.0",
