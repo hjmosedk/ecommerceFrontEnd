@@ -11,7 +11,9 @@ export const ProductsActions = createActionGroup({
     'Load All Products Success': props<{ products: ProductModel[] }>(),
     'Load Product': props<{ id: number }>(),
     'Load Product Success': props<{ product: ProductModel }>(),
-    'create Product': props<NewProductModel>(),
-    'create Product Success': props<{ product: ProductModel }>(),
+    'Create Product': props<NewProductModel>(),
+    'Create Product Success': props<{ product: ProductModel }>(),
+    'Update Product': props<ProductModel>(),
+    'Updated Product Success': props<ProductModel>(),
   },
 });

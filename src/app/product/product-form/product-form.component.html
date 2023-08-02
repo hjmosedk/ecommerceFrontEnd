@@ -15,7 +15,7 @@
       >
     </mat-form-field>
     <br />
-    <mat-form-field class="inputField">
+    <mat-form-field *ngIf="skuIsActive" class="inputField">
       <mat-label>SKU</mat-label>
       <input type="text" matInput formControlName="sku" required />
       <mat-hint>Give the new product a SKU</mat-hint>
@@ -95,6 +95,8 @@
       <input type="number" matInput formControlName="percentage" />
       <mat-hint>Please input the percentage the product is on sale</mat-hint>
     </mat-form-field>
+    <br />
+    <br />
     <br />
     <div class="slider">
       <mat-slide-toggle formControlName="onSale"> On sale?</mat-slide-toggle>

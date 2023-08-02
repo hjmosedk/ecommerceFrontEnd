@@ -1,0 +1,13 @@
+<div>
+  <h1 mat-dialog-title>Update {{ data.product.name }}</h1>
+  <mat-card-content class="mat-typography"
+    ><app-product-form
+      [product]="data.product"
+      [baseUri]="data.uri"
+      (changedProduct)="data.onUpdatedProduct($event)"
+      [imageId]="data.product.image"
+      [imageString]="data.imgString"
+      [skuIsActive]="false"
+    ></app-product-form
+  ></mat-card-content>
+</div>

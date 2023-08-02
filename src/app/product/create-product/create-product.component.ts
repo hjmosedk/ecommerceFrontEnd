@@ -1,19 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
-import {
-  FormControl,
-  FormGroup,
-  Validators,
-  AbstractControl,
-} from '@angular/forms';
+import { Component, Input } from '@angular/core';
 
-import {
-  CurrencyEnum,
-  ProductModel,
-} from 'src/app/shared/models/product.model';
+import { ProductModel } from 'src/app/shared/models/product.model';
 import { Store } from '@ngrx/store';
 import { ProductsActions } from '../state/actions';
-import { v4 as uuid } from 'uuid';
-import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-create-product',

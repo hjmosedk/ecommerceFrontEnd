@@ -26,6 +26,7 @@ export class ProductFormComponent implements OnInit {
   @Input() imageId?: string | undefined;
   @Input() imageString: string = ``;
   @Input() baseUri: string = '';
+  @Input() skuIsActive: boolean = true;
 
   constructor() {}
 

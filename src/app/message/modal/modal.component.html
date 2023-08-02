@@ -1,7 +1,9 @@
 <div>
   <div *ngIf="data.type === messageType.success" class="success">
     <h1 mat-dialog-title>{{ data.title }}</h1>
-    <mat-dialog-content>{{ data.messageText }} </mat-dialog-content>
+    <mat-dialog-content class="mat-typography"
+      >{{ data.messageText }}
+    </mat-dialog-content>
     <mat-dialog-actions align="center">
       <button mat-raised-button color="primary" (click)="onClose()">
         Close
@@ -10,7 +12,7 @@
   </div>
   <div *ngIf="data.type === messageType.error" class="error">
     <h1 mat-dialog-title>{{ data.title }}</h1>
-    <mat-dialog-content>
+    <mat-dialog-content class="mat-typography">
       The error have the following message: <br />{{ data.messageText }}
     </mat-dialog-content>
     <mat-dialog-actions align="center">

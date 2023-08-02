@@ -10,21 +10,6 @@ export class ProductService {
   baseUri = environment.baseUri;
   constructor(private http: HttpClient) {}
 
-  /*
-  private handleError(error: HttpErrorResponse) {
-    if (error.status === 0) {
-      console.log('An error occurred:', error.error);
-    } else {
-      console.error(
-        `Backend returned an error ${error.status}, body was: `,
-        error.error
-      );
-    }
-    return throwError(
-      () => new Error('Something went wrong, Please try again later')
-    );
-  }
-*/
   getAllProducts(): Observable<ProductModel[]> {
     return this.http.get<ProductModel[]>(`${this.baseUri}/products`);
     //.pipe(catchError(this.handleError));

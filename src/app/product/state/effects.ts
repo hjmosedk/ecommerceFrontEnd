@@ -4,10 +4,8 @@ import { ProductsActions } from './actions';
 import { ProductService } from '../product.service';
 
 import { throwError } from 'rxjs';
-import { catchError, mergeMap, switchMap, map, filter } from 'rxjs/operators';
+import { catchError, mergeMap, switchMap, map } from 'rxjs/operators';
 import { ProductModel } from 'src/app/shared/models/product.model';
-import { routerNavigatedAction } from '@ngrx/router-store';
-import { error } from 'cypress/types/jquery';
 
 @Injectable()
 export class ProductsEffects {
@@ -32,25 +30,6 @@ export class ProductsEffects {
     );
   });
 
-  /* loadSingleProduct = createEffect(() => {
-    return this.actions.pipe(
-      ofType(routerNavigatedAction),
-      filter(({ payload }) => {
-        return payload.event.url.includes('product');
-      }),
-      mergeMap(({ payload }) => {
-        let id = payload.routerState.root.children[0].params['id'];
-        if (!id) {
-          id = '1';
-        }
-        return this.productsService.getProduct(id).pipe(
-          map((product) => ProductsActions.loadProductSuccess({ product })),
-          catchError((error) => throwError(() => error))
-        );
-      })
-    );
-  });
-*/
   loadSingleProduct = createEffect(() => {
     return this.actions.pipe(
       ofType(ProductsActions.loadProduct),

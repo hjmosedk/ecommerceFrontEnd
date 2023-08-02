@@ -23,6 +23,8 @@ import { ProductsEffects } from './state/effects';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { productsReducer } from './state/reducer';
+import { UpdateProductModalComponent } from './update-product-modal/update-product-modal.component';
+
 @NgModule({
   declarations: [
     ProductCardComponent,
@@ -32,6 +34,7 @@ import { productsReducer } from './state/reducer';
     ProductListComponent,
     ProductFormComponent,
     FileUploadComponent,
+    UpdateProductModalComponent,
   ],
   imports: [
     CommonModule,
