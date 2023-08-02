@@ -8,12 +8,12 @@ import { GlobalErrorHandler } from './global-error-handler';
 //Internal Modules
 import { ProductModule } from './product/product.module';
 import { SharedModule } from './shared/shared.module';
+import { MessageModule } from './message/message.module';
 
-import { EffectsModule } from '@ngrx/effects';
 //State Components
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { MessageModule } from './message/message.module';
+import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
   declarations: [AppComponent],

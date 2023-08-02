@@ -17,7 +17,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { ProductListComponent } from './product-list/product-list.component';
 import { MatTableModule } from '@angular/material/table';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { ProductFormComponent } from '../product-form/product-form.component';
+import { ProductFormComponent } from './product-form/product-form.component';
 import { FileUploadComponent } from './file-upload/file-upload.component';
 import { ProductsEffects } from './state/effects';
 import { EffectsModule } from '@ngrx/effects';
