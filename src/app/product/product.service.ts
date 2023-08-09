@@ -10,6 +10,16 @@ export class ProductService {
   baseUri = environment.baseUri;
   constructor(private http: HttpClient) {}
 
+  private _selectedProduct!: ProductModel;
+
+  public get selectedProduct() {
+    return this._selectedProduct;
+  }
+
+  public set selectedProduct(product: ProductModel) {
+    this._selectedProduct = product;
+  }
+
   getAllProducts(): Observable<ProductModel[]> {
     return this.http.get<ProductModel[]>(`${this.baseUri}/products`);
     //.pipe(catchError(this.handleError));
@@ -27,5 +37,13 @@ export class ProductService {
 
   uploadImage(image: any): void {
     this.http.post(`${this.baseUri}/images/upload`, image);
+  }
+
+  updateProduct(product: ProductModel): Observable<ProductModel> {
+    const { id } = product;
+    return this.http.patch<ProductModel>(
+      `${this.baseUri}/products/${id}`,
+      product
+    );
   }
 }

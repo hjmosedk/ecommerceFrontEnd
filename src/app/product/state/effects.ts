@@ -55,4 +55,22 @@ export class ProductsEffects {
       );
     }
   });
+
+  updateProduct = createEffect(() => {
+    {
+      return this.actions.pipe(
+        ofType(ProductsActions.updateProduct),
+        switchMap(({ product }) => {
+          return this.productsService.updateProduct(product).pipe(
+            map((product) =>
+              ProductsActions.updatedProductSuccess({
+                update: { id: product.id, changes: product },
+              })
+            ),
+            catchError((error) => throwError(() => error))
+          );
+        })
+      );
+    }
+  });
 }

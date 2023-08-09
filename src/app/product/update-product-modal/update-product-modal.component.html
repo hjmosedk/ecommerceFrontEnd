@@ -1,6 +1,6 @@
 <div>
   <h1 mat-dialog-title>Update {{ data.product.name }}</h1>
-  <mat-card-content class="mat-typography"
+  <mat-dialog-content class="mat-typography"
     ><app-product-form
       [product]="data.product"
       [baseUri]="data.uri"
@@ -9,5 +9,5 @@
       [imageString]="data.imgString"
       [skuIsActive]="false"
     ></app-product-form
-  ></mat-card-content>
+  ></mat-dialog-content>
 </div>

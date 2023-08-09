@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { selectAllProducts, selectOneProduct } from '../state/selectors';
 import { Store } from '@ngrx/store';
 import Dinero, { Currency } from 'dinero.js';
@@ -23,7 +23,6 @@ export class ProductListComponent implements OnInit {
     new Observable<undefined>();
   product: ProductModel | undefined = undefined;
   formData: UpdateProductModel | undefined;
-  @Input() updatedProduct: ProductModel | undefined;
 
   constructor(private store: Store, private dialog: MatDialog) {}
 
@@ -54,11 +53,10 @@ export class ProductListComponent implements OnInit {
     this.selectedProduct$ = this.store.select(selectOneProduct(id));
     this.selectedProduct$.subscribe((product) => (this.product = product));
     if (this.product) {
-      const updateFunction = this.onUpdatedProduct;
       this.formData = {
         product: this.product,
         uri: this.baseUrl,
-        onUpdatedProduct: updateFunction,
+        onUpdatedProduct: this.onUpdatedProduct,
         imgString: `${this.baseUrl}/images/${this.product.image}`,
       };
       this.dialog.open(UpdateProductModalComponent, {
@@ -67,7 +65,12 @@ export class ProductListComponent implements OnInit {
     }
   }
 
-  onUpdatedProduct(product: ProductModel) {
-    console.log(product);
-  }
+  onUpdatedProduct = (product: ProductModel) => {
+    this.dialog.closeAll();
+    const updateProduct = product;
+    (updateProduct.id = this.product!.id),
+      this.store.dispatch(
+        ProductsActions.updateProduct({ product: updateProduct })
+      );
+  };
 }

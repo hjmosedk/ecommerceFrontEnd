@@ -12,5 +12,8 @@ export const productsReducer = createReducer(
   ),
   on(ProductsActions.createProductSuccess, (state, { product }) =>
     productsAdapter.addOne(product, state)
+  ),
+  on(ProductsActions.updatedProductSuccess, (state, { update }) =>
+    productsAdapter.updateOne(update, state)
   )
 );
