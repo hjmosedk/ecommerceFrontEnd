@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { selectAllProducts, selectOneProduct } from '../state/selectors';
 import { Store } from '@ngrx/store';
 import Dinero, { Currency } from 'dinero.js';
@@ -6,7 +6,7 @@ import { ProductsActions } from '../state/actions';
 import { environment } from 'src/environments/environment';
 
 import { ProductModel } from 'src/app/shared/models/product.model';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { UpdateProductModalComponent } from '../update-product-modal/update-product-modal.component';
 import { UpdateProductModel } from '../models/updateProduct.model';
@@ -16,13 +16,14 @@ import { UpdateProductModel } from '../models/updateProduct.model';
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.css'],
 })
-export class ProductListComponent implements OnInit {
+export class ProductListComponent implements OnInit, OnDestroy {
   baseUrl = environment.baseUri;
   imagePath = environment.imagePath;
   selectedProduct$: Observable<ProductModel | undefined> =
     new Observable<undefined>();
   product: ProductModel | undefined = undefined;
   formData: UpdateProductModel | undefined;
+  selectedProductSubscription: Subscription | null = null;
 
   constructor(private store: Store, private dialog: MatDialog) {}
 
@@ -51,7 +52,9 @@ export class ProductListComponent implements OnInit {
 
   onEdit(id: number) {
     this.selectedProduct$ = this.store.select(selectOneProduct(id));
-    this.selectedProduct$.subscribe((product) => (this.product = product));
+    this.selectedProductSubscription = this.selectedProduct$.subscribe(
+      (product) => (this.product = product)
+    );
     if (this.product) {
       this.formData = {
         product: this.product,
@@ -73,4 +76,10 @@ export class ProductListComponent implements OnInit {
         ProductsActions.updateProduct({ product: updateProduct })
       );
   };
+
+  ngOnDestroy(): void {
+    if (this.selectedProductSubscription) {
+      this.selectedProductSubscription.unsubscribe();
+    }
+  }
 }

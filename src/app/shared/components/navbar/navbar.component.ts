@@ -17,6 +17,6 @@ export class NavbarComponent {
   }
 
   viewAllProducts() {
-    this.router.navigate(['/products/admin']);
+    this.router.navigate(['/products', 'admin']);
   }
 }
