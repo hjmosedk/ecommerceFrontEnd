@@ -10,3 +10,9 @@ th.mat.header-cell {
 img {
   padding-top: 5px;
 }
+
+.table-container {
+  margin: 20px;
+  /*margin-top: 20px;
+  margin-bottom: 20px;*/
+}
