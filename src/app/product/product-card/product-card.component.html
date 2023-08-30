@@ -1,6 +1,6 @@
-<mat-card>
+<mat-card class="product-card">
   <mat-card-header>
-    <mat-card-title>{{ trimName(product.name) }}</mat-card-title>
+    <mat-card-title class="trimTitle">{{ product.name }}</mat-card-title>
     <mat-card-subtitle>{{ product.category }}</mat-card-subtitle>
   </mat-card-header>
   <img
@@ -15,10 +15,6 @@
     ></div>
     <ng-template #onSaleTemplate>
       <div class="on-sale">
-        <div class="sale-badge">
-          <span>SALE</span>
-          <span class="percentage">{{ product.percentage }}%</span>
-        </div>
         <div class="price">
           <span class="currency">{{
             calculatePrice(product.price, product.currency)
@@ -33,10 +29,17 @@
         }}</span>
       </div>
     </ng-template>
-    <p class="description">{{ product.description }}</p>
+    <p class="description trimDescription">{{ product.description }}</p>
   </mat-card-content>
   <mat-card-actions>
     <button mat-raised-button color="primary">Add to Cart</button>
-    <button mat-raised-button color="accent">Write Review</button>
+    <button
+      *ngIf="product.onSale"
+      mat-raised-button
+      color="accent"
+      class="on-sale"
+    >
+      SAVE {{ product.percentage }} %
+    </button>
   </mat-card-actions>
 </mat-card>

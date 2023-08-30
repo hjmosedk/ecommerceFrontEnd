@@ -1,5 +1,12 @@
+.product-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center content horizontally */
+  text-align: center; /* Center text */
+}
+
 .mat-mdc-card .mdc-card {
-  height: 500px; /* set a fixed height for the card */
+  height: 500px;
 }
 
 .mat-card-header,
@@ -8,7 +15,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100px; /* set a fixed height for the header */
+  height: 100px;
 }
 
 .mat-card-title,
@@ -41,15 +48,13 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: calc(
-    100% - 250px
-  ); /* set the height to accommodate for the header and actions */
-  overflow: hidden; /* hide overflow text */
+  height: calc(100% - 250px);
+  overflow: hidden;
 }
 
 .description {
-  text-overflow: ellipsis; /* add ellipsis for overflow text */
-  overflow: hidden; /* hide overflow text */
+  text-overflow: ellipsis;
+  overflow: hidden;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
@@ -59,7 +64,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 50px; /* set a fixed height for the price section */
+  height: 50px;
   color: #3f51b5;
   font-weight: bold;
   margin: 0 auto;
@@ -67,19 +72,17 @@
 }
 
 .on-sale .price {
-  background-color: coral; /* set background color for the price section on sale */
-  color: white; /* set text color for the price section on sale */
-  position: absolute; /* position the price section on sale */
-  bottom: 10px;
-  right: 10px;
-  padding: 5px;
+  color: coral !important;
+  background-color: none;
 }
 
 .sale-badge {
-  background-color: gold; /* set background color for the sale badge */
-  color: white; /* set text color for the sale badge */
+  position: absolute;
+  top: 12.5%;
+  right: 25px;
+  background-color: gold;
+  color: white;
   display: inline-block;
-  padding: 5px;
 }
 
 .percentage {

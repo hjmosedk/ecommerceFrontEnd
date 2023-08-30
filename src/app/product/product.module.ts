@@ -24,6 +24,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { productsReducer } from './state/reducer';
 import { UpdateProductModalComponent } from './update-product-modal/update-product-modal.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { UpdateProductModalComponent } from './update-product-modal/update-produ
     MatGridListModule,
     MatTableModule,
     FlexLayoutModule,
+    MatPaginatorModule,
     EffectsModule.forFeature([ProductsEffects]),
     StoreModule.forFeature('products', productsReducer),
   ],
