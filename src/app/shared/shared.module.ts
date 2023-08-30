@@ -8,6 +8,7 @@ import { SplitterbarComponent } from './components/splitterbar/splitterbar.compo
 import { FooterComponent } from './components/footer/footer.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDialogModule } from '@angular/material/dialog';
+import { AppRoutingModule } from '../app-routing.module';
 
 @NgModule({
   declarations: [NavbarComponent, SplitterbarComponent, FooterComponent],
@@ -26,6 +27,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatButtonModule,
     MatMenuModule,
     MatDialogModule,
+    AppRoutingModule,
   ],
 })
 export class SharedModule {}
