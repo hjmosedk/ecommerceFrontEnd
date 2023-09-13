@@ -24,6 +24,7 @@
         mat-cell
         *matCellDef="let element; let odd = odd"
         [ngClass]="{ striped: odd }"
+        data-cy="productName"
       >
         {{ element.name }}
       </td>
@@ -154,7 +155,12 @@
         *matCellDef="let element; let odd = odd"
         [ngClass]="{ striped: odd }"
       >
-        <button mat-raised-button color="accent" (click)="onEdit(element.id)">
+        <button
+          mat-raised-button
+          color="accent"
+          (click)="onEdit(element.id)"
+          data-cy="editProduct"
+        >
           Edit
         </button>
       </td>

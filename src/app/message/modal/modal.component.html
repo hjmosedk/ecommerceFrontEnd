@@ -5,7 +5,12 @@
       >{{ data.messageText }}
     </mat-dialog-content>
     <mat-dialog-actions align="center">
-      <button mat-raised-button color="primary" (click)="onClose()">
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="onClose()"
+        data-cy="modalButton"
+      >
         Close
       </button>
     </mat-dialog-actions>
@@ -21,6 +26,7 @@
         mat-dialog-close
         color="warn"
         (click)="onClose()"
+        data-cy="modalButton"
       >
         Close
       </button>

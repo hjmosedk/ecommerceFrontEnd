@@ -8,27 +8,31 @@
   >
   <span class="spacer-small"></span>
   <span>
-    <a mat-icon-button routerLink="/">
+    <a mat-icon-button routerLink="/" data-cy="home">
       <mat-icon>home</mat-icon>
     </a></span
   >
   <span>
-    <a mat-icon-button routerLink="/user">
+    <a mat-icon-button routerLink="/user" data-cy="user">
       <mat-icon>person</mat-icon>
     </a></span
   >
   <span>
-    <a mat-icon-button routerLink="/cart">
+    <a mat-icon-button routerLink="/cart" data-cy="cart">
       <mat-icon>shopping_cart</mat-icon>
     </a></span
   >
   <span>
-    <a mat-icon-button [matMenuTriggerFor]="settings">
+    <a mat-icon-button data-cy="settings" [matMenuTriggerFor]="settings">
       <mat-icon>settings</mat-icon>
     </a></span
   >
   <mat-menu #settings="matMenu">
-    <button mat-menu-item (click)="createNewProduct()">Add New Product</button>
-    <button mat-menu-item (click)="viewAllProducts()">View All Products</button>
+    <button mat-menu-item data-cy="newProduct" (click)="createNewProduct()">
+      Add New Product
+    </button>
+    <button mat-menu-item data-cy="allProducts" (click)="viewAllProducts()">
+      View All Products
+    </button>
   </mat-menu>
 </mat-toolbar>

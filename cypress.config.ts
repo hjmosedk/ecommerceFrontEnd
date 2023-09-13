@@ -12,4 +12,7 @@ export default defineConfig({
     },
     specPattern: '**/*.cy.ts',
   },
+  env: {
+    BACKEND: 'http://192.168.1.135:3000',
+  },
 });

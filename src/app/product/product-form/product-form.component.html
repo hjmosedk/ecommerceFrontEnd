@@ -8,7 +8,14 @@
   >
     <mat-form-field class="inputField">
       <mat-label for="name">Name</mat-label>
-      <input type="text" matInput formControlName="name" id="name" required />
+      <input
+        type="text"
+        matInput
+        formControlName="name"
+        id="name"
+        required
+        data-cy="productName"
+      />
       <mat-hint>Give the new product a name</mat-hint>
       <mat-error *ngIf="formData['name'].errors?.['required']"
         >A Product must have a name</mat-error
@@ -17,7 +24,13 @@
     <br />
     <mat-form-field *ngIf="skuIsActive" class="inputField">
       <mat-label>SKU</mat-label>
-      <input type="text" matInput formControlName="sku" required />
+      <input
+        type="text"
+        matInput
+        formControlName="sku"
+        required
+        data-cy="productSku"
+      />
       <mat-hint>Give the new product a SKU</mat-hint>
       <mat-error *ngIf="formData['sku'].errors?.['required']"
         >A Product must have a SKU(Item number)</mat-error
@@ -31,6 +44,7 @@
         formControlName="description"
         rows="4"
         cols="12"
+        data-cy="productDescription"
       ></textarea>
       <mat-hint>Give the new product a description</mat-hint>
       <mat-error *ngIf="formData['description'].errors?.['required']"
@@ -48,7 +62,12 @@
     <br />
     <mat-form-field class="inputField">
       <mat-label>Category</mat-label>
-      <input type="text" matInput formControlName="category" />
+      <input
+        type="text"
+        matInput
+        formControlName="category"
+        data-cy="productCategory"
+      />
       <mat-hint>Please describe the category</mat-hint>
       <mat-error *ngIf="formData['category'].errors?.['required']"
         >A Product must have a Category</mat-error
@@ -57,7 +76,13 @@
     <br />
     <mat-form-field class="inputField">
       <mat-label>Price</mat-label>
-      <input type="number" matInput formControlName="price" required />
+      <input
+        type="number"
+        matInput
+        formControlName="price"
+        required
+        data-cy="productPrice"
+      />
       <mat-hint
         >Give the new product a price, must be in lowest coinage e.g. cent for
         USD, EUR or øre for DKK, and pence for GBP</mat-hint
@@ -72,7 +97,13 @@
     <br />
     <mat-form-field class="inputField">
       <mat-label>Currency</mat-label>
-      <mat-select type="text" matInput formControlName="currency" required>
+      <mat-select
+        type="text"
+        matInput
+        formControlName="currency"
+        required
+        data-cy="productCurrency"
+      >
         <mat-option
           *ngFor="let currency of acceptableCurrencies"
           [value]="currency"
@@ -83,7 +114,13 @@
     </mat-form-field>
     <mat-form-field class="inputField">
       <mat-label>Quantity</mat-label>
-      <input type="number" matInput formControlName="quantity" required />
+      <input
+        type="number"
+        matInput
+        formControlName="quantity"
+        required
+        data-cy="productQuantity"
+      />
       <mat-hint>Input the quantity of the product</mat-hint>
       <mat-error *ngIf="formData['quantity'].errors?.['required']"
         >You cannot create a product with no quantity></mat-error
@@ -92,14 +129,21 @@
     <br />
     <mat-form-field class="inputField">
       <mat-label>Sales Percentage</mat-label>
-      <input type="number" matInput formControlName="percentage" />
+      <input
+        type="number"
+        matInput
+        formControlName="percentage"
+        data-cy="productPercentage"
+      />
       <mat-hint>Please input the percentage the product is on sale</mat-hint>
     </mat-form-field>
     <br />
     <br />
     <br />
     <div class="slider">
-      <mat-slide-toggle formControlName="onSale"> On sale?</mat-slide-toggle>
+      <mat-slide-toggle formControlName="onSale" data-cy="productOnSale">
+        On sale?</mat-slide-toggle
+      >
     </div>
     <br />
     <p>Complete the form to enable the button</p>
@@ -107,6 +151,7 @@
       type="submit"
       mat-button
       color="primary"
+      data-cy="submit"
       [disabled]="!productDataForm.valid"
     >
       Submit

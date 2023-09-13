@@ -1,6 +1,8 @@
 <mat-card class="product-card">
   <mat-card-header>
-    <mat-card-title class="trimTitle">{{ product.name }}</mat-card-title>
+    <mat-card-title data-cy="mat-card" class="trimTitle">{{
+      product.name
+    }}</mat-card-title>
     <mat-card-subtitle>{{ product.category }}</mat-card-subtitle>
   </mat-card-header>
   <img
@@ -14,7 +16,7 @@
       *ngIf="product.onSale; then onSaleTemplate; else defaultTemplate"
     ></div>
     <ng-template #onSaleTemplate>
-      <div class="on-sale">
+      <div class="on-sale" data-cy="on-sale">
         <div class="price">
           <span class="currency">{{
             calculatePrice(product.price, product.currency)
@@ -23,7 +25,7 @@
       </div>
     </ng-template>
     <ng-template #defaultTemplate>
-      <div class="price">
+      <div class="price" data-cy="price">
         <span class="currency">{{
           calculatePrice(product.price, product.currency)
         }}</span>
