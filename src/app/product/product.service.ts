@@ -21,7 +21,7 @@ export class ProductService {
   }
 
   getAllProducts(): Observable<ProductModel[]> {
-    return this.http.get<ProductModel[]>(`${this.baseUri}/products`);
+    return this.http.get<ProductModel[]>(`${this.baseUri}/products/all`);
     //.pipe(catchError(this.handleError));
   }
 
@@ -45,5 +45,9 @@ export class ProductService {
       `${this.baseUri}/products/${id}`,
       product
     );
+  }
+
+  updateStatus(id: number): Observable<ProductModel> {
+    return this.http.post<ProductModel>(`${this.baseUri}/products/${id}`, {});
   }
 }

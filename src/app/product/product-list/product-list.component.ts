@@ -68,6 +68,10 @@ export class ProductListComponent implements OnInit, OnDestroy {
     }
   }
 
+  onActiveInactive(id: number) {
+    this.store.dispatch(ProductsActions.updateStatus({ id }));
+  }
+
   onUpdatedProduct = (product: ProductModel) => {
     this.dialog.closeAll();
     const updateProduct = product;

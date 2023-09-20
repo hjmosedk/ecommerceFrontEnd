@@ -17,6 +17,7 @@ export interface ProductModel {
   category: string;
   percentage: number;
   onSale: boolean;
+  isPublic: boolean;
 }
 
 export type NewProductModel = Omit<ProductModel, 'id'>;

@@ -171,13 +171,30 @@
     -->
 
     <ng-container matColumnDef="inactive">
-      <th mat-header-cell *matHeaderCellDef>Inactivate</th>
+      <th mat-header-cell *matHeaderCellDef>Status</th>
       <td
         mat-cell
         *matCellDef="let element; let odd = odd"
         [ngClass]="{ striped: odd }"
       >
-        <button mat-raised-button color="warn">Inactivate</button>
+        <button
+          *ngIf="element.isPublic"
+          mat-raised-button
+          color="warn"
+          data-cy="setPrivate"
+          (click)="onActiveInactive(element.id)"
+        >
+          Set Private
+        </button>
+        <button
+          *ngIf="!element.isPublic"
+          mat-raised-button
+          color="primary"
+          data-cy="setPublic"
+          (click)="onActiveInactive(element.id)"
+        >
+          Set Public
+        </button>
       </td>
     </ng-container>
 

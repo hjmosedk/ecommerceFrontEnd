@@ -6,6 +6,7 @@ import { ProductService } from '../product.service';
 import { throwError } from 'rxjs';
 import { catchError, mergeMap, switchMap, map } from 'rxjs/operators';
 import { ProductModel } from 'src/app/shared/models/product.model';
+import { error } from 'cypress/types/jquery';
 
 @Injectable()
 export class ProductsEffects {
@@ -62,6 +63,24 @@ export class ProductsEffects {
         ofType(ProductsActions.updateProduct),
         switchMap(({ product }) => {
           return this.productsService.updateProduct(product).pipe(
+            map((product) =>
+              ProductsActions.updatedProductSuccess({
+                update: { id: product.id, changes: product },
+              })
+            ),
+            catchError((error) => throwError(() => error))
+          );
+        })
+      );
+    }
+  });
+
+  changeStatus = createEffect(() => {
+    {
+      return this.actions.pipe(
+        ofType(ProductsActions.updateStatus),
+        switchMap(({ id }) => {
+          return this.productsService.updateStatus(id).pipe(
             map((product) =>
               ProductsActions.updatedProductSuccess({
                 update: { id: product.id, changes: product },

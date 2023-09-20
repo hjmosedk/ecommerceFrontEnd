@@ -1,25 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
 import { ProductsActions } from '../state/actions';
-import { selectAllProducts } from '../state/selectors';
-import { Observable } from 'rxjs';
+import { selectActiveProducts } from '../state/selectors';
+import { Observable, Subscription } from 'rxjs';
 import { ProductModel } from 'src/app/shared/models/product.model';
 import { ViewportScroller } from '@angular/common';
-import { throwDialogContentAlreadyAttachedError } from '@angular/cdk/dialog';
 
 @Component({
   selector: 'app-all-products',
   templateUrl: './all-products.component.html',
   styleUrls: ['./all-products.component.css'],
 })
-export class AllProductsComponent implements OnInit {
+export class AllProductsComponent implements OnInit, OnDestroy {
   productList$: Observable<ProductModel[]> =
-    this.store.select(selectAllProducts);
+    this.store.select(selectActiveProducts);
 
   pageSize: number = 25; //! Static value!
   totalProducts: number = 0;
   pagesProducts: ProductModel[] | undefined;
+  productsSubscription!: Subscription;
 
   constructor(
     private store: Store,
@@ -33,7 +33,8 @@ export class AllProductsComponent implements OnInit {
 
   ngOnInit() {
     this.store.dispatch(ProductsActions.loadAllProducts());
-    this.productList$.subscribe((products) => {
+
+    this.productsSubscription = this.productList$.subscribe((products) => {
       this.totalProducts = products.length;
       this.pagesProducts = products.slice(0, this.pageSize);
     });
@@ -53,5 +54,9 @@ export class AllProductsComponent implements OnInit {
     this.productList$.subscribe((products) => {
       this.pagesProducts = products.slice(startIndex, endIndex);
     });
+  }
+
+  ngOnDestroy(): void {
+    this.productsSubscription.unsubscribe();
   }
 }

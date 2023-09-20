@@ -17,5 +17,6 @@ export const ProductsActions = createActionGroup({
     'Update Product': props<{ product: ProductModel }>(),
     'Updated Product Success': props<{ update: Update<ProductModel> }>(),
     'Select Product': props<{ product: ProductModel }>(),
+    'update Status': props<{ id: number }>(),
   },
 });
