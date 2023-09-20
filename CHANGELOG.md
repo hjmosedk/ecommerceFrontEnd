@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.2.0](https://codeberg.org/hjmosedk/ecommerceFrontEnd/compare/v0.1.0...v0.2.0) (2023-09-20)
+
+
+### Features
+
+* **isPublic:** added a is public flag to ensure filter products ([a6bab98](https://codeberg.org/hjmosedk/ecommerceFrontEnd/commits/a6bab98c381c554438ccf783c8d03edac3c9e966))
+
 ## [0.1.0](https://codeberg.org/hjmosedk/ecommerceFrontEnd/compare/v0.0.2...v0.1.0) (2023-09-13)
 
 
