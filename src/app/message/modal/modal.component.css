@@ -5,3 +5,7 @@
 .error {
   background-color: #b00020;
 }
+
+.warning {
+  background-color: #ffd740;
+}
