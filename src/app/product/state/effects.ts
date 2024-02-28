@@ -2,11 +2,9 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { ProductsActions } from './actions';
 import { ProductService } from '../product.service';
-
 import { throwError } from 'rxjs';
 import { catchError, mergeMap, switchMap, map } from 'rxjs/operators';
 import { ProductModel } from 'src/app/shared/models/product.model';
-import { error } from 'cypress/types/jquery';
 
 @Injectable()
 export class ProductsEffects {

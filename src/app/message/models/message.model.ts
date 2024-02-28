@@ -1,6 +1,7 @@
 export enum MessageType {
   success = 'success',
   error = 'error',
+  warning = 'warning',
 }
 export interface MessageData {
   type: MessageType | null;
@@ -9,4 +10,8 @@ export interface MessageData {
   status?: number;
   statusText?: string;
   stackTrace?: string | void;
+}
+
+export enum DialogResult {
+  ok = 'OK',
 }

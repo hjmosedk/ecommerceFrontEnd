@@ -1,4 +1,4 @@
-<mat-card class="product-card">
+<mat-card class="product-card" (click)="onClick(product.id)">
   <mat-card-header>
     <mat-card-title data-cy="mat-card" class="trimTitle">{{
       product.name
@@ -34,7 +34,13 @@
     <p class="description trimDescription">{{ product.description }}</p>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-raised-button color="primary">Add to Cart</button>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="addToCart($event, product)"
+    >
+      Add to Cart
+    </button>
     <button
       *ngIf="product.onSale"
       mat-raised-button

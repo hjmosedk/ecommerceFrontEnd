@@ -4,6 +4,7 @@ import { AllProductsComponent } from './product/all-products/all-products.compon
 import { ProductComponent } from './product/product/product.component';
 import { CreateProductComponent } from './product/create-product/create-product.component';
 import { ProductListComponent } from './product/product-list/product-list.component';
+import { CartListComponent } from './orders/cart-list/cart-list.component';
 
 const routes: Routes = [
   { path: '', component: AllProductsComponent },
@@ -11,6 +12,7 @@ const routes: Routes = [
   { path: 'products/admin', component: ProductListComponent },
   { path: 'product/:id', component: ProductComponent },
   { path: 'newProduct', component: CreateProductComponent },
+  { path: 'cart', component: CartListComponent },
   { path: '**', component: AllProductsComponent },
 ];
 

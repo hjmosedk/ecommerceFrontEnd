@@ -8,7 +8,9 @@ import { MessageData } from './models/message.model';
 export class MessageService {
   constructor(private dialog: MatDialog) {}
 
+  dialogResult: any;
+
   sendSystemMessage(message: MessageData) {
-    this.dialog.open(ModalComponent, { data: message });
+    return this.dialog.open(ModalComponent, { data: message });
   }
 }

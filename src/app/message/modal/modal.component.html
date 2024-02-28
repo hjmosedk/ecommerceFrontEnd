@@ -32,5 +32,31 @@
       </button>
     </mat-dialog-actions>
   </div>
-  <div *ngIf="data.type === null" hidden></div>
+  <div *ngIf="data.type === messageType.warning" class="warning">
+    <h1 mat-dialog-title>{{ data.title }}</h1>
+    <mat-dialog-content class="mat-typography">
+      {{ data.messageText }}
+    </mat-dialog-content>
+    <mat-dialog-actions align="center">
+      <button
+        mat-raised-button
+        mat-dialog-close
+        color="primary"
+        (click)="onClose()"
+        data-cy="modalButton"
+      >
+        Cancel
+      </button>
+      <button
+        mat-raised-button
+        mat-dialog-close
+        color="warn"
+        (click)="onAccept()"
+        data-cy="modalButton"
+      >
+        Ok
+      </button>
+    </mat-dialog-actions>
+    <div *ngIf="data.type === null" hidden></div>
+  </div>
 </div>

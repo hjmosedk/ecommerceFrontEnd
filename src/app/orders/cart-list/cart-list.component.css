@@ -1,0 +1,14 @@
+.button {
+  padding-bottom: 25px;
+}
+
+.mainContainer {
+  margin: 20px;
+  width: 95%;
+  padding: 16px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+}

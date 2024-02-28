@@ -1,6 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { productsAdapter, ProductsState } from './state';
-import { entries } from 'cypress/types/lodash';
 import { ProductModel } from 'src/app/shared/models/product.model';
 
 const selectProductsFeature = createFeatureSelector<ProductsState>('products');

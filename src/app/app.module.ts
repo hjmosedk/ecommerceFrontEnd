@@ -9,6 +9,7 @@ import { GlobalErrorHandler } from './global-error-handler';
 import { ProductModule } from './product/product.module';
 import { SharedModule } from './shared/shared.module';
 import { MessageModule } from './message/message.module';
+import { OrdersModule } from './orders/orders.module';
 
 //State Components
 import { StoreModule } from '@ngrx/store';
@@ -24,9 +25,14 @@ import { EffectsModule } from '@ngrx/effects';
     HttpClientModule,
     StoreModule.forRoot(),
     EffectsModule.forRoot(),
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+      logOnly: !isDevMode(),
+      connectInZone: true,
+    }),
     ProductModule,
     MessageModule,
+    OrdersModule,
   ],
   providers: [{ provide: ErrorHandler, useClass: GlobalErrorHandler }],
   bootstrap: [AppComponent],
