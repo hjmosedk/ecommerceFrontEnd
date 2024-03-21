@@ -1,0 +1,244 @@
+<div>
+  <mat-stepper [linear]="false" orientation="vertical" #stepper>
+    <mat-step [stepControl]="personalInformationForm">
+      <form [formGroup]="personalInformationForm">
+        <ng-template matStepLabel>Personal Information</ng-template>
+        <mat-form-field>
+          <mat-label>First Name</mat-label>
+          <input
+            matInput
+            placeholder="Peter"
+            formControlName="firstName"
+            required
+            type="text"
+          />
+          <mat-hint>Enter Your First Name</mat-hint>
+          <mat-error
+            *ngIf="personalInformationForm.controls['firstName'].errors?.['required']"
+            >A First Name Must Be Entered!</mat-error
+          >
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Middle Name</mat-label>
+          <input
+            matInput
+            placeholder="Abraham"
+            formControlName="middleName"
+            type="text"
+          />
+          <mat-hint>Enter Your Middle Name</mat-hint>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Last Name</mat-label>
+          <input
+            matInput
+            placeholder="Petersen"
+            formControlName="lastName"
+            required
+            type="text"
+          />
+          <mat-hint>Enter your Last Name</mat-hint>
+          <mat-error
+            *ngIf="personalInformationForm.controls['lastName'].errors?.['required']"
+            >A Last Name Must Be Entered!</mat-error
+          >
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Email</mat-label>
+          <input
+            matInput
+            placeholder="peter@pp.dk"
+            formControlName="email"
+            required
+            type="email"
+          />
+          <mat-hint>Enter Your Email</mat-hint>
+          <mat-error
+            *ngIf="personalInformationForm.controls['email'].errors?.['required']"
+            >A Email Must Be Entered!</mat-error
+          >
+          <mat-error
+            *ngIf="personalInformationForm.controls['email'].errors?.['email']"
+            >Did You Enter A Real Email?</mat-error
+          >
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Phone</mat-label>
+          <input
+            matInput
+            placeholder="2599887755"
+            formControlName="firstName"
+            required
+            type="text"
+          />
+          <mat-hint>Enter Your Phone Number</mat-hint>
+          <mat-error
+            *ngIf="personalInformationForm.controls['phone'].errors?.['required']"
+            >A Phone Number Must Be Entered!</mat-error
+          >
+        </mat-form-field>
+        <br />
+        <button
+          mat-button
+          color="primary"
+          matStepperNext
+          [disabled]="!personalInformationForm.valid"
+        >
+          Next
+        </button>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="shippingAddressInformation">
+      <form [formGroup]="shippingAddressInformation">
+        <ng-template matStepLabel>Shipping Address</ng-template>
+        <mat-form-field>
+          <mat-label>Address</mat-label>
+          <input
+            matInput
+            placeholder="Home Street 3"
+            formControlName="address"
+            required
+            type="text"
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Address 2nd Line</mat-label>
+          <input
+            matInput
+            placeholder="Cuxhaven"
+            formControlName="address2nd"
+            type="text"
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>City</mat-label>
+          <input
+            matInput
+            placeholder="Nice"
+            formControlName="city"
+            required
+            type="text"
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Zip Code</mat-label>
+          <input
+            matInput
+            placeholder="3650"
+            formControlName="zipCode"
+            required
+            type="text"
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Country</mat-label>
+          <input
+            matInput
+            placeholder="Canada"
+            formControlName="country"
+            required
+            type="text"
+          />
+        </mat-form-field>
+        <br />
+        <button mat-button color="warn" matStepperPrevious>Back</button>
+        <button
+          mat-button
+          color="primary"
+          matStepperNext
+          [disabled]="!shippingAddressInformation.valid"
+        >
+          Next
+        </button>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="billingAddressInformation">
+      <form [formGroup]="billingAddressInformation">
+        <ng-template matStepLabel>Billing Address</ng-template>
+        <mat-form-field>
+          <mat-label>Address</mat-label>
+          <input
+            matInput
+            placeholder="Home Street 3"
+            formControlName="address"
+            required
+            type="text"
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Address 2nd Line</mat-label>
+          <input
+            matInput
+            placeholder="Cuxhaven"
+            formControlName="address2nd"
+            type="text"
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>City</mat-label>
+          <input
+            matInput
+            placeholder="Nice"
+            formControlName="city"
+            required
+            type="text"
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Zip Code</mat-label>
+          <input
+            matInput
+            placeholder="3650"
+            formControlName="zipCode"
+            required
+            type="text"
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Country</mat-label>
+          <input
+            matInput
+            placeholder="Canada"
+            formControlName="country"
+            required
+            type="text"
+          />
+        </mat-form-field>
+        <br />
+        <button mat-button color="warn" matStepperPrevious>Back</button>
+        <button
+          mat-button
+          color="primary"
+          matStepperNext
+          [disabled]="!billingAddressInformation.valid"
+        >
+          Next
+        </button>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="order">
+      <form [formGroup]="order">
+        <ng-template matStepLabel>Confirm Order</ng-template>
+        <h1>Order Items</h1>
+        <table>
+          <tr>
+            <th>SKU</th>
+            <th>Name</th>
+            <th>Quantity</th>
+            <th>Price pr. item</th>
+            <th>Total Price</th>
+          </tr>
+          <tr *ngFor="let item of cartContent | async">
+            <td>{{ item.sku }}</td>
+            <td>{{ item.name }}</td>
+            <td>{{ item.salesQuantity }}</td>
+            <td>{{ calculatePrice(item.price, item.currency) }}</td>
+            <td>{{ calculateLinePrice(item, item.salesQuantity) }}</td>
+          </tr>
+        </table>
+        <button mat-button color="warn" matStepperPrevious>Back</button>
+        <button mat-button color="primary" matStepperNext>Confirm</button>
+      </form>
+    </mat-step>
+  </mat-stepper>
+</div>

@@ -5,8 +5,6 @@ import { ViewportScroller } from '@angular/common';
 import { Router } from '@angular/router';
 import { PriceService } from '../price.service';
 import { environment } from 'src/environments/environment';
-import { Store } from '@ngrx/store';
-import { CartActions } from 'src/app/orders/state/actions';
 import { CartService } from 'src/app/orders/cart.service';
 
 @Component({
@@ -32,7 +30,7 @@ export class ProductCardComponent {
   }
 
   calculatePrice(price: number = 2500, currency: Currency) {
-    return this.priceService.calculatePrice(price, currency);
+    return this.priceService.calculatePrice(price, currency).toFormat();
   }
 
   addToCart(event: MouseEvent, product: ProductModel) {

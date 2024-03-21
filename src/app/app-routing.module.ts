@@ -5,6 +5,7 @@ import { ProductComponent } from './product/product/product.component';
 import { CreateProductComponent } from './product/create-product/create-product.component';
 import { ProductListComponent } from './product/product-list/product-list.component';
 import { CartListComponent } from './orders/cart-list/cart-list.component';
+import { CreateOrderComponent } from './orders/create-order/create-order.component';
 
 const routes: Routes = [
   { path: '', component: AllProductsComponent },
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: 'product/:id', component: ProductComponent },
   { path: 'newProduct', component: CreateProductComponent },
   { path: 'cart', component: CartListComponent },
+  { path: 'order', component: CreateOrderComponent },
   { path: '**', component: AllProductsComponent },
 ];
 

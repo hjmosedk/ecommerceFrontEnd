@@ -3,7 +3,7 @@ import { environment } from 'src/environments/environment';
 import { CartItemModel } from '../models/cartItem.model';
 import { CartService } from '../cart.service';
 import { CurrencyEnum } from 'src/app/shared/models/product.model';
-import { Subject, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-cart-item-card',
@@ -14,12 +14,8 @@ export class CartItemCardComponent implements OnInit, OnDestroy {
   baseUrl = environment.baseUri;
   imagePath: string = '/images/';
   constructor(private cartService: CartService) {}
-  private orderedQuantity: number = 1;
-  public orderedQuantity$: Subject<number> = new Subject();
-
-  salesQuantitySubscription: Subscription | null = null;
-
-  salesQuantity: number = 1;
+  public cartItemQuantity!: number;
+  private cartItemQuantitySubscription: Subscription = Subscription.EMPTY;
 
   @Input()
   cartItem!: CartItemModel;
@@ -28,33 +24,37 @@ export class CartItemCardComponent implements OnInit, OnDestroy {
     return this.cartService.calculatePrice(price, currency);
   }
 
-  ngOnInit(): void {
-    this.orderedQuantity$.next(this.orderedQuantity);
-    this.salesQuantitySubscription = this.orderedQuantity$.subscribe(
-      (quantity) => (this.salesQuantity = quantity)
-    );
+  calculateLinePrice(cartItem: CartItemModel, quantity: number) {
+    return this.cartService.calculateLinePrice(cartItem, quantity);
   }
 
-  addToQuantity(): void {
-    this.orderedQuantity++;
-    this.orderedQuantity$.next(this.orderedQuantity);
+  addToQuantity(id: string): void {
+    this.cartItemQuantity = ++this.cartItemQuantity;
+    this.cartService.updateCartItem(id, this.cartItemQuantity);
   }
 
   subtractFromQuantity(id: string): void {
-    this.orderedQuantity--;
-    if (!this.orderedQuantity) {
+    this.cartItemQuantity = --this.cartItemQuantity;
+    if (!this.cartItemQuantity) {
       this.cartService.removeItem(id);
+    } else {
+      this.cartService.updateCartItem(id, this.cartItemQuantity);
     }
-    this.orderedQuantity$.next(this.orderedQuantity);
   }
 
   removeItem(id: string): void {
     this.cartService.removeItem(id);
   }
 
+  ngOnInit(): void {
+    this.cartItemQuantitySubscription = this.cartService
+      .getOneItem(this.cartItem.id)
+      .subscribe((cartItem) => {
+        this.cartItemQuantity = cartItem!.salesQuantity;
+      });
+  }
+
   ngOnDestroy(): void {
-    if (this.salesQuantitySubscription) {
-      this.salesQuantitySubscription.unsubscribe();
-    }
+    this.cartItemQuantitySubscription.unsubscribe();
   }
 }

@@ -25,7 +25,10 @@
       rel="stylesheet"
     />
   </head>
+
   <header><app-navbar [title]="title"></app-navbar></header>
-  <router-outlet></router-outlet>
+  <body>
+    <router-outlet></router-outlet>
+  </body>
   <footer><app-footer [title]="title"></app-footer></footer>
 </html>

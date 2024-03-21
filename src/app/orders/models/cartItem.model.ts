@@ -8,7 +8,7 @@ export class CartItemModel {
     public description: string,
     public price: number,
     public image: string,
-    public SalesQuantity: number,
+    public salesQuantity: number,
     public currency: CurrencyEnum
   ) {}
 }

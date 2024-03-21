@@ -9,7 +9,7 @@ import {
   MessageData,
   MessageType,
 } from 'src/app/message/models/message.model';
-import { result } from 'cypress/types/lodash';
+import { PriceService } from 'src/app/product/price.service';
 
 @Component({
   selector: 'app-cart-list',
@@ -27,18 +27,6 @@ export class CartListComponent implements OnInit, OnDestroy {
   cartLength: number = 0;
   cartLengthSubscription: Subscription = new Subscription();
   cartContent: Observable<CartItemModel[]> | undefined = undefined;
-
-  ngOnInit(): void {
-    this.cartLengthSubscription = this.cartService
-      .cartLength()
-      .subscribe((length) => (this.cartLength = length));
-
-    this.cartContent = this.cartService.cartContent();
-  }
-
-  ngOnDestroy(): void {
-    this.cartLengthSubscription.unsubscribe();
-  }
 
   goBack(): void {
     this.router.navigate(['/']);
@@ -64,5 +52,17 @@ export class CartListComponent implements OnInit, OnDestroy {
 
   onConfirm() {
     this.router.navigate(['/order']);
+  }
+
+  ngOnInit(): void {
+    this.cartLengthSubscription = this.cartService
+      .cartLength()
+      .subscribe((length) => (this.cartLength = length));
+
+    this.cartContent = this.cartService.cartContent();
+  }
+
+  ngOnDestroy(): void {
+    this.cartLengthSubscription.unsubscribe();
   }
 }

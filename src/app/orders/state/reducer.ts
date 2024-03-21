@@ -7,6 +7,12 @@ export const cartReducer = createReducer(
   on(CartActions.addToCart, (state, { cartItem }) =>
     cartAdapter.upsertOne(cartItem, state)
   ),
+  on(CartActions.updateCart, (state, { id, quantity }) => {
+    return cartAdapter.updateOne(
+      { id: id, changes: { salesQuantity: quantity } },
+      state
+    );
+  }),
   on(CartActions.removeFromCart, (state, { id }) =>
     cartAdapter.removeOne(id, state)
   ),
