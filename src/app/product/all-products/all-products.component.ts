@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
 import { ProductsActions } from '../state/actions';
 import { selectActiveProducts } from '../state/selectors';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, Subscription, take } from 'rxjs';
 import { ProductModel } from 'src/app/shared/models/product.model';
 import { ViewportScroller } from '@angular/common';
 
@@ -32,7 +32,11 @@ export class AllProductsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.store.dispatch(ProductsActions.loadAllProducts());
+    this.productList$.pipe(take(1)).subscribe((products) => {
+      if (!products.length) {
+        this.store.dispatch(ProductsActions.loadAllProducts());
+      }
+    });
 
     this.productsSubscription = this.productList$.subscribe((products) => {
       this.totalProducts = products.length;
