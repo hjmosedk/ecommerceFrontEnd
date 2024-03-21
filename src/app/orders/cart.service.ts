@@ -46,7 +46,6 @@ export class CartService {
   }
 
   updateCartItem(id: string, quantity: number) {
-    console.log(`This is the service ${quantity}`);
     this.store.dispatch(CartActions.updateCart({ id, quantity }));
   }
 
