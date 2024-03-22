@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.1](https://codeberg.org/hjmosedk/ecommerceFrontEnd/compare/v0.2.0...v0.2.1) (2024-03-22)
+
+
+### Features
+
+* **cart:** products can now be added to cart - create order still pending ([3e5ed10](https://codeberg.org/hjmosedk/ecommerceFrontEnd/commits/3e5ed1069d16d9cb3994a318d899a918d587be91))
+* **cart:** the cart feature have been added in preperating of the order feature ([655292d](https://codeberg.org/hjmosedk/ecommerceFrontEnd/commits/655292dea235c1c0d25b837e4a487cb00f90eddf))
+
+
+### Bug Fixes
+
+* **allProduct:** fixed a bug in connection with product loading ([6bfd029](https://codeberg.org/hjmosedk/ecommerceFrontEnd/commits/6bfd0293745e5f65da36ac394d57a4cbaa19ee4f))
+* **various:** made minor adjustments - no effect on app ([2b11e09](https://codeberg.org/hjmosedk/ecommerceFrontEnd/commits/2b11e09265e168a2deaf3ee3e4b9f464c19ca683))
+
 ## [0.2.0](https://codeberg.org/hjmosedk/ecommerceFrontEnd/compare/v0.1.0...v0.2.0) (2023-09-20)
 
 
