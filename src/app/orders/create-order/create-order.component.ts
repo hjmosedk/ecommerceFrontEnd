@@ -1,21 +1,25 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {
   AddressModel,
+  DineroModel,
   PersonalInformationModel,
 } from 'src/app/shared/models/product.model';
 import { CartService } from '../cart.service';
 import { CartItemModel } from '../models/cartItem.model';
-import { Observable } from 'rxjs';
+import { Observable, Subscription, take } from 'rxjs';
 import { CurrencyEnum } from 'src/app/shared/models/product.model';
+import Dinero from 'dinero.js';
 
 @Component({
   selector: 'app-create-order',
   templateUrl: './create-order.component.html',
   styleUrl: './create-order.component.css',
 })
-export class CreateOrderComponent implements OnInit {
+export class CreateOrderComponent implements OnInit, OnDestroy {
   cartContent: Observable<CartItemModel[]> | undefined = undefined;
+  totalPriceSubscription!: Subscription;
+  totalPrice: DineroModel = Dinero({ amount: 1, currency: 'DKK' });
 
   personalInformation: PersonalInformationModel =
     new PersonalInformationModel();
@@ -63,7 +67,44 @@ export class CreateOrderComponent implements OnInit {
     return this.cartService.calculateLinePrice(cartItem, quantity);
   }
 
+  calculateTotalPrice() {
+    this.totalPriceSubscription = this.cartService
+      .updateTotalPrice()
+      .subscribe((totalPrice) => (this.totalPrice = totalPrice));
+  }
+
+  calculateTaxRate(totalPrice: DineroModel) {
+    return this.cartService.calculateTax(totalPrice, 20);
+  }
+
+  calculateSubTotal() {
+    const taxPrice = this.calculateTaxRate(this.totalPrice);
+    return this.totalPrice.subtract(taxPrice);
+  }
+
+  OnClick() {
+    this.cartService
+      .cartContent()
+      .pipe(take(1))
+      .subscribe((cartContent) => {
+        const newOrder = {
+          personalInformation: this.personalInformationForm.value,
+          shippingAddress: this.shippingAddressInformation.value,
+          billingAddress: this.billingAddressInformation.value,
+          orderItems: cartContent,
+        };
+
+        console.log(newOrder);
+        this.cartService.clearCart();
+      });
+  }
+
   ngOnInit(): void {
     this.cartContent = this.cartService.cartContent();
+    this.calculateTotalPrice();
+  }
+
+  ngOnDestroy(): void {
+    this.totalPriceSubscription.unsubscribe();
   }
 }

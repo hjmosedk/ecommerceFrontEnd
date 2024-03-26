@@ -235,9 +235,26 @@
             <td>{{ calculatePrice(item.price, item.currency) }}</td>
             <td>{{ calculateLinePrice(item, item.salesQuantity) }}</td>
           </tr>
+          <tr>
+            <td class="bold">SUBTOTAL</td>
+            <td colspan="3">Price Without Tax</td>
+            <td>{{ calculateSubTotal().toFormat() }}</td>
+          </tr>
+          <tr>
+            <td class="additions" colspan="4">VAT</td>
+            <td class="additions">
+              {{ calculateTaxRate(totalPrice).toFormat() }}
+            </td>
+          </tr>
+          <tr>
+            <td class="bold total" colspan="4">TOTAL</td>
+            <td class="totalPrice total">{{ totalPrice.toFormat() }}</td>
+          </tr>
         </table>
         <button mat-button color="warn" matStepperPrevious>Back</button>
-        <button mat-button color="primary" matStepperNext>Confirm</button>
+        <button mat-button color="primary" matStepperNext (click)="OnClick()">
+          Confirm
+        </button>
       </form>
     </mat-step>
   </mat-stepper>

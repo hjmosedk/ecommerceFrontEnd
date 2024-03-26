@@ -1,21 +1,27 @@
 import { Injectable } from '@angular/core';
 import { CartItemModel } from './models/cartItem.model';
-import { CurrencyEnum, ProductModel } from '../shared/models/product.model';
+import {
+  CurrencyEnum,
+  DineroModel,
+  ProductModel,
+} from '../shared/models/product.model';
 import { CartActions } from './state/actions';
 import { Store } from '@ngrx/store';
 import {
   selectCartItems,
   selectCartLength,
   selectCartEntitiesById,
+  selectTotalPrice,
 } from './state/selectors';
 import { PriceService } from '../product/price.service';
-import { Subject, take, map } from 'rxjs';
+import { take, map } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
 export class CartService {
-  constructor(private store: Store, private priceService: PriceService) {}
   private orderedQuantity: number = 1;
+
+  constructor(private store: Store, private priceService: PriceService) {}
 
   addToCart(product: ProductModel) {
     this.store
@@ -79,5 +85,14 @@ export class CartService {
 
   getOneItem(id: string) {
     return this.store.select(selectCartEntitiesById(id));
+  }
+
+  updateTotalPrice() {
+    return this.store.select(selectTotalPrice);
+  }
+
+  calculateTax(totalPrice: DineroModel, taxRate: number) {
+    const calculatedTaxRate = taxRate / 100;
+    return totalPrice.multiply(calculatedTaxRate);
   }
 }

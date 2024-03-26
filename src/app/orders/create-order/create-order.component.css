@@ -1,7 +1,7 @@
 /*.mat-stepper-vertical {
   margin-top: 8px;
 }
-
+*/
 .mat-mdc-form-field {
   margin-top: 16px;
 }
@@ -9,4 +9,32 @@
 .container {
   height: 84vh;
 }
-*/
+
+.bold {
+  font-weight: bolder;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+th {
+  border-bottom: 2px solid black;
+}
+
+td {
+  border-bottom: 2px dotted black;
+}
+
+.totalPrice {
+  font-weight: bolder;
+  color: #673ab7;
+}
+
+.additions {
+  padding-top: 20px;
+}
+
+.total {
+  padding-top: 40px;
+}
