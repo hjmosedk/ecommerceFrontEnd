@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
-import { cartAdapter } from './state';
-import { CartActions } from './actions';
+import { cartAdapter } from './cart.state';
+import { CartActions } from './cart.actions';
 
 export const cartReducer = createReducer(
   cartAdapter.getInitialState(),

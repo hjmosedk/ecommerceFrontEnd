@@ -1,5 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { CartState, cartAdapter } from './state';
+import { CartState, cartAdapter } from './cart.state';
 import { CartItemModel } from '../models/cartItem.model';
 import { Dictionary } from '@ngrx/entity';
 import Dinero from 'dinero.js';
