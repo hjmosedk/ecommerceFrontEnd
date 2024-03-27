@@ -2,14 +2,18 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {
   AddressModel,
-  DineroModel,
   PersonalInformationModel,
-} from 'src/app/shared/models/product.model';
+} from 'src/app/shared/models/customer.model';
+import { DineroModel } from 'src/app/shared/models/product.model';
 import { CartService } from '../cart.service';
 import { CartItemModel } from '../models/cartItem.model';
 import { Observable, Subscription, take } from 'rxjs';
 import { CurrencyEnum } from 'src/app/shared/models/product.model';
 import Dinero from 'dinero.js';
+import { OrdersService } from '../orders.service';
+import { OrderModel } from '../models/order.model';
+import { Store } from '@ngrx/store';
+import { OrderActions } from '../state/order.actions';
 
 @Component({
   selector: 'app-create-order',
@@ -27,37 +31,51 @@ export class CreateOrderComponent implements OnInit, OnDestroy {
   billingAddress: AddressModel = new AddressModel();
 
   personalInformationForm = this.formBuilder.group({
-    firstName: [this.personalInformation.firstName, [Validators.required]],
-    lastName: [this.personalInformation.lastName, [Validators.required]],
+    firstName: [
+      this.personalInformation.firstName || '',
+      [Validators.required],
+    ],
+    lastName: [this.personalInformation.lastName || '', [Validators.required]],
     email: [
-      this.personalInformation.email,
+      this.personalInformation.email || '',
       [Validators.required, Validators.email],
     ],
-    phone: [this.personalInformation.phone, [Validators.required]],
+    phone: [this.personalInformation.phone || '', [Validators.required]],
     middleName: [this.personalInformation.middleName, []],
   });
 
-  shippingAddressInformation = this.formBuilder.group({
-    address: [this.shippingAddress.address, [Validators.required]],
+  shippingAddressInformationForm = this.formBuilder.group({
+    address: [this.shippingAddress.address || '', [Validators.required]],
     address2nd: [this.shippingAddress.address2nd, []],
-    city: [this.shippingAddress.city, [Validators.required]],
-    zipCode: [this.shippingAddress.zipCode, [Validators.required]],
-    country: [this.shippingAddress.country, [Validators.required]],
+    city: [this.shippingAddress.city || '', [Validators.required]],
+    zipCode: [this.shippingAddress.zipCode || '', [Validators.required]],
+    country: [this.shippingAddress.country || '', [Validators.required]],
   });
 
-  billingAddressInformation = this.formBuilder.group({
-    address: [this.billingAddress.address, [Validators.required]],
+  billingAddressInformationForm = this.formBuilder.group({
+    address: [this.billingAddress.address || '', [Validators.required]],
     address2nd: [this.billingAddress.address2nd, []],
-    city: [this.billingAddress.city, [Validators.required]],
-    zipCode: [this.billingAddress.zipCode, [Validators.required]],
-    country: [this.billingAddress.country, [Validators.required]],
+    city: [this.billingAddress.city || '', [Validators.required]],
+    zipCode: [this.billingAddress.zipCode || '', [Validators.required]],
+    country: [this.billingAddress.country || '', [Validators.required]],
   });
 
-  order = this.formBuilder.group({});
+  orderItems = this.formBuilder.group({});
+
+  newOrderForm = this.formBuilder.group({
+    customer: this.formBuilder.group({
+      personalInformation: this.personalInformationForm ?? ' ',
+      shippingAddressInformation: this.shippingAddressInformationForm ?? '',
+      billingAddressInformation: this.billingAddressInformationForm ?? '',
+    }),
+    orderItems: this.orderItems,
+    orderNotes: '',
+  });
 
   constructor(
     private formBuilder: FormBuilder,
-    private cartService: CartService
+    private cartService: CartService,
+    private orderService: OrdersService
   ) {}
 
   calculatePrice(price: number, currency: CurrencyEnum) {
@@ -82,19 +100,20 @@ export class CreateOrderComponent implements OnInit, OnDestroy {
     return this.totalPrice.subtract(taxPrice);
   }
 
-  OnClick() {
+  onSubmit() {
     this.cartService
       .cartContent()
       .pipe(take(1))
       .subscribe((cartContent) => {
         const newOrder = {
-          personalInformation: this.personalInformationForm.value,
-          shippingAddress: this.shippingAddressInformation.value,
-          billingAddress: this.billingAddressInformation.value,
+          customer: {
+            personalInformation: this.personalInformationForm.value,
+            shippingAddress: this.shippingAddressInformationForm.value,
+            billingAddress: this.billingAddressInformationForm.value,
+          },
           orderItems: cartContent,
-        };
-
-        console.log(newOrder);
+        } as OrderModel;
+        this.orderService.dispatchNewOrder(newOrder);
         this.cartService.clearCart();
       });
   }

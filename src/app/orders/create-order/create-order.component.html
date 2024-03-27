@@ -67,7 +67,7 @@
           <input
             matInput
             placeholder="2599887755"
-            formControlName="firstName"
+            formControlName="phone"
             required
             type="text"
           />
@@ -88,8 +88,8 @@
         </button>
       </form>
     </mat-step>
-    <mat-step [stepControl]="shippingAddressInformation">
-      <form [formGroup]="shippingAddressInformation">
+    <mat-step [stepControl]="shippingAddressInformationForm">
+      <form [formGroup]="shippingAddressInformationForm">
         <ng-template matStepLabel>Shipping Address</ng-template>
         <mat-form-field>
           <mat-label>Address</mat-label>
@@ -146,14 +146,14 @@
           mat-button
           color="primary"
           matStepperNext
-          [disabled]="!shippingAddressInformation.valid"
+          [disabled]="!shippingAddressInformationForm.valid"
         >
           Next
         </button>
       </form>
     </mat-step>
-    <mat-step [stepControl]="billingAddressInformation">
-      <form [formGroup]="billingAddressInformation">
+    <mat-step [stepControl]="billingAddressInformationForm">
+      <form [formGroup]="billingAddressInformationForm">
         <ng-template matStepLabel>Billing Address</ng-template>
         <mat-form-field>
           <mat-label>Address</mat-label>
@@ -210,14 +210,14 @@
           mat-button
           color="primary"
           matStepperNext
-          [disabled]="!billingAddressInformation.valid"
+          [disabled]="!billingAddressInformationForm.valid"
         >
           Next
         </button>
       </form>
     </mat-step>
-    <mat-step [stepControl]="order">
-      <form [formGroup]="order">
+    <mat-step [stepControl]="orderItems">
+      <form [formGroup]="orderItems">
         <ng-template matStepLabel>Confirm Order</ng-template>
         <h1>Order Items</h1>
         <table>
@@ -252,7 +252,7 @@
           </tr>
         </table>
         <button mat-button color="warn" matStepperPrevious>Back</button>
-        <button mat-button color="primary" matStepperNext (click)="OnClick()">
+        <button mat-button color="primary" matStepperNext (click)="onSubmit()">
           Confirm
         </button>
       </form>

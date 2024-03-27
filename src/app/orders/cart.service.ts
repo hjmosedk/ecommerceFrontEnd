@@ -5,14 +5,14 @@ import {
   DineroModel,
   ProductModel,
 } from '../shared/models/product.model';
-import { CartActions } from './state/actions';
+import { CartActions } from './state/cart.actions';
 import { Store } from '@ngrx/store';
 import {
   selectCartItems,
   selectCartLength,
   selectCartEntitiesById,
   selectTotalPrice,
-} from './state/selectors';
+} from './state/cart.selectors';
 import { PriceService } from '../product/price.service';
 import { take, map } from 'rxjs';
 @Injectable({
