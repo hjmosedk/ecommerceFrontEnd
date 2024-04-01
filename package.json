@@ -61,6 +61,7 @@
     "@types/uuid": "^9.0.8",
     "@typescript-eslint/eslint-plugin": "^7.4.0",
     "@typescript-eslint/parser": "^7.4.0",
+    "commit-and-tag-version": "^12.2.0",
     "cypress": "^13.7.1",
     "cypress-file-upload": "^5.0.8",
     "eslint": "^8.57.0",
@@ -71,7 +72,6 @@
     "karma-coverage": "~2.2.1",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
-    "standard-version": "^9.5.0",
     "typescript": "^5.3.3"
   }
 }

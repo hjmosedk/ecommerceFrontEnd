@@ -2,15 +2,15 @@
   "types": [
     { "type": "feat", "section": "Features" },
     { "type": "fix", "section": "Bug Fixes" },
-    { "type": "chore", "hidden": true },
+    { "type": "chore", "section": "Minor Changes" },
     { "type": "docs", "section": "Documentation" },
     { "type": "style", "hidden": true },
-    { "type": "refactor", "hidden": true },
-    { "type": "perf", "hidden": true },
+    { "type": "refactor", "section": "Optimizations" },
+    { "type": "perf", "section": "Performance Adjustments" },
     { "type": "test", "section": "Test" },
-    { "type": "build", "section": "Infrastructure" },
-    { "type": "ci", "section": "CI-CD" }
+    { "type": "build", "section": "Build Pipeline Adjustments" },
+    { "type": "ci", "section": "Technical Adjustment" }
   ],
-  "commitUrlFormat": "https://codeberg.org/hjmosedk/ecommerceFrontEnd/commits/{{hash}}",
-  "compareUrlFormat": "https://codeberg.org/hjmosedk/ecommerceFrontEnd/compare/{{previousTag}}...{{currentTag}}"
+  "commitUrlFormat": "https://github.com/hjmosedk/ecommerceFrontEnd/commits/{{hash}}",
+  "compareUrlFormat": "https://github.com/hjmosedk/ecommerceFrontEnd/compare/{{previousTag}}...{{currentTag}}"
 }
