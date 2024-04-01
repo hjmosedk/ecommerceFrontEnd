@@ -16,6 +16,7 @@ export const diamondRingItem: newProduct = {
   quantity: 5,
   percentage: 0,
   onSale: false,
+  isPublic: true,
 };
 
 export const cheeseburgerItem: newProduct = {
@@ -29,6 +30,7 @@ export const cheeseburgerItem: newProduct = {
   quantity: 10,
   percentage: 0,
   onSale: false,
+  isPublic: true,
 };
 
 export const glovesItem: newProduct = {
@@ -42,6 +44,7 @@ export const glovesItem: newProduct = {
   quantity: 10,
   percentage: 20,
   onSale: true,
+  isPublic: true,
 };
 
 export const goldWatchItem: newProduct = {
@@ -55,6 +58,7 @@ export const goldWatchItem: newProduct = {
   quantity: 10,
   percentage: 20,
   onSale: true,
+  isPublic: true,
 };
 
 export const testProducts: newProduct[] = [
