@@ -3,8 +3,7 @@ import { CartState, cartAdapter } from './cart.state';
 import { CartItemModel } from '../models/cartItem.model';
 import { Dictionary } from '@ngrx/entity';
 import Dinero from 'dinero.js';
-import { CurrencyEnum } from 'src/app/shared/models/product.model';
-
+import { Ecommerce } from 'ckh-typings';
 const selectCartFeature = createFeatureSelector<CartState>('cart');
 
 export const cartSelectors = cartAdapter.getSelectors();
@@ -24,7 +23,7 @@ export const selectCartEntities = createSelector(
   cartSelectors.selectEntities
 );
 
-export const selectCartEntitiesById = (productId: string) =>
+export const selectCartEntitiesById = (productId: number) =>
   createSelector(
     selectCartEntities,
     (entities: Dictionary<CartItemModel>) => entities[productId]
@@ -33,7 +32,7 @@ export const selectCartEntitiesById = (productId: string) =>
 export const selectTotalPrice = createSelector(
   selectCartItems,
   (items: CartItemModel[]) => {
-    let total = Dinero({ amount: 0, currency: CurrencyEnum.DKK });
+    let total = Dinero({ amount: 0, currency: Ecommerce.CurrencyType.DKK });
 
     for (let item of items) {
       let itemTotal = Dinero({

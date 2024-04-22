@@ -1,14 +1,18 @@
-export class PersonalInformationModel {
+import { Ecommerce } from 'ckh-typings';
+
+export class PersonalInformationModel
+  implements Ecommerce.PersonalInformationModel
+{
   constructor(
     public firstName: string = '',
     public lastName: string = '',
     public email: string = '',
-    public phone: number = 0,
+    public phone: string = '',
     public middleName?: string
   ) {}
 }
 
-export class AddressModel {
+export class AddressModel implements Ecommerce.AddressModel {
   constructor(
     public address: string = '',
     public address2nd?: string,
@@ -18,7 +22,7 @@ export class AddressModel {
   ) {}
 }
 
-export class CustomerModel {
+export class CustomerModel implements Ecommerce.CustomerModel {
   constructor(
     public personalInformation: PersonalInformationModel,
     public shippingAddress: AddressModel,

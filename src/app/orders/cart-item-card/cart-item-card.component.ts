@@ -2,7 +2,7 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { CartItemModel } from '../models/cartItem.model';
 import { CartService } from '../cart.service';
-import { CurrencyEnum } from 'src/app/shared/models/product.model';
+import { Ecommerce } from 'ckh-typings';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -20,7 +20,7 @@ export class CartItemCardComponent implements OnInit, OnDestroy {
   @Input()
   cartItem!: CartItemModel;
 
-  calculatePrice(price: number, currency: CurrencyEnum) {
+  calculatePrice(price: number, currency: Ecommerce.CurrencyType) {
     return this.cartService.calculatePrice(price, currency);
   }
 
@@ -28,12 +28,12 @@ export class CartItemCardComponent implements OnInit, OnDestroy {
     return this.cartService.calculateLinePrice(cartItem, quantity);
   }
 
-  addToQuantity(id: string): void {
+  addToQuantity(id: number): void {
     this.cartItemQuantity = ++this.cartItemQuantity;
     this.cartService.updateCartItem(id, this.cartItemQuantity);
   }
 
-  subtractFromQuantity(id: string): void {
+  subtractFromQuantity(id: number): void {
     this.cartItemQuantity = --this.cartItemQuantity;
     if (!this.cartItemQuantity) {
       this.cartService.removeItem(id);
@@ -42,7 +42,7 @@ export class CartItemCardComponent implements OnInit, OnDestroy {
     }
   }
 
-  removeItem(id: string): void {
+  removeItem(id: number): void {
     this.cartService.removeItem(id);
   }
 

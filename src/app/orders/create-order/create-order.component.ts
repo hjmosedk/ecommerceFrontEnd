@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import {
   AddressModel,
   PersonalInformationModel,
@@ -8,12 +8,11 @@ import { DineroModel } from 'src/app/shared/models/product.model';
 import { CartService } from '../cart.service';
 import { CartItemModel } from '../models/cartItem.model';
 import { Observable, Subscription, take } from 'rxjs';
-import { CurrencyEnum } from 'src/app/shared/models/product.model';
+import { Ecommerce } from 'ckh-typings';
 import Dinero from 'dinero.js';
 import { OrdersService } from '../orders.service';
 import { OrderModel } from '../models/order.model';
-import { Store } from '@ngrx/store';
-import { OrderActions } from '../state/order.actions';
+import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-create-order',
@@ -53,6 +52,7 @@ export class CreateOrderComponent implements OnInit, OnDestroy {
   });
 
   billingAddressInformationForm = this.formBuilder.group({
+    same: [false],
     address: [this.billingAddress.address || '', [Validators.required]],
     address2nd: [this.billingAddress.address2nd, []],
     city: [this.billingAddress.city || '', [Validators.required]],
@@ -78,7 +78,7 @@ export class CreateOrderComponent implements OnInit, OnDestroy {
     private orderService: OrdersService
   ) {}
 
-  calculatePrice(price: number, currency: CurrencyEnum) {
+  calculatePrice(price: number, currency: Ecommerce.CurrencyType) {
     return this.cartService.calculatePrice(price, currency);
   }
   calculateLinePrice(cartItem: CartItemModel, quantity: number) {
@@ -112,10 +112,20 @@ export class CreateOrderComponent implements OnInit, OnDestroy {
             billingAddress: this.billingAddressInformationForm.value,
           },
           orderItems: cartContent,
+          orderNotes: '',
+          orderStatus: Ecommerce.OrderStatus.RECEIVED,
         } as OrderModel;
         this.orderService.dispatchNewOrder(newOrder);
         this.cartService.clearCart();
       });
+  }
+
+  onToggleChange(event: MatSlideToggleChange) {
+    if (event.checked) {
+      this.billingAddressInformationForm.patchValue(
+        this.shippingAddressInformationForm.value
+      );
+    }
   }
 
   ngOnInit(): void {

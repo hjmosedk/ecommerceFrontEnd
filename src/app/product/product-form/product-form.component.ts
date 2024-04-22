@@ -5,10 +5,8 @@ import {
   Validators,
   AbstractControl,
 } from '@angular/forms';
-import {
-  CurrencyEnum,
-  ProductModel,
-} from 'src/app/shared/models/product.model';
+
+import { Ecommerce } from 'ckh-typings';
 
 @Component({
   selector: 'app-product-form',
@@ -17,10 +15,10 @@ import {
 })
 export class ProductFormComponent implements OnInit {
   productDataForm!: FormGroup;
-  @Input() product: ProductModel | undefined;
-  @Output() changedProduct: EventEmitter<ProductModel> =
-    new EventEmitter<ProductModel>();
-  acceptableCurrencies: string[] = Object.values(CurrencyEnum);
+  @Input() product: Ecommerce.ProductModel | undefined;
+  @Output() changedProduct: EventEmitter<Ecommerce.ProductModel> =
+    new EventEmitter<Ecommerce.ProductModel>();
+  acceptableCurrencies: string[] = Object.values(Ecommerce.CurrencyType);
   fileName: string = '';
   reset: boolean = false;
   @Input() imageId?: string | undefined;
@@ -69,7 +67,7 @@ export class ProductFormComponent implements OnInit {
         nonNullable: true,
         validators: [Validators.required, Validators.min(100)],
       }),
-      currency: new FormControl(CurrencyEnum.DKK, {
+      currency: new FormControl(Ecommerce.CurrencyType.DKK, {
         nonNullable: true,
         validators: [Validators.required],
       }),

@@ -6,15 +6,22 @@ import { CreateProductComponent } from './product/create-product/create-product.
 import { ProductListComponent } from './product/product-list/product-list.component';
 import { CartListComponent } from './orders/cart-list/cart-list.component';
 import { CreateOrderComponent } from './orders/create-order/create-order.component';
+import { cartGuard } from './orders/cart.guard';
 
 const routes: Routes = [
   { path: '', component: AllProductsComponent },
-  { path: 'products', component: AllProductsComponent },
-  { path: 'products/admin', component: ProductListComponent },
-  { path: 'product/:id', component: ProductComponent },
-  { path: 'newProduct', component: CreateProductComponent },
-  { path: 'cart', component: CartListComponent },
-  { path: 'order', component: CreateOrderComponent },
+  {
+    path: 'products',
+    loadChildren: () =>
+      import('./product/products-routing.module').then(
+        (m) => m.ProductsRoutingModule
+      ),
+  },
+  //{ path: 'products/admin', component: ProductListComponent },
+  //{ path: 'product/:id', component: ProductComponent },
+  //{ path: 'newProduct', component: CreateProductComponent },
+  { path: 'cart', component: CartListComponent, canActivate: [cartGuard] },
+  { path: 'order', component: CreateOrderComponent, canActivate: [cartGuard] },
   { path: '**', component: AllProductsComponent },
 ];
 

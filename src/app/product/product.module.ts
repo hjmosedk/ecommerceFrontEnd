@@ -3,9 +3,9 @@ import { CommonModule } from '@angular/common';
 import { SharedModule } from '../shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProductCardComponent } from './product-card/product-card.component';
+import { ProductsRoutingModule } from './products-routing.module';
 
 import { MatSelectModule } from '@angular/material/select';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { AllProductsComponent } from './all-products/all-products.component';
 import { ProductComponent } from './product/product.component';
 import { CreateProductComponent } from './create-product/create-product.component';
@@ -37,12 +37,12 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     CommonModule,
     SharedModule,
     BrowserAnimationsModule,
-    MatSlideToggleModule,
     MatSelectModule,
     MatGridListModule,
     MatTableModule,
     FlexLayoutModule,
     MatPaginatorModule,
+    ProductsRoutingModule,
     EffectsModule.forFeature([ProductsEffects]),
     StoreModule.forFeature('products', productsReducer),
   ],

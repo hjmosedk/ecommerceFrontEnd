@@ -1,14 +1,16 @@
-import { CurrencyEnum } from 'src/app/shared/models/product.model';
+import { Ecommerce } from 'ckh-typings';
 
-export class CartItemModel {
+export class CartItemModel implements Ecommerce.OrderItemModel {
   constructor(
     public name: string,
-    public id: string,
+    public id: number,
     public sku: string,
     public description: string,
     public price: number,
     public image: string,
     public salesQuantity: number,
-    public currency: CurrencyEnum
+    public currency: Ecommerce.CurrencyType,
+    public productId: number,
+    public product: Ecommerce.ProductModel
   ) {}
 }

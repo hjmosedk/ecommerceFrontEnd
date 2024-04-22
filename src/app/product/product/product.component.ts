@@ -4,14 +4,15 @@ import { ActivatedRoute } from '@angular/router';
 import { ProductsActions } from '../state/actions';
 import { selectOneProduct } from '../state/selectors';
 import { Observable } from 'rxjs';
-import { ProductModel } from 'src/app/shared/models/product.model';
+import { Ecommerce } from 'ckh-typings';
+
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.css'],
 })
 export class ProductComponent implements OnInit {
-  public product: Observable<ProductModel | undefined> =
+  public product: Observable<Ecommerce.ProductModel | undefined> =
     new Observable<undefined>();
   constructor(private store: Store, private router: ActivatedRoute) {}
 

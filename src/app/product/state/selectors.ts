@@ -1,6 +1,6 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { productsAdapter, ProductsState } from './state';
-import { ProductModel } from 'src/app/shared/models/product.model';
+import { Ecommerce } from 'ckh-typings';
 
 const selectProductsFeature = createFeatureSelector<ProductsState>('products');
 
@@ -21,7 +21,7 @@ export const selectOneProduct = (productId: number) =>
 
 export const selectActiveProducts = createSelector(
   selectAllProducts,
-  (entries: ProductModel[]) => {
+  (entries: Ecommerce.ProductModel[]) => {
     return entries.filter(
       (entity) => entity.isPublic === true && entity.quantity > 0
     );

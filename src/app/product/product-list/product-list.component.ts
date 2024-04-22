@@ -5,11 +5,11 @@ import Dinero, { Currency } from 'dinero.js';
 import { ProductsActions } from '../state/actions';
 import { environment } from 'src/environments/environment';
 
-import { ProductModel } from 'src/app/shared/models/product.model';
 import { Observable, Subscription } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { UpdateProductModalComponent } from '../update-product-modal/update-product-modal.component';
 import { UpdateProductModel } from '../models/updateProduct.model';
+import { Ecommerce } from 'ckh-typings';
 
 @Component({
   selector: 'app-product-list',
@@ -19,9 +19,9 @@ import { UpdateProductModel } from '../models/updateProduct.model';
 export class ProductListComponent implements OnInit, OnDestroy {
   baseUrl = environment.baseUri;
   imagePath = environment.imagePath;
-  selectedProduct$: Observable<ProductModel | undefined> =
+  selectedProduct$: Observable<Ecommerce.ProductModel | undefined> =
     new Observable<undefined>();
-  product: ProductModel | undefined = undefined;
+  product: Ecommerce.ProductModel | undefined = undefined;
   formData: UpdateProductModel | undefined;
   selectedProductSubscription: Subscription | null = null;
 
@@ -72,7 +72,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
     this.store.dispatch(ProductsActions.updateStatus({ id }));
   }
 
-  onUpdatedProduct = (product: ProductModel) => {
+  onUpdatedProduct = (product: Ecommerce.ProductModel) => {
     this.dialog.closeAll();
     const updateProduct = product;
     (updateProduct.id = this.product!.id),

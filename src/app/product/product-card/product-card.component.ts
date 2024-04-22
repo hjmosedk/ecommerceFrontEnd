@@ -1,11 +1,11 @@
 import { Component, Input } from '@angular/core';
-import { ProductModel } from 'src/app/shared/models/product.model';
 import { Currency } from 'dinero.js';
 import { ViewportScroller } from '@angular/common';
 import { Router } from '@angular/router';
 import { PriceService } from '../price.service';
 import { environment } from 'src/environments/environment';
 import { CartService } from 'src/app/orders/cart.service';
+import { Ecommerce } from 'ckh-typings';
 
 @Component({
   selector: 'app-product-card',
@@ -23,7 +23,7 @@ export class ProductCardComponent {
   ) {}
 
   @Input()
-  product!: ProductModel;
+  product!: Ecommerce.ProductModel;
 
   scrollToTop() {
     this.viewportScroller.scrollToPosition([0, 0]);
@@ -33,12 +33,12 @@ export class ProductCardComponent {
     return this.priceService.calculatePrice(price, currency).toFormat();
   }
 
-  addToCart(event: MouseEvent, product: ProductModel) {
+  addToCart(event: MouseEvent, product: Ecommerce.ProductModel) {
     event.stopPropagation();
     this.cartService.addToCart(product);
   }
 
-  onClick(productId: string) {
+  onClick(productId: number) {
     this.scrollToTop();
     this.router.navigate(['/product', productId]);
   }

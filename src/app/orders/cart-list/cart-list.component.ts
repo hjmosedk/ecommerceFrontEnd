@@ -9,7 +9,6 @@ import {
   MessageData,
   MessageType,
 } from 'src/app/message/models/message.model';
-import { PriceService } from 'src/app/product/price.service';
 
 @Component({
   selector: 'app-cart-list',

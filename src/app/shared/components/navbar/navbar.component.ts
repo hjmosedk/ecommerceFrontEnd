@@ -13,10 +13,10 @@ export class NavbarComponent {
   constructor(private router: Router) {}
 
   createNewProduct() {
-    this.router.navigate(['/newProduct']);
+    this.router.navigate(['products', 'newProduct']);
   }
 
   viewAllProducts() {
-    this.router.navigate(['/products', 'admin']);
+    this.router.navigate(['products', 'admin']);
   }
 }

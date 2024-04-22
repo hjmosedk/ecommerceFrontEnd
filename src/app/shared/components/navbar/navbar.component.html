@@ -8,17 +8,17 @@
   >
   <span class="spacer-small"></span>
   <span>
-    <a mat-icon-button routerLink="/" data-cy="home">
+    <a mat-icon-button [routerLink]="['/']" data-cy="home">
       <mat-icon>home</mat-icon>
     </a></span
   >
   <span>
-    <a mat-icon-button routerLink="/user" data-cy="user">
+    <a mat-icon-button [routerLink]="['/user']" data-cy="user">
       <mat-icon>person</mat-icon>
     </a></span
   >
   <span>
-    <a mat-icon-button routerLink="/cart" data-cy="cart">
+    <a mat-icon-button [routerLink]="['cart']" data-cy="cart">
       <mat-icon>shopping_cart</mat-icon>
     </a></span
   >

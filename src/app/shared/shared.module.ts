@@ -14,6 +14,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormField } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @NgModule({
   declarations: [NavbarComponent, SplitterbarComponent, FooterComponent],
@@ -29,6 +30,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatFormField,
     ReactiveFormsModule,
     MatInputModule,
+    MatSlideToggleModule,
   ],
   imports: [
     CommonModule,
@@ -43,6 +45,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     MatFormField,
     ReactiveFormsModule,
+    MatSlideToggleModule,
   ],
 })
 export class SharedModule {}

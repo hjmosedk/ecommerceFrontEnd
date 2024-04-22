@@ -1,10 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CartItemModel } from './models/cartItem.model';
-import {
-  CurrencyEnum,
-  DineroModel,
-  ProductModel,
-} from '../shared/models/product.model';
+import { DineroModel } from '../shared/models/product.model';
 import { CartActions } from './state/cart.actions';
 import { Store } from '@ngrx/store';
 import {
@@ -15,6 +11,7 @@ import {
 } from './state/cart.selectors';
 import { PriceService } from '../product/price.service';
 import { take, map } from 'rxjs';
+import { Ecommerce } from 'ckh-typings';
 @Injectable({
   providedIn: 'root',
 })
@@ -23,7 +20,7 @@ export class CartService {
 
   constructor(private store: Store, private priceService: PriceService) {}
 
-  addToCart(product: ProductModel) {
+  addToCart(product: Ecommerce.ProductModel) {
     this.store
       .select(selectCartEntitiesById(product.id))
       .pipe(
@@ -38,7 +35,9 @@ export class CartService {
               product.price,
               product.image,
               this.orderedQuantity,
-              product.currency
+              product.currency,
+              product.id,
+              product
             );
             this.store.dispatch(
               CartActions.addToCart({ cartItem: newCartItem })
@@ -51,7 +50,7 @@ export class CartService {
       .subscribe();
   }
 
-  updateCartItem(id: string, quantity: number) {
+  updateCartItem(id: number, quantity: number) {
     this.store.dispatch(CartActions.updateCart({ id, quantity }));
   }
 
@@ -67,7 +66,7 @@ export class CartService {
     return this.store.select(selectCartItems);
   }
 
-  calculatePrice(price: number, currency: CurrencyEnum) {
+  calculatePrice(price: number, currency: Ecommerce.CurrencyType) {
     return this.priceService.calculatePrice(price, currency).toFormat();
   }
 
@@ -79,11 +78,11 @@ export class CartService {
     return this.priceService.multiplyPrice(linePrice, quantity).toFormat();
   }
 
-  removeItem(id: string) {
+  removeItem(id: number) {
     return this.store.dispatch(CartActions.removeFromCart({ id }));
   }
 
-  getOneItem(id: string) {
+  getOneItem(id: number) {
     return this.store.select(selectCartEntitiesById(id));
   }
 

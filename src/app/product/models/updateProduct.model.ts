@@ -1,7 +1,7 @@
-import { ProductModel } from 'src/app/shared/models/product.model';
+import { Ecommerce } from 'ckh-typings';
 
 export interface UpdateProductModel {
-  product: ProductModel;
+  product: Ecommerce.ProductModel;
   uri: string;
   onUpdatedProduct: any;
   imgString: string;

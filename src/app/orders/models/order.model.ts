@@ -1,24 +1,8 @@
-import { CustomerModel } from 'src/app/shared/models/customer.model';
-import { CartItemModel } from './cartItem.model';
+import { Ecommerce } from 'ckh-typings';
 
-export interface OrderModel {
-  orderItems: CartItemModel[];
-  customer: CustomerModel;
-  orderNotes?: string;
-}
+export type OrderModel = Omit<
+  Ecommerce.OrderModel,
+  'orderDate' | 'lastChange' | 'id'
+>;
 
-export interface CreatedOrderModel extends OrderModel {
-  id: number;
-  orderDate: string;
-  lastChange: string;
-  orderStatus: OrderStatus;
-}
-
-export enum OrderStatus {
-  RECEIVED = 'RECEIVED',
-  RESERVED = 'RESERVED',
-  CONFIRMED = 'CONFIRMED',
-  PACKED = 'PACKED',
-  SHIPPED = 'SHIPPED',
-  CLOSED = 'CLOSED',
-}
+//export type createOrderModel = Omit<Ecommerce.OrderModel, 'id'>;

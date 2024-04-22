@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { ProductsActions } from '../state/actions';
 import { selectActiveProducts } from '../state/selectors';
 import { Observable, Subscription, take } from 'rxjs';
-import { ProductModel } from 'src/app/shared/models/product.model';
+import { Ecommerce } from 'ckh-typings';
 import { ViewportScroller } from '@angular/common';
 
 @Component({
@@ -13,12 +13,12 @@ import { ViewportScroller } from '@angular/common';
   styleUrls: ['./all-products.component.css'],
 })
 export class AllProductsComponent implements OnInit, OnDestroy {
-  productList$: Observable<ProductModel[]> =
+  productList$: Observable<Ecommerce.ProductModel[]> =
     this.store.select(selectActiveProducts);
 
   pageSize: number = 25; //! Static value!
   totalProducts: number = 0;
-  pagesProducts: ProductModel[] | undefined;
+  pagesProducts: Ecommerce.ProductModel[] | undefined;
   productsSubscription!: Subscription;
 
   constructor(
@@ -44,9 +44,9 @@ export class AllProductsComponent implements OnInit, OnDestroy {
     });
   }
 
-  onClick(productId: string) {
+  onClick(productId: number) {
     this.scrollToTop();
-    this.router.navigate(['/product', productId]);
+    this.router.navigate(['/products', productId]);
   }
 
   onPageChange(event: any): void {

@@ -4,7 +4,7 @@ import { ProductsActions } from './actions';
 import { ProductService } from '../product.service';
 import { throwError } from 'rxjs';
 import { catchError, mergeMap, switchMap, map } from 'rxjs/operators';
-import { ProductModel } from 'src/app/shared/models/product.model';
+import { Ecommerce } from 'ckh-typings';
 
 @Injectable()
 export class ProductsEffects {
@@ -18,7 +18,7 @@ export class ProductsEffects {
       ofType(ProductsActions.loadAllProducts),
       mergeMap(() =>
         this.productsService.getAllProducts().pipe(
-          map((products: ProductModel[]) =>
+          map((products: Ecommerce.ProductModel[]) =>
             ProductsActions.loadAllProductsSuccess({
               products,
             })
