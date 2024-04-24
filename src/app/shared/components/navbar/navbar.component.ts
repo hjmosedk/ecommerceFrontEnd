@@ -14,7 +14,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   constructor(private router: Router, private cartService: CartService) {}
 
-  itemsInCart: number | undefined = undefined;
+  itemsInCart: number | undefined;
 
   cartLengthSubscription: Subscription | undefined;
 

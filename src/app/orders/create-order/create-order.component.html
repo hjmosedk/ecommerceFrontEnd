@@ -1,7 +1,12 @@
 <div>
   <mat-stepper [linear]="false" orientation="vertical" #stepper>
     <mat-step [stepControl]="personalInformationForm">
-      <form [formGroup]="personalInformationForm">
+      <ng-template matStepLabel>Personal Information</ng-template>
+      <app-personal-information
+        [personalInformation]="personalInformation"
+        (formValueChange)="onPersonalInformationFormValueChange($event)"
+      ></app-personal-information>
+      <!--  <form [formGroup]="personalInformationForm">
         <ng-template matStepLabel>Personal Information</ng-template>
         <mat-form-field>
           <mat-label>First Name</mat-label>
@@ -86,7 +91,7 @@
         >
           Next
         </button>
-      </form>
+      </form> -->
     </mat-step>
     <mat-step [stepControl]="shippingAddressInformationForm">
       <form [formGroup]="shippingAddressInformationForm">
@@ -155,16 +160,14 @@
     <mat-step [stepControl]="billingAddressInformationForm">
       <form [formGroup]="billingAddressInformationForm">
         <ng-template matStepLabel>Billing Address</ng-template>
-        <mat-form-field>
-          <div class="slider">
-            <mat-slide-toggle
-              formControlName="same"
-              (change)="onToggleChange($event)"
-            >
-              Same as shipping Address?</mat-slide-toggle
-            >
-          </div>
-        </mat-form-field>
+        <div class="slider">
+          <mat-slide-toggle
+            formControlName="same"
+            (change)="onToggleChange($event)"
+          >
+            Same as shipping Address?</mat-slide-toggle
+          >
+        </div>
         <mat-form-field>
           <mat-label>Address</mat-label>
           <input

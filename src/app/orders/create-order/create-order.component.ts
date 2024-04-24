@@ -13,6 +13,7 @@ import Dinero from 'dinero.js';
 import { OrdersService } from '../orders.service';
 import { OrderModel } from '../models/order.model';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-order',
@@ -29,7 +30,9 @@ export class CreateOrderComponent implements OnInit, OnDestroy {
   shippingAddress: AddressModel = new AddressModel();
   billingAddress: AddressModel = new AddressModel();
 
-  personalInformationForm = this.formBuilder.group({
+  personalInformationForm = this.formBuilder.group({});
+
+  /* personalInformationForm = this.formBuilder.group({
     firstName: [
       this.personalInformation.firstName || '',
       [Validators.required],
@@ -42,7 +45,7 @@ export class CreateOrderComponent implements OnInit, OnDestroy {
     phone: [this.personalInformation.phone || '', [Validators.required]],
     middleName: [this.personalInformation.middleName, []],
   });
-
+*/
   shippingAddressInformationForm = this.formBuilder.group({
     address: [this.shippingAddress.address || '', [Validators.required]],
     address2nd: [this.shippingAddress.address2nd, []],
@@ -75,7 +78,8 @@ export class CreateOrderComponent implements OnInit, OnDestroy {
   constructor(
     private formBuilder: FormBuilder,
     private cartService: CartService,
-    private orderService: OrdersService
+    private orderService: OrdersService,
+    private router: Router
   ) {}
 
   calculatePrice(price: number, currency: Ecommerce.CurrencyType) {
@@ -107,7 +111,7 @@ export class CreateOrderComponent implements OnInit, OnDestroy {
       .subscribe((cartContent) => {
         const newOrder = {
           customer: {
-            personalInformation: this.personalInformationForm.value,
+            personalInformation: this.personalInformation,
             shippingAddress: this.shippingAddressInformationForm.value,
             billingAddress: this.billingAddressInformationForm.value,
           },
@@ -115,9 +119,11 @@ export class CreateOrderComponent implements OnInit, OnDestroy {
           orderNotes: '',
           orderStatus: Ecommerce.OrderStatus.RECEIVED,
         } as OrderModel;
-        this.orderService.dispatchNewOrder(newOrder);
-        this.cartService.clearCart();
+        console.log(newOrder);
+        //this.orderService.dispatchNewOrder(newOrder);
+        //this.cartService.clearCart();
       });
+    this.router.navigate(['/']);
   }
 
   onToggleChange(event: MatSlideToggleChange) {
@@ -126,6 +132,14 @@ export class CreateOrderComponent implements OnInit, OnDestroy {
         this.shippingAddressInformationForm.value
       );
     }
+
+    if (!event.checked) {
+      this.billingAddressInformationForm.reset();
+    }
+  }
+
+  onPersonalInformationFormValueChange(value: PersonalInformationModel) {
+    this.personalInformation = value;
   }
 
   ngOnInit(): void {

@@ -32,6 +32,7 @@ import { MatBadgeModule } from '@angular/material/badge';
     ReactiveFormsModule,
     MatInputModule,
     MatSlideToggleModule,
+    MatBadgeModule,
   ],
   imports: [
     CommonModule,
