@@ -13,8 +13,7 @@ import { OrdersEffect } from './state/order.effects';
 //Material Modules
 import { MatStepperModule } from '@angular/material/stepper';
 import { PersonalInformationComponent } from './personal-information/personal-information.component';
-import { ShippingInformationComponent } from './shipping-information/shipping-information.component';
-import { BillingInformationComponent } from './billing-information/billing-information.component';
+import { AddressInformationComponent } from './address-information/address-information.component';
 
 @NgModule({
   declarations: [
@@ -22,8 +21,7 @@ import { BillingInformationComponent } from './billing-information/billing-infor
     CartItemCardComponent,
     CreateOrderComponent,
     PersonalInformationComponent,
-    ShippingInformationComponent,
-    BillingInformationComponent,
+    AddressInformationComponent,
   ],
   imports: [
     CommonModule,

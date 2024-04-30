@@ -1,6 +1,13 @@
-import { coerceNumberProperty } from '@angular/cdk/coercion';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
 import { PersonalInformationModel } from 'src/app/shared/models/customer.model';
 
 @Component({
@@ -8,10 +15,14 @@ import { PersonalInformationModel } from 'src/app/shared/models/customer.model';
   templateUrl: './personal-information.component.html',
   styleUrl: './personal-information.component.css',
 })
-export class PersonalInformationComponent implements OnInit {
+export class PersonalInformationComponent implements OnInit, OnDestroy {
+  constructor(private formBuilder: FormBuilder) {}
+
   @Input() personalInformation = new PersonalInformationModel();
 
   @Output() formValueChange = new EventEmitter<PersonalInformationModel>();
+
+  personalInformationSubscription: Subscription = new Subscription();
 
   personalInformationForm = this.formBuilder.group({
     firstName: [
@@ -27,18 +38,21 @@ export class PersonalInformationComponent implements OnInit {
     middleName: [this.personalInformation.middleName || '', []],
   });
 
-  constructor(private formBuilder: FormBuilder) {}
-
   ngOnInit(): void {
-    this.personalInformationForm.valueChanges.subscribe((value) => {
-      const newPersonalInformation: PersonalInformationModel = {
-        firstName: value.firstName || '',
-        lastName: value.lastName || '',
-        email: value.email || '',
-        phone: value.phone || '',
-        middleName: value.middleName || '',
-      };
-      this.formValueChange.emit(newPersonalInformation);
-    });
+    this.personalInformationSubscription =
+      this.personalInformationForm.valueChanges.subscribe((value) => {
+        const newPersonalInformation: PersonalInformationModel = {
+          firstName: value.firstName || '',
+          lastName: value.lastName || '',
+          email: value.email || '',
+          phone: value.phone || '',
+          middleName: value.middleName || '',
+        };
+        this.formValueChange.emit(newPersonalInformation);
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.personalInformationSubscription.unsubscribe();
   }
 }

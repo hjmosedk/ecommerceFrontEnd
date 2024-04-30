@@ -1,0 +1,88 @@
+<form [formGroup]="addressInformationForm" *ngIf="!isDisabled">
+  <mat-form-field>
+    <mat-label>Address</mat-label>
+    <input
+      matInput
+      placeholder="Home Street 1"
+      formControlName="address"
+      required
+      type="text"
+    />
+    <mat-hint>Enter Your Address</mat-hint>
+    <mat-error
+      *ngIf="addressInformationForm.controls['address'].errors?.['required']"
+      >You must enter a address</mat-error
+    >
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Address 2nd line</mat-label>
+    <input
+      matInput
+      placeholder="Lipton"
+      formControlName="address2nd"
+      type="text"
+    />
+    <mat-hint>Enter the 2nd line of your address</mat-hint>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>City</mat-label>
+    <input
+      matInput
+      placeholder="Amsterdam"
+      formControlName="city"
+      required
+      type="text"
+    />
+    <mat-hint>Enter your City</mat-hint>
+    <mat-error
+      *ngIf="addressInformationForm.controls['city'].errors?.['required']"
+      >A City must be</mat-error
+    >
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Zip Code</mat-label>
+    <input
+      matInput
+      placeholder="125587"
+      formControlName="zipCode"
+      required
+      type="text"
+    />
+    <mat-hint>Enter Your Zip Code</mat-hint>
+    <mat-error
+      *ngIf="addressInformationForm.controls['zipCode'].errors?.['required']"
+      >A Zip Code must be entered!</mat-error
+    >
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Country</mat-label>
+    <input
+      matInput
+      placeholder="Canada"
+      formControlName="country"
+      required
+      type="text"
+    />
+    <mat-hint>Enter Your Country</mat-hint>
+    <mat-error
+      *ngIf="addressInformationForm.controls['country'].errors?.['required']"
+      >A Phone Number Must Be Entered!</mat-error
+    >
+  </mat-form-field>
+  <br />
+  <button
+    mat-button
+    color="primary"
+    matStepperNext
+    [disabled]="!addressInformationForm.valid"
+  >
+    Next
+  </button>
+</form>
+<div *ngIf="isDisabled">
+  <p><strong>Address:</strong> {{ displayAddress.address }}</p>
+  <p><strong>Address 2nd line:</strong> {{ displayAddress.address2nd }}</p>
+  <p><strong>City:</strong> {{ displayAddress.city }}</p>
+  <p><strong>Zip Code:</strong> {{ displayAddress.zipCode }}</p>
+  <p><strong>Country:</strong> {{ displayAddress.country }}</p>
+</div>

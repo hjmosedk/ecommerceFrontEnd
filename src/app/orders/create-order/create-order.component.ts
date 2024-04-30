@@ -24,6 +24,8 @@ export class CreateOrderComponent implements OnInit, OnDestroy {
   cartContent: Observable<CartItemModel[]> | undefined = undefined;
   totalPriceSubscription!: Subscription;
   totalPrice: DineroModel = Dinero({ amount: 1, currency: 'DKK' });
+  disableDisplay: boolean = false;
+  displayAddress: AddressModel = new AddressModel();
 
   personalInformation: PersonalInformationModel =
     new PersonalInformationModel();
@@ -46,6 +48,9 @@ export class CreateOrderComponent implements OnInit, OnDestroy {
     middleName: [this.personalInformation.middleName, []],
   });
 */
+
+  shippingAddressInformationForm = this.formBuilder.group({});
+  /*
   shippingAddressInformationForm = this.formBuilder.group({
     address: [this.shippingAddress.address || '', [Validators.required]],
     address2nd: [this.shippingAddress.address2nd, []],
@@ -53,7 +58,13 @@ export class CreateOrderComponent implements OnInit, OnDestroy {
     zipCode: [this.shippingAddress.zipCode || '', [Validators.required]],
     country: [this.shippingAddress.country || '', [Validators.required]],
   });
+*/
 
+  billingAddressInformationForm = this.formBuilder.group({
+    same: [false],
+  });
+
+  /*
   billingAddressInformationForm = this.formBuilder.group({
     same: [false],
     address: [this.billingAddress.address || '', [Validators.required]],
@@ -62,6 +73,7 @@ export class CreateOrderComponent implements OnInit, OnDestroy {
     zipCode: [this.billingAddress.zipCode || '', [Validators.required]],
     country: [this.billingAddress.country || '', [Validators.required]],
   });
+  */
 
   orderItems = this.formBuilder.group({});
 
@@ -112,8 +124,8 @@ export class CreateOrderComponent implements OnInit, OnDestroy {
         const newOrder = {
           customer: {
             personalInformation: this.personalInformation,
-            shippingAddress: this.shippingAddressInformationForm.value,
-            billingAddress: this.billingAddressInformationForm.value,
+            shippingAddress: this.shippingAddress,
+            billingAddress: this.billingAddress,
           },
           orderItems: cartContent,
           orderNotes: '',
@@ -127,19 +139,21 @@ export class CreateOrderComponent implements OnInit, OnDestroy {
   }
 
   onToggleChange(event: MatSlideToggleChange) {
-    if (event.checked) {
-      this.billingAddressInformationForm.patchValue(
-        this.shippingAddressInformationForm.value
-      );
-    }
-
     if (!event.checked) {
-      this.billingAddressInformationForm.reset();
+      this.billingAddress = new AddressModel();
     }
   }
 
   onPersonalInformationFormValueChange(value: PersonalInformationModel) {
     this.personalInformation = value;
+  }
+
+  onShippingAddressInformationFormValueChange(value: AddressModel) {
+    this.shippingAddress = value;
+  }
+
+  onBillingAddressInformationFormValueChange(value: AddressModel) {
+    this.billingAddress = value;
   }
 
   ngOnInit(): void {
