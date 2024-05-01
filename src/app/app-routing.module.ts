@@ -14,8 +14,13 @@ const routes: Routes = [
         (m) => m.ProductsRoutingModule
       ),
   },
-  { path: 'cart', component: CartListComponent },
-  { path: 'order', component: CreateOrderComponent, canActivate: [cartGuard] },
+  {
+    path: 'cart',
+    loadChildren: () =>
+      import('./orders/orders-routing.module').then(
+        (m) => m.OrdersRoutingModule
+      ),
+  },
   { path: '**', component: AllProductsComponent },
 ];
 

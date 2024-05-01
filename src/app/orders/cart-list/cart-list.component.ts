@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CartService } from '../cart.service';
 import { Observable, Subscription } from 'rxjs';
 import { CartItemModel } from '../models/cartItem.model';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { MessageService } from 'src/app/message/message.service';
 import {
   DialogResult,
@@ -19,7 +19,8 @@ export class CartListComponent implements OnInit, OnDestroy {
   constructor(
     private cartService: CartService,
     private router: Router,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private route: ActivatedRoute
   ) {}
 
   test: any;
@@ -50,7 +51,7 @@ export class CartListComponent implements OnInit, OnDestroy {
   }
 
   onConfirm() {
-    this.router.navigate(['/order']);
+    this.router.navigate(['order'], { relativeTo: this.route });
   }
 
   ngOnInit(): void {

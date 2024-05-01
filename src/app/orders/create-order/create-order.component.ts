@@ -1,5 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ValidationErrors,
+  Validators,
+} from '@angular/forms';
 import {
   AddressModel,
   PersonalInformationModel,
@@ -13,7 +18,7 @@ import Dinero from 'dinero.js';
 import { OrdersService } from '../orders.service';
 import { OrderModel } from '../models/order.model';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-create-order',
@@ -21,6 +26,14 @@ import { Router } from '@angular/router';
   styleUrl: './create-order.component.css',
 })
 export class CreateOrderComponent implements OnInit, OnDestroy {
+  constructor(
+    private formBuilder: FormBuilder,
+    private cartService: CartService,
+    private orderService: OrdersService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
+
   cartContent: Observable<CartItemModel[]> | undefined = undefined;
   totalPriceSubscription!: Subscription;
   totalPrice: DineroModel = Dinero({ amount: 1, currency: 'DKK' });
@@ -32,67 +45,21 @@ export class CreateOrderComponent implements OnInit, OnDestroy {
   shippingAddress: AddressModel = new AddressModel();
   billingAddress: AddressModel = new AddressModel();
 
-  personalInformationForm = this.formBuilder.group({});
-
-  /* personalInformationForm = this.formBuilder.group({
-    firstName: [
-      this.personalInformation.firstName || '',
-      [Validators.required],
-    ],
-    lastName: [this.personalInformation.lastName || '', [Validators.required]],
-    email: [
-      this.personalInformation.email || '',
-      [Validators.required, Validators.email],
-    ],
-    phone: [this.personalInformation.phone || '', [Validators.required]],
-    middleName: [this.personalInformation.middleName, []],
-  });
-*/
-
-  shippingAddressInformationForm = this.formBuilder.group({});
-  /*
-  shippingAddressInformationForm = this.formBuilder.group({
-    address: [this.shippingAddress.address || '', [Validators.required]],
-    address2nd: [this.shippingAddress.address2nd, []],
-    city: [this.shippingAddress.city || '', [Validators.required]],
-    zipCode: [this.shippingAddress.zipCode || '', [Validators.required]],
-    country: [this.shippingAddress.country || '', [Validators.required]],
-  });
-*/
-
   billingAddressInformationForm = this.formBuilder.group({
     same: [false],
   });
-
-  /*
-  billingAddressInformationForm = this.formBuilder.group({
-    same: [false],
-    address: [this.billingAddress.address || '', [Validators.required]],
-    address2nd: [this.billingAddress.address2nd, []],
-    city: [this.billingAddress.city || '', [Validators.required]],
-    zipCode: [this.billingAddress.zipCode || '', [Validators.required]],
-    country: [this.billingAddress.country || '', [Validators.required]],
-  });
-  */
 
   orderItems = this.formBuilder.group({});
 
   newOrderForm = this.formBuilder.group({
     customer: this.formBuilder.group({
-      personalInformation: this.personalInformationForm ?? ' ',
-      shippingAddressInformation: this.shippingAddressInformationForm ?? '',
-      billingAddressInformation: this.billingAddressInformationForm ?? '',
+      personalInformation: [this.personalInformation ?? ' '],
+      shippingAddressInformation: [this.shippingAddress ?? ''],
+      billingAddressInformation: [this.billingAddress ?? ''],
     }),
     orderItems: this.orderItems,
     orderNotes: '',
   });
-
-  constructor(
-    private formBuilder: FormBuilder,
-    private cartService: CartService,
-    private orderService: OrdersService,
-    private router: Router
-  ) {}
 
   calculatePrice(price: number, currency: Ecommerce.CurrencyType) {
     return this.cartService.calculatePrice(price, currency);
@@ -128,14 +95,13 @@ export class CreateOrderComponent implements OnInit, OnDestroy {
             billingAddress: this.billingAddress,
           },
           orderItems: cartContent,
-          orderNotes: '',
+          orderNotes: this.newOrderForm.get('orderNotes')?.value,
           orderStatus: Ecommerce.OrderStatus.RECEIVED,
         } as OrderModel;
-        console.log(newOrder);
-        //this.orderService.dispatchNewOrder(newOrder);
-        //this.cartService.clearCart();
+        this.orderService.dispatchNewOrder(newOrder);
+        this.cartService.clearCart();
       });
-    this.router.navigate(['/']);
+    this.router.navigate(['completed'], { relativeTo: this.route });
   }
 
   onToggleChange(event: MatSlideToggleChange) {

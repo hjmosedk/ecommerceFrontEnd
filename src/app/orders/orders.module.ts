@@ -14,6 +14,7 @@ import { OrdersEffect } from './state/order.effects';
 import { MatStepperModule } from '@angular/material/stepper';
 import { PersonalInformationComponent } from './personal-information/personal-information.component';
 import { AddressInformationComponent } from './address-information/address-information.component';
+import { OrdersRoutingModule } from './orders-routing.module';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { AddressInformationComponent } from './address-information/address-infor
     CommonModule,
     SharedModule,
     MatStepperModule,
+    OrdersRoutingModule,
     EffectsModule.forFeature([OrdersEffect]),
     StoreModule.forFeature('cart', cartReducer),
     StoreModule.forFeature('order', orderReducer),
