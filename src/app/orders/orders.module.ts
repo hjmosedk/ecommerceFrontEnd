@@ -15,6 +15,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { PersonalInformationComponent } from './personal-information/personal-information.component';
 import { AddressInformationComponent } from './address-information/address-information.component';
 import { OrdersRoutingModule } from './orders-routing.module';
+import { CurrentOrderComponent } from './current-order/current-order.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { OrdersRoutingModule } from './orders-routing.module';
     CreateOrderComponent,
     PersonalInformationComponent,
     AddressInformationComponent,
+    CurrentOrderComponent,
   ],
   imports: [
     CommonModule,

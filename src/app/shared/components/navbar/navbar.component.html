@@ -18,14 +18,14 @@
     </a></span
   >
   <span *ngIf="itemsInCart">
-    <a mat-icon-button [routerLink]="['cart']" data-cy="cart">
+    <a mat-icon-button [routerLink]="['orders', 'cart']" data-cy="cart">
       <mat-icon [matBadge]="itemsInCart" matBadgeColor="warn"
         >shopping_cart</mat-icon
       >
     </a>
   </span>
   <span *ngIf="!itemsInCart">
-    <a mat-icon-button [routerLink]="['cart']" data-cy="cart">
+    <a mat-icon-button [routerLink]="['orders', 'cart']" data-cy="cart">
       <mat-icon>shopping_cart</mat-icon>
     </a>
   </span>

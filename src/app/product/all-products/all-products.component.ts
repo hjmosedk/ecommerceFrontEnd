@@ -46,7 +46,7 @@ export class AllProductsComponent implements OnInit, OnDestroy {
 
   onClick(productId: number) {
     this.scrollToTop();
-    this.router.navigate(['/products', productId]);
+    this.router.navigate(['products', productId]);
   }
 
   onPageChange(event: any): void {

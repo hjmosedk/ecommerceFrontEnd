@@ -1,6 +1,6 @@
 import { Ecommerce } from 'ckh-typings';
 
-export type OrderModel = Omit<
+export type newOrderModel = Omit<
   Ecommerce.OrderModel,
   'orderDate' | 'lastChange' | 'id'
 >;

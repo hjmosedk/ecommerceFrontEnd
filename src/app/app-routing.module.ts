@@ -1,9 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AllProductsComponent } from './product/all-products/all-products.component';
-import { CartListComponent } from './orders/cart-list/cart-list.component';
-import { CreateOrderComponent } from './orders/create-order/create-order.component';
-import { cartGuard } from './orders/cart.guard';
 
 const routes: Routes = [
   { path: '', component: AllProductsComponent },
@@ -15,7 +12,7 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'cart',
+    path: 'orders',
     loadChildren: () =>
       import('./orders/orders-routing.module').then(
         (m) => m.OrdersRoutingModule

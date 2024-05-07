@@ -6,5 +6,8 @@ export const orderReducer = createReducer(
   orderAdapter.getInitialState(),
   on(OrderActions.createOrderSuccess, (state, { createdOrder }) =>
     orderAdapter.upsertOne(createdOrder, state)
+  ),
+  on(OrderActions.getOrderSuccess, (state, { order }) =>
+    orderAdapter.upsertOne(order, state)
   )
 );

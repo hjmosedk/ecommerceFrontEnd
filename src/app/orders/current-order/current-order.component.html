@@ -1,0 +1,61 @@
+<div *ngIf="isCurrentOrderEmpty | async">
+  <button (click)="onClick()">
+    Click me for data - Only for testing - remove in production
+  </button>
+</div>
+<div class="mainContainer" *ngIf="currentOrder | async as orders">
+  <div *ngFor="let order of orders">
+    <div class="headline">
+      <h1>Thank you for your order!</h1>
+    </div>
+    <hr />
+    <div class="dataContainer">
+      <div>
+        <p><strong>OrderDate:</strong> {{ order.orderDate }}</p>
+      </div>
+      <div>
+        <p><strong>OrderNumber:</strong> {{ order.id }}</p>
+      </div>
+      <div>
+        <p><strong>Update:</strong> {{ order.lastChange }}</p>
+      </div>
+    </div>
+    <hr />
+    <div class="headline">
+      <h2>Order Content:</h2>
+    </div>
+    <div class="orderContainer">
+      <div class="orderLines">
+        <div *ngFor="let item of order.orderItems" class="orderItem">
+          <img
+            src="{{ baseUrl }}/images/{{ item.product.image }}"
+            width="75px"
+            height="75px"
+          />
+          <div class="productInfo">
+            <p>
+              <em>Item:</em>
+              {{ item.product.sku }}&nbsp;-&nbsp;{{ item.product.name }}
+            </p>
+            <p><em>Quantity:</em> {{ item.salesQuantity }}</p>
+            <p>
+              <em>Price:</em>
+              {{ calculatePrice(item.price) }}
+            </p>
+          </div>
+          <div class="priceInfo">
+            Total:
+            <strong>{{
+              calculateLinePrice(item.price, item.salesQuantity)
+            }}</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr />
+    <div class="priceContainer">
+      <h2>Total Price:</h2>
+      <div></div>
+    </div>
+  </div>
+</div>

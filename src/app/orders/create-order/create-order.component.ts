@@ -1,10 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  ValidationErrors,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import {
   AddressModel,
   PersonalInformationModel,
@@ -16,7 +11,7 @@ import { Observable, Subscription, take } from 'rxjs';
 import { Ecommerce } from 'ckh-typings';
 import Dinero from 'dinero.js';
 import { OrdersService } from '../orders.service';
-import { OrderModel } from '../models/order.model';
+import { newOrderModel } from '../models/order.model';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { Router, ActivatedRoute } from '@angular/router';
 
@@ -97,7 +92,7 @@ export class CreateOrderComponent implements OnInit, OnDestroy {
           orderItems: cartContent,
           orderNotes: this.newOrderForm.get('orderNotes')?.value,
           orderStatus: Ecommerce.OrderStatus.RECEIVED,
-        } as OrderModel;
+        } as newOrderModel;
         this.orderService.dispatchNewOrder(newOrder);
         this.cartService.clearCart();
       });

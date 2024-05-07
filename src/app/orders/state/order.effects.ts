@@ -22,4 +22,16 @@ export class OrdersEffect {
       })
     );
   });
+
+  getCurrentOrder = createEffect(() => {
+    return this.actions.pipe(
+      ofType(OrderActions.getOrder),
+      switchMap(({ orderId }) => {
+        return this.ordersService.getOrder(orderId).pipe(
+          map((order) => OrderActions.getOrderSuccess({ order })),
+          catchError((error) => throwError(() => error))
+        );
+      })
+    );
+  });
 }
