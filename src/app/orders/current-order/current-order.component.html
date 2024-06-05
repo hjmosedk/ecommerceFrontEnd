@@ -22,7 +22,7 @@
     </div>
     <hr />
     <div class="headline">
-      <h2>Order Content:</h2>
+      <h2>Order Content</h2>
     </div>
     <div class="orderContainer">
       <div class="orderLines">
@@ -34,13 +34,18 @@
           />
           <div class="productInfo">
             <p>
-              <em>Item:</em>
-              {{ item.product.sku }}&nbsp;-&nbsp;{{ item.product.name }}
+              <em>SKU:</em>
+              {{ item.product.sku }}
             </p>
+            <p>
+              <em>Item:</em>
+              {{ item.product.name }}
+            </p>
+
             <p><em>Quantity:</em> {{ item.salesQuantity }}</p>
             <p>
               <em>Price:</em>
-              {{ calculatePrice(item.price) }}
+              {{ calculatePrice(item.price, order.orderCurrency) }}
             </p>
           </div>
           <div class="priceInfo">
@@ -54,8 +59,115 @@
     </div>
     <hr />
     <div class="priceContainer">
-      <h2>Total Price:</h2>
-      <div></div>
+      <h2>Total Price</h2>
+      <div class="totalPrice">
+        <p>
+          {{ calculatePrice(order.orderTotalPrice, order.orderCurrency) }}
+        </p>
+      </div>
     </div>
+    <hr />
+    <div class="headline">
+      <h2>Customer Information</h2>
+    </div>
+    <div class="orderCustomerInformationContainer">
+      <div class="orderCustomerInformation">
+        <p>
+          <strong>Name:</strong>
+          {{ order.customer.personalInformation.firstName }}&nbsp;{{
+            order.customer.personalInformation.middleName
+          }}&nbsp;{{ order.customer.personalInformation.lastName }}
+        </p>
+        <p>
+          <strong>Email:</strong>
+          {{ order.customer.personalInformation.email }}
+        </p>
+        <p>
+          <strong>Phone:</strong>
+          {{ order.customer.personalInformation.phone }}
+        </p>
+      </div>
+    </div>
+    <hr />
+    <div>
+      <div class="shippingInformationContainer">
+        <div class="shippingAndBillingInformation">
+          <div class="shippingInformation">
+            <h2>Shipping Address</h2>
+            <p>
+              <strong>Address:</strong>
+              {{ order.customer.shippingAddress.address }}&nbsp;{{
+                order.customer.shippingAddress.address2nd
+              }}
+            </p>
+            <p>
+              <strong>ZipCode:</strong>
+              {{ order.customer.shippingAddress.zipCode }}
+            </p>
+            <p>
+              <strong>City:</strong>
+              {{ order.customer.shippingAddress.city }}
+            </p>
+            <p>
+              <strong>Country:</strong>
+              {{ order.customer.shippingAddress.country }}
+            </p>
+          </div>
+          <div
+            *ngIf="!order.customer.billingAddress"
+            class="shippingInformation"
+          >
+            <h2>Billing Address</h2>
+            <p>
+              <strong>Address:</strong>
+              {{ order.customer.shippingAddress.address }}&nbsp;{{
+                order.customer.shippingAddress.address2nd
+              }}
+            </p>
+            <p>
+              <strong>ZipCode:</strong>
+              {{ order.customer.shippingAddress.zipCode }}
+            </p>
+            <p>
+              <strong>City:</strong>
+              {{ order.customer.shippingAddress.city }}
+            </p>
+            <p>
+              <strong>Country:</strong>
+              {{ order.customer.shippingAddress.country }}
+            </p>
+          </div>
+          <div
+            *ngIf="order.customer.billingAddress"
+            class="shippingInformation"
+          >
+            <h2>Billing Address</h2>
+            <p>
+              <strong>Address:</strong>
+              {{ order.customer.billingAddress.address }}&nbsp;{{
+                order.customer.billingAddress.address2nd
+              }}
+            </p>
+            <p>
+              <strong>ZipCode:</strong>
+              {{ order.customer.billingAddress.zipCode }}
+            </p>
+            <p>
+              <strong>City:</strong>
+              {{ order.customer.billingAddress.city }}
+            </p>
+            <p>
+              <strong>Country:</strong>
+              {{ order.customer.billingAddress.country }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr />
+    <div class="headline">
+      <h2>Payment method</h2>
+    </div>
+    <div></div>
   </div>
 </div>

@@ -31,7 +31,7 @@ export class CreateOrderComponent implements OnInit, OnDestroy {
 
   cartContent: Observable<CartItemModel[]> | undefined = undefined;
   totalPriceSubscription!: Subscription;
-  totalPrice: DineroModel = Dinero({ amount: 1, currency: 'DKK' });
+  totalPrice: DineroModel = Dinero({ amount: 1, currency: 'DKK' }); //* This currency is only set to defined the object, it is being dynamically set by each product;
   disableDisplay: boolean = false;
   displayAddress: AddressModel = new AddressModel();
 
@@ -90,6 +90,7 @@ export class CreateOrderComponent implements OnInit, OnDestroy {
             billingAddress: this.billingAddress,
           },
           orderItems: cartContent,
+          orderCurrency: this.totalPrice.getCurrency(),
           orderNotes: this.newOrderForm.get('orderNotes')?.value,
           orderStatus: Ecommerce.OrderStatus.RECEIVED,
         } as newOrderModel;

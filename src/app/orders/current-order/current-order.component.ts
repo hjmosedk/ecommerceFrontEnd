@@ -21,8 +21,8 @@ export class CurrentOrderComponent implements OnInit {
   currentOrder: Observable<Ecommerce.OrderModel[]> | undefined;
   isCurrentOrderEmpty: Observable<boolean> | undefined;
 
-  calculatePrice(price: number) {
-    return this.cartService.calculatePrice(price, Ecommerce.CurrencyType.DKK);
+  calculatePrice(price: number, currency: Ecommerce.CurrencyType) {
+    return this.cartService.calculatePrice(price, currency);
   }
 
   calculateLinePrice(price: number, quantity: number) {
@@ -31,7 +31,7 @@ export class CurrentOrderComponent implements OnInit {
       currency: Ecommerce.CurrencyType.DKK,
     });
 
-    return itemPrice.toFormat();
+    return itemPrice.multiply(quantity).toFormat();
   }
 
   ngOnInit(): void {
