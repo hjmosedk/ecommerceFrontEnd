@@ -2,7 +2,7 @@ import { ErrorHandler, NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { GlobalErrorHandler } from './global-error-handler';
 
 //Internal Modules
@@ -16,25 +16,18 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 
-@NgModule({
-  declarations: [AppComponent],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    SharedModule,
-    HttpClientModule,
-    StoreModule.forRoot(),
-    EffectsModule.forRoot(),
-    StoreDevtoolsModule.instrument({
-      maxAge: 25,
-      logOnly: !isDevMode(),
-      connectInZone: true,
-    }),
-    ProductModule,
-    MessageModule,
-    OrdersModule,
-  ],
-  providers: [{ provide: ErrorHandler, useClass: GlobalErrorHandler }],
-  bootstrap: [AppComponent],
-})
+@NgModule({ declarations: [AppComponent],
+    bootstrap: [AppComponent], imports: [BrowserModule,
+        AppRoutingModule,
+        SharedModule,
+        StoreModule.forRoot(),
+        EffectsModule.forRoot(),
+        StoreDevtoolsModule.instrument({
+            maxAge: 25,
+            logOnly: !isDevMode(),
+            connectInZone: true,
+        }),
+        ProductModule,
+        MessageModule,
+        OrdersModule], providers: [{ provide: ErrorHandler, useClass: GlobalErrorHandler }, provideHttpClient(withInterceptorsFromDi())] })
 export class AppModule {}
