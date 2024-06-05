@@ -1,13 +1,16 @@
-<div *ngIf="isCurrentOrderEmpty | async">
-  <button (click)="onClick()">
-    Click me for data - Only for testing - remove in production
-  </button>
+@if (isCurrentOrderEmpty | async) {
+<div>
+  <h1>There is currently No Orders to show</h1>
 </div>
-<div class="mainContainer" *ngIf="currentOrder | async as orders">
-  <div *ngFor="let order of orders">
+} @if (currentOrder | async; as orders) {
+<div class="mainContainer">
+  @for (order of orders; track order) {
+  <div>
     <div class="headline">
       <h1>Thank you for your order!</h1>
     </div>
+    <hr />
+    <app-status-stepper [orderStatus]="testOrderStatus"></app-status-stepper>
     <hr />
     <div class="dataContainer">
       <div>
@@ -26,7 +29,8 @@
     </div>
     <div class="orderContainer">
       <div class="orderLines">
-        <div *ngFor="let item of order.orderItems" class="orderItem">
+        @for (item of order.orderItems; track item) {
+        <div class="orderItem">
           <img
             src="{{ baseUrl }}/images/{{ item.product.image }}"
             width="75px"
@@ -41,7 +45,6 @@
               <em>Item:</em>
               {{ item.product.name }}
             </p>
-
             <p><em>Quantity:</em> {{ item.salesQuantity }}</p>
             <p>
               <em>Price:</em>
@@ -55,6 +58,7 @@
             }}</strong>
           </div>
         </div>
+        }
       </div>
     </div>
     <hr />
@@ -113,10 +117,8 @@
               {{ order.customer.shippingAddress.country }}
             </p>
           </div>
-          <div
-            *ngIf="!order.customer.billingAddress"
-            class="shippingInformation"
-          >
+          @if (!order.customer.billingAddress) {
+          <div class="shippingInformation">
             <h2>Billing Address</h2>
             <p>
               <strong>Address:</strong>
@@ -137,10 +139,8 @@
               {{ order.customer.shippingAddress.country }}
             </p>
           </div>
-          <div
-            *ngIf="order.customer.billingAddress"
-            class="shippingInformation"
-          >
+          } @if (order.customer.billingAddress) {
+          <div class="shippingInformation">
             <h2>Billing Address</h2>
             <p>
               <strong>Address:</strong>
@@ -161,6 +161,7 @@
               {{ order.customer.billingAddress.country }}
             </p>
           </div>
+          }
         </div>
       </div>
     </div>
@@ -170,4 +171,6 @@
     </div>
     <div></div>
   </div>
+  }
 </div>
+}

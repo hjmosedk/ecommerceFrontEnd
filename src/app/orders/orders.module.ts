@@ -16,6 +16,7 @@ import { PersonalInformationComponent } from './personal-information/personal-in
 import { AddressInformationComponent } from './address-information/address-information.component';
 import { OrdersRoutingModule } from './orders-routing.module';
 import { CurrentOrderComponent } from './current-order/current-order.component';
+import { StatusStepperComponent } from './status-stepper/status-stepper.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { CurrentOrderComponent } from './current-order/current-order.component';
     PersonalInformationComponent,
     AddressInformationComponent,
     CurrentOrderComponent,
+    StatusStepperComponent,
   ],
   imports: [
     CommonModule,

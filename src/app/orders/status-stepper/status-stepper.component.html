@@ -1,0 +1,20 @@
+@if (orderStatus) {
+<div class="headline">
+  <h1>Order Status</h1>
+</div>
+<mat-horizontal-stepper
+  [linear]="true"
+  [selectedIndex]="getCurrentStep(orderStatus)"
+>
+  @for (label of stepperLabel; track label; let i = $index) {
+  <mat-step [editable]="false" completed="false">
+    <ng-template matStepLabel>
+      {{ label }}
+    </ng-template></mat-step
+  >
+  }
+  <ng-template matStepperIcon="number" let-index="index"
+    ><mat-icon>{{ stepperIcons[index] }}</mat-icon>
+  </ng-template>
+</mat-horizontal-stepper>
+}

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { OrdersService } from '../orders.service';
 import { Observable } from 'rxjs';
 import { Ecommerce } from 'ckh-typings';
@@ -20,6 +20,8 @@ export class CurrentOrderComponent implements OnInit {
   baseUrl = environment.baseUri;
   currentOrder: Observable<Ecommerce.OrderModel[]> | undefined;
   isCurrentOrderEmpty: Observable<boolean> | undefined;
+  testOrderStatus: Ecommerce.OrderStatus | undefined = undefined;
+  orderStatus: Ecommerce.OrderStatus[] = Object.values(Ecommerce.OrderStatus);
 
   calculatePrice(price: number, currency: Ecommerce.CurrencyType) {
     return this.cartService.calculatePrice(price, currency);
@@ -43,5 +45,9 @@ export class CurrentOrderComponent implements OnInit {
 
   onClick() {
     this.orderService.setCurrentOrder(11);
+  }
+
+  setOrderStatus(orderStatus: Ecommerce.OrderStatus) {
+    this.testOrderStatus = orderStatus;
   }
 }
