@@ -1,27 +1,33 @@
 <div class="mainContainer">
-  <div *ngIf="!cartLength">
-    <h1>You do not have anything in your cart</h1>
+  @if (!cartLength) {
     <div>
-      <button mat-raised-button color="primary" (click)="goBack()">
-        Go Back?
-      </button>
-    </div>
-  </div>
-  <div *ngIf="cartLength">
-    <div *ngFor="let cartItem of cartContent | async">
-      <app-cart-item-card [cartItem]="cartItem"></app-cart-item-card>
-    </div>
-    <div class="button-container">
+      <h1>You do not have anything in your cart</h1>
       <div>
-        <button mat-raised-button color="warn" (click)="onCancel()">
-          Cancel
-        </button>
-      </div>
-      <div>
-        <button mat-raised-button color="primary" (click)="onConfirm()">
-          Confirm Items
+        <button mat-raised-button color="primary" (click)="goBack()">
+          Go Back?
         </button>
       </div>
     </div>
-  </div>
+  }
+  @if (cartLength) {
+    <div>
+      @for (cartItem of cartContent | async; track cartItem) {
+        <div>
+          <app-cart-item-card [cartItem]="cartItem"></app-cart-item-card>
+        </div>
+      }
+      <div class="button-container">
+        <div>
+          <button mat-raised-button color="warn" (click)="onCancel()">
+            Cancel
+          </button>
+        </div>
+        <div>
+          <button mat-raised-button color="primary" (click)="onConfirm()">
+            Confirm Items
+          </button>
+        </div>
+      </div>
+    </div>
+  }
 </div>

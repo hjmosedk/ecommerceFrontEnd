@@ -1,7 +1,7 @@
 <div class="table-container">
   <table mat-table [dataSource]="productList$" class="mat-elevation-z8">
     <!--
-        Sku colum
+    Sku colum
     -->
     <ng-container matColumnDef="sku">
       <th mat-header-cell *matHeaderCellDef>SKU</th>
@@ -9,13 +9,13 @@
         mat-cell
         *matCellDef="let element; let odd = odd"
         [ngClass]="{ striped: odd }"
-      >
+        >
         {{ element.sku }}
       </td>
     </ng-container>
 
     <!--
-        Name colum
+    Name colum
     -->
 
     <ng-container matColumnDef="name">
@@ -25,13 +25,13 @@
         *matCellDef="let element; let odd = odd"
         [ngClass]="{ striped: odd }"
         data-cy="productName"
-      >
+        >
         {{ element.name }}
       </td>
     </ng-container>
 
     <!--
-        Description colum
+    Description colum
     -->
 
     <ng-container matColumnDef="description">
@@ -40,13 +40,13 @@
         mat-cell
         *matCellDef="let element; let odd = odd"
         [ngClass]="{ striped: odd }"
-      >
+        >
         {{ element.description }}
       </td>
     </ng-container>
 
     <!--
-        Brand colum
+    Brand colum
     -->
 
     <ng-container matColumnDef="category">
@@ -55,13 +55,13 @@
         mat-cell
         *matCellDef="let element; let odd = odd"
         [ngClass]="{ striped: odd }"
-      >
+        >
         {{ element.category }}
       </td>
     </ng-container>
 
     <!--
-        Price colum
+    Price colum
     -->
 
     <ng-container matColumnDef="price">
@@ -70,13 +70,13 @@
         mat-cell
         *matCellDef="let element; let odd = odd"
         [ngClass]="{ striped: odd }"
-      >
+        >
         {{ calculatePrice(element.price, element.currency) }}
       </td>
     </ng-container>
 
     <!--
-        Quantity colum
+    Quantity colum
     -->
 
     <ng-container matColumnDef="quantity">
@@ -85,13 +85,13 @@
         mat-cell
         *matCellDef="let element; let odd = odd"
         [ngClass]="{ striped: odd }"
-      >
+        >
         {{ element.quantity }}
       </td>
     </ng-container>
 
     <!--
-        Percentage colum
+    Percentage colum
     -->
 
     <ng-container matColumnDef="percentage">
@@ -100,13 +100,13 @@
         mat-cell
         *matCellDef="let element; let odd = odd"
         [ngClass]="{ striped: odd }"
-      >
+        >
         {{ element.percentage }} %
       </td>
     </ng-container>
 
     <!--
-        onSale colum
+    onSale colum
     -->
 
     <ng-container matColumnDef="onSale">
@@ -115,18 +115,22 @@
         mat-cell
         *matCellDef="let element; let odd = odd"
         [ngClass]="{ striped: odd }"
-      >
-        <div *ngIf="element.onSale">
-          <mat-icon>check-circle</mat-icon>
-        </div>
-        <div *ngIf="!element.onSale">
-          <mat-icon>radio_button_unchecked</mat-icon>
-        </div>
+        >
+        @if (element.onSale) {
+          <div>
+            <mat-icon>check-circle</mat-icon>
+          </div>
+        }
+        @if (!element.onSale) {
+          <div>
+            <mat-icon>radio_button_unchecked</mat-icon>
+          </div>
+        }
       </td>
     </ng-container>
 
     <!--
-        Picture colum
+    Picture colum
     -->
 
     <ng-container matColumnDef="image">
@@ -135,17 +139,17 @@
         mat-cell
         *matCellDef="let element; let odd = odd"
         [ngClass]="{ striped: odd }"
-      >
+        >
         <img
           src="{{ baseUrl }}/images/{{ element.image }}"
           width="50px"
           height="50px"
-        />
+          />
       </td>
     </ng-container>
 
     <!--
-        Edit Button
+    Edit Button
     -->
 
     <ng-container matColumnDef="edit">
@@ -154,20 +158,20 @@
         mat-cell
         *matCellDef="let element; let odd = odd"
         [ngClass]="{ striped: odd }"
-      >
+        >
         <button
           mat-raised-button
           color="accent"
           (click)="onEdit(element.id)"
           data-cy="editProduct"
-        >
+          >
           Edit
         </button>
       </td>
     </ng-container>
 
     <!--
-        Set Inactive Button
+    Set Inactive Button
     -->
 
     <ng-container matColumnDef="inactive">
@@ -176,25 +180,27 @@
         mat-cell
         *matCellDef="let element; let odd = odd"
         [ngClass]="{ striped: odd }"
-      >
-        <button
-          *ngIf="element.isPublic"
-          mat-raised-button
-          color="warn"
-          data-cy="setPrivate"
-          (click)="onActiveInactive(element.id)"
         >
-          Set Private
-        </button>
-        <button
-          *ngIf="!element.isPublic"
-          mat-raised-button
-          color="primary"
-          data-cy="setPublic"
-          (click)="onActiveInactive(element.id)"
-        >
-          Set Public
-        </button>
+        @if (element.isPublic) {
+          <button
+            mat-raised-button
+            color="warn"
+            data-cy="setPrivate"
+            (click)="onActiveInactive(element.id)"
+            >
+            Set Private
+          </button>
+        }
+        @if (!element.isPublic) {
+          <button
+            mat-raised-button
+            color="primary"
+            data-cy="setPublic"
+            (click)="onActiveInactive(element.id)"
+            >
+            Set Public
+          </button>
+        }
       </td>
     </ng-container>
 

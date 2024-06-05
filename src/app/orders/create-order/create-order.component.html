@@ -4,7 +4,7 @@
       [stepControl]="
         newOrderForm.controls.customer.controls['personalInformation']
       "
-    >
+      >
       <ng-template matStepLabel>Personal Information</ng-template>
       <app-personal-information
         [personalInformation]="personalInformation"
@@ -15,7 +15,7 @@
       [stepControl]="
         newOrderForm.controls.customer.controls['shippingAddressInformation']
       "
-    >
+      >
       <ng-template matStepLabel>Shipping Address</ng-template>
       <app-address-information
         [addressInformation]="shippingAddress"
@@ -27,85 +27,87 @@
       [stepControl]="
         newOrderForm.controls.customer.controls['billingAddressInformation']
       "
-    >
+      >
       <ng-template matStepLabel>Billing Address</ng-template>
       <form [formGroup]="billingAddressInformationForm">
         <div class="slider">
           <mat-slide-toggle
             formControlName="same"
             (change)="onToggleChange($event)"
-          >
+            >
             Same as shipping Address?</mat-slide-toggle
-          >
-        </div>
-        <app-address-information
-          [addressInformation]="billingAddress"
+            >
+          </div>
+          <app-address-information
+            [addressInformation]="billingAddress"
           [isDisabled]="
             billingAddressInformationForm.get('same')?.value || false
           "
-          [displayAddress]="shippingAddress"
-          (formValueChange)="onBillingAddressInformationFormValueChange($event)"
-        ></app-address-information>
-      </form>
-    </mat-step>
-    <mat-step [stepControl]="newOrderForm.controls['orderNotes']">
-      <form [formGroup]="newOrderForm">
-        <ng-template matStepLabel>Order Notes</ng-template>
-        <mat-form-field>
-          <mat-label>Order Notes</mat-label>
-          <input
-            matInput
-            placeholder=""
-            formControlName="orderNotes"
-            type="text"
-          />
-          <mat-hint>Enter Any Notes to the order</mat-hint>
-        </mat-form-field>
-        <br />
-        <button mat-button color="warn" matStepperPrevious>Back</button>
-        <button mat-button color="primary" matStepperNext>Next</button>
-      </form>
-    </mat-step>
-    <mat-step [stepControl]="newOrderForm.controls['orderItems']">
-      <form [formGroup]="newOrderForm">
-        <ng-template matStepLabel>Confirm Order</ng-template>
-        <h1>Order Items</h1>
-        <table>
-          <tr>
-            <th>SKU</th>
-            <th>Name</th>
-            <th>Quantity</th>
-            <th>Price pr. item</th>
-            <th>Total Price</th>
-          </tr>
-          <tr *ngFor="let item of cartContent | async">
-            <td>{{ item.sku }}</td>
-            <td>{{ item.name }}</td>
-            <td>{{ item.salesQuantity }}</td>
-            <td>{{ calculatePrice(item.price, item.currency) }}</td>
-            <td>{{ calculateLinePrice(item, item.salesQuantity) }}</td>
-          </tr>
-          <tr>
-            <td class="bold">SUBTOTAL</td>
-            <td colspan="3">Price Without Tax</td>
-            <td>{{ calculateSubTotal().toFormat() }}</td>
-          </tr>
-          <tr>
-            <td class="additions" colspan="4">VAT</td>
-            <td class="additions">
-              {{ calculateTaxRate(totalPrice).toFormat() }}
-            </td>
-          </tr>
-          <tr>
-            <td class="bold total" colspan="4">TOTAL</td>
-            <td class="totalPrice total">{{ totalPrice.toFormat() }}</td>
-          </tr>
-        </table>
-        <button mat-button color="warn" matStepperPrevious>Back</button>
-        <button mat-button color="primary" matStepperNext (click)="onSubmit()">
-          Confirm
-        </button>
-      </form>
-    </mat-step>
-  </mat-stepper>
-</div>
+            [displayAddress]="shippingAddress"
+            (formValueChange)="onBillingAddressInformationFormValueChange($event)"
+          ></app-address-information>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="newOrderForm.controls['orderNotes']">
+        <form [formGroup]="newOrderForm">
+          <ng-template matStepLabel>Order Notes</ng-template>
+          <mat-form-field>
+            <mat-label>Order Notes</mat-label>
+            <input
+              matInput
+              placeholder=""
+              formControlName="orderNotes"
+              type="text"
+              />
+            <mat-hint>Enter Any Notes to the order</mat-hint>
+          </mat-form-field>
+          <br />
+          <button mat-button color="warn" matStepperPrevious>Back</button>
+          <button mat-button color="primary" matStepperNext>Next</button>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="newOrderForm.controls['orderItems']">
+        <form [formGroup]="newOrderForm">
+          <ng-template matStepLabel>Confirm Order</ng-template>
+          <h1>Order Items</h1>
+          <table>
+            <tr>
+              <th>SKU</th>
+              <th>Name</th>
+              <th>Quantity</th>
+              <th>Price pr. item</th>
+              <th>Total Price</th>
+            </tr>
+            @for (item of cartContent | async; track item) {
+              <tr>
+                <td>{{ item.sku }}</td>
+                <td>{{ item.name }}</td>
+                <td>{{ item.salesQuantity }}</td>
+                <td>{{ calculatePrice(item.price, item.currency) }}</td>
+                <td>{{ calculateLinePrice(item, item.salesQuantity) }}</td>
+              </tr>
+            }
+            <tr>
+              <td class="bold">SUBTOTAL</td>
+              <td colspan="3">Price Without Tax</td>
+              <td>{{ calculateSubTotal().toFormat() }}</td>
+            </tr>
+            <tr>
+              <td class="additions" colspan="4">VAT</td>
+              <td class="additions">
+                {{ calculateTaxRate(totalPrice).toFormat() }}
+              </td>
+            </tr>
+            <tr>
+              <td class="bold total" colspan="4">TOTAL</td>
+              <td class="totalPrice total">{{ totalPrice.toFormat() }}</td>
+            </tr>
+          </table>
+          <button mat-button color="warn" matStepperPrevious>Back</button>
+          <button mat-button color="primary" matStepperNext (click)="onSubmit()">
+            Confirm
+          </button>
+        </form>
+      </mat-step>
+    </mat-stepper>
+  </div>

@@ -10,12 +10,9 @@
     src="{{ baseUrl }}/images/{{ product.image }}"
     width="150px"
     height="150px"
-  />
+    />
   <mat-card-content>
-    <div
-      *ngIf="product.onSale; then onSaleTemplate; else defaultTemplate"
-    ></div>
-    <ng-template #onSaleTemplate>
+    @if (product.onSale) {
       <div class="on-sale" data-cy="on-sale">
         <div class="price">
           <span class="currency">{{
@@ -23,14 +20,13 @@
           }}</span>
         </div>
       </div>
-    </ng-template>
-    <ng-template #defaultTemplate>
+    } @else {
       <div class="price" data-cy="price">
         <span class="currency">{{
           calculatePrice(product.price, product.currency)
         }}</span>
       </div>
-    </ng-template>
+    }
     <p class="description trimDescription">{{ product.description }}</p>
   </mat-card-content>
   <mat-card-actions>
@@ -38,16 +34,17 @@
       mat-raised-button
       color="primary"
       (click)="addToCart($event, product)"
-    >
+      >
       Add to Cart
     </button>
-    <button
-      *ngIf="product.onSale"
-      mat-raised-button
-      color="accent"
-      class="on-sale"
-    >
-      SAVE {{ product.percentage }} %
-    </button>
+    @if (product.onSale) {
+      <button
+        mat-raised-button
+        color="accent"
+        class="on-sale"
+        >
+        SAVE {{ product.percentage }} %
+      </button>
+    }
   </mat-card-actions>
 </mat-card>

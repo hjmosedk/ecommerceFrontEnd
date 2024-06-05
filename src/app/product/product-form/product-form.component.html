@@ -5,7 +5,7 @@
     enctype="multipart/form-data"
     method="post"
     (ngSubmit)="onSubmit()"
-  >
+    >
     <mat-form-field class="inputField">
       <mat-label for="name">Name</mat-label>
       <input
@@ -15,146 +15,165 @@
         id="name"
         required
         data-cy="productName"
-      />
+        />
       <mat-hint>Give the new product a name</mat-hint>
-      <mat-error *ngIf="formData['name'].errors?.['required']"
-        >A Product must have a name</mat-error
-      >
-    </mat-form-field>
-    <br />
-    <mat-form-field *ngIf="skuIsActive" class="inputField">
-      <mat-label>SKU</mat-label>
-      <input
-        type="text"
-        matInput
-        formControlName="sku"
-        required
-        data-cy="productSku"
-      />
-      <mat-hint>Give the new product a SKU</mat-hint>
-      <mat-error *ngIf="formData['sku'].errors?.['required']"
-        >A Product must have a SKU(Item number)</mat-error
-      >
-    </mat-form-field>
-    <br />
-    <mat-form-field class="inputField">
-      <mat-label>Description</mat-label>
-      <textarea
-        matInput
-        formControlName="description"
-        rows="4"
-        cols="12"
-        data-cy="productDescription"
-      ></textarea>
-      <mat-hint>Give the new product a description</mat-hint>
-      <mat-error *ngIf="formData['description'].errors?.['required']"
-        >A Product must have a description</mat-error
-      >
-    </mat-form-field>
-    <br />
-    <app-file-upload
-      [baseUri]="baseUri"
-      (imageMetaData)="getImageMetaData($event)"
-    ></app-file-upload>
-    <mat-card *ngIf="imageId">
-      <img mat-card-lg-image src="{{ imageString }}" />
-    </mat-card>
-    <br />
-    <mat-form-field class="inputField">
-      <mat-label>Category</mat-label>
-      <input
-        type="text"
-        matInput
-        formControlName="category"
-        data-cy="productCategory"
-      />
-      <mat-hint>Please describe the category</mat-hint>
-      <mat-error *ngIf="formData['category'].errors?.['required']"
-        >A Product must have a Category</mat-error
-      >
-    </mat-form-field>
-    <br />
-    <mat-form-field class="inputField">
-      <mat-label>Price</mat-label>
-      <input
-        type="number"
-        matInput
-        formControlName="price"
-        required
-        data-cy="productPrice"
-      />
-      <mat-hint
-        >Give the new product a price, must be in lowest coinage e.g. cent for
-        USD, EUR or øre for DKK, and pence for GBP</mat-hint
-      >
-      <mat-error *ngIf="formData['price'].errors?.['required']"
-        >A Product must have a price</mat-error
-      >
-      <mat-error *ngIf="formData['price'].errors?.['min']"
-        >The price must be at least 1 DKK, USD, GBP or EUR (100)</mat-error
-      >
-    </mat-form-field>
-    <br />
-    <mat-form-field class="inputField">
-      <mat-label>Currency</mat-label>
-      <mat-select
-        type="text"
-        matInput
-        formControlName="currency"
-        required
-        data-cy="productCurrency"
-      >
-        <mat-option
-          *ngFor="let currency of acceptableCurrencies"
-          [value]="currency"
-          >{{ currency }}</mat-option
-        >
-      </mat-select>
-      <mat-hint>Give the new product a currency</mat-hint>
-    </mat-form-field>
-    <mat-form-field class="inputField">
-      <mat-label>Quantity</mat-label>
-      <input
-        type="number"
-        matInput
-        formControlName="quantity"
-        required
-        data-cy="productQuantity"
-      />
-      <mat-hint>Input the quantity of the product</mat-hint>
-      <mat-error *ngIf="formData['quantity'].errors?.['required']"
-        >You cannot create a product with no quantity></mat-error
-      >
-    </mat-form-field>
-    <br />
-    <mat-form-field class="inputField">
-      <mat-label>Sales Percentage</mat-label>
-      <input
-        type="number"
-        matInput
-        formControlName="percentage"
-        data-cy="productPercentage"
-      />
-      <mat-hint>Please input the percentage the product is on sale</mat-hint>
-    </mat-form-field>
-    <br />
-    <br />
-    <br />
-    <div class="slider">
-      <mat-slide-toggle formControlName="onSale" data-cy="productOnSale">
-        On sale?</mat-slide-toggle
-      >
-    </div>
-    <br />
-    <p>Complete the form to enable the button</p>
-    <button
-      type="submit"
-      mat-button
-      color="primary"
-      data-cy="submit"
-      [disabled]="!productDataForm.valid"
-    >
-      Submit
-    </button>
-  </form>
-</div>
+      @if (formData['name'].errors?.['required']) {
+        <mat-error
+          >A Product must have a name</mat-error
+          >
+        }
+      </mat-form-field>
+      <br />
+      @if (skuIsActive) {
+        <mat-form-field class="inputField">
+          <mat-label>SKU</mat-label>
+          <input
+            type="text"
+            matInput
+            formControlName="sku"
+            required
+            data-cy="productSku"
+            />
+          <mat-hint>Give the new product a SKU</mat-hint>
+          @if (formData['sku'].errors?.['required']) {
+            <mat-error
+              >A Product must have a SKU(Item number)</mat-error
+              >
+            }
+          </mat-form-field>
+        }
+        <br />
+        <mat-form-field class="inputField">
+          <mat-label>Description</mat-label>
+          <textarea
+            matInput
+            formControlName="description"
+            rows="4"
+            cols="12"
+            data-cy="productDescription"
+          ></textarea>
+          <mat-hint>Give the new product a description</mat-hint>
+          @if (formData['description'].errors?.['required']) {
+            <mat-error
+              >A Product must have a description</mat-error
+              >
+            }
+          </mat-form-field>
+          <br />
+          <app-file-upload
+            [baseUri]="baseUri"
+            (imageMetaData)="getImageMetaData($event)"
+          ></app-file-upload>
+          @if (imageId) {
+            <mat-card>
+              <img mat-card-lg-image src="{{ imageString }}" />
+            </mat-card>
+          }
+          <br />
+          <mat-form-field class="inputField">
+            <mat-label>Category</mat-label>
+            <input
+              type="text"
+              matInput
+              formControlName="category"
+              data-cy="productCategory"
+              />
+            <mat-hint>Please describe the category</mat-hint>
+            @if (formData['category'].errors?.['required']) {
+              <mat-error
+                >A Product must have a Category</mat-error
+                >
+              }
+            </mat-form-field>
+            <br />
+            <mat-form-field class="inputField">
+              <mat-label>Price</mat-label>
+              <input
+                type="number"
+                matInput
+                formControlName="price"
+                required
+                data-cy="productPrice"
+                />
+              <mat-hint
+                >Give the new product a price, must be in lowest coinage e.g. cent for
+                USD, EUR or øre for DKK, and pence for GBP</mat-hint
+                >
+                @if (formData['price'].errors?.['required']) {
+                  <mat-error
+                    >A Product must have a price</mat-error
+                    >
+                  }
+                  @if (formData['price'].errors?.['min']) {
+                    <mat-error
+                      >The price must be at least 1 DKK, USD, GBP or EUR (100)</mat-error
+                      >
+                    }
+                  </mat-form-field>
+                  <br />
+                  <mat-form-field class="inputField">
+                    <mat-label>Currency</mat-label>
+                    <mat-select
+                      type="text"
+                      matInput
+                      formControlName="currency"
+                      required
+                      data-cy="productCurrency"
+                      >
+                      @for (currency of acceptableCurrencies; track currency) {
+                        <mat-option
+                          [value]="currency"
+                          >{{ currency }}</mat-option
+                          >
+                        }
+                      </mat-select>
+                      <mat-hint>Give the new product a currency</mat-hint>
+                    </mat-form-field>
+                    <mat-form-field class="inputField">
+                      <mat-label>Quantity</mat-label>
+                      <input
+                        type="number"
+                        matInput
+                        formControlName="quantity"
+                        required
+                        data-cy="productQuantity"
+                        />
+                      <mat-hint>Input the quantity of the product</mat-hint>
+                      @if (formData['quantity'].errors?.['required']) {
+                        <mat-error
+                          >You cannot create a product with no quantity></mat-error
+                          >
+                        }
+                      </mat-form-field>
+                      <br />
+                      <mat-form-field class="inputField">
+                        <mat-label>Sales Percentage</mat-label>
+                        <input
+                          type="number"
+                          matInput
+                          formControlName="percentage"
+                          data-cy="productPercentage"
+                          />
+                        <mat-hint>Please input the percentage the product is on sale</mat-hint>
+                      </mat-form-field>
+                      <br />
+                      <br />
+                      <br />
+                      <div class="slider">
+                        <mat-slide-toggle formControlName="onSale" data-cy="productOnSale">
+                          On sale?</mat-slide-toggle
+                          >
+                        </div>
+                        <br />
+                        <p>Complete the form to enable the button</p>
+                        <button
+                          type="submit"
+                          mat-button
+                          color="primary"
+                          data-cy="submit"
+                          [disabled]="!productDataForm.valid"
+                          >
+                          Submit
+                        </button>
+                      </form>
+                    </div>

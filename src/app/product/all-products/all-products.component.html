@@ -3,7 +3,9 @@
 <!-- * END RAINBOW BABY DRAGON SPLITTER BAR-->
 <!-- TODO FOR TESTING-->
 
-<div *ngIf="!productList$">Loading...</div>
+@if (!productList$) {
+  <div>Loading...</div>
+}
 <div class="mainContainer">
   <mat-paginator
     [length]="totalProducts"
@@ -11,14 +13,15 @@
     [pageSizeOptions]="[5, 10, 25]"
     aria-label="Select Page"
     (page)="onPageChange($event)"
-  >
+    >
   </mat-paginator>
   <div class="product-list">
-    <app-product-card
-      *ngFor="let product of pagesProducts; index as i"
-      [product]="product"
-      (click)="onClick(product.id)"
-    ></app-product-card>
+    @for (product of pagesProducts; track product; let i = $index) {
+      <app-product-card
+        [product]="product"
+        (click)="onClick(product.id)"
+      ></app-product-card>
+    }
   </div>
 
   <!--
@@ -28,7 +31,7 @@
       gutterSize="16px"
       rowHeight="400px"
       class="gridContainer"
-    >
+      >
       <mat-grid-tile *ngFor="let product of pagesProducts; index as i">
         <app-product-card
           [product]="product"

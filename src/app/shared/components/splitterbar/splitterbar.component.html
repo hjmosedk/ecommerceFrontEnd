@@ -1,7 +1,9 @@
 <mat-toolbar color="secondary">
-  <span class="spacer-small" *ngFor="let category of categories">
-    <button mat-button>
-      {{ category }}
-    </button>
-  </span>
+  @for (category of categories; track category) {
+    <span class="spacer-small">
+      <button mat-button>
+        {{ category }}
+      </button>
+    </span>
+  }
 </mat-toolbar>

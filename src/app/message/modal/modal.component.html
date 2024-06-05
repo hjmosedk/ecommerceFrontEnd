@@ -1,62 +1,70 @@
 <div>
-  <div *ngIf="data.type === messageType.success" class="success">
-    <h1 mat-dialog-title>{{ data.title }}</h1>
-    <mat-dialog-content class="mat-typography"
-      >{{ data.messageText }}
-    </mat-dialog-content>
-    <mat-dialog-actions align="center">
-      <button
-        mat-raised-button
-        color="primary"
-        (click)="onClose()"
-        data-cy="modalButton"
-      >
-        Close
-      </button>
-    </mat-dialog-actions>
-  </div>
-  <div *ngIf="data.type === messageType.error" class="error">
-    <h1 mat-dialog-title>{{ data.title }}</h1>
-    <mat-dialog-content class="mat-typography">
-      The error have the following message: <br />{{ data.messageText }}
-    </mat-dialog-content>
-    <mat-dialog-actions align="center">
-      <button
-        mat-raised-button
-        mat-dialog-close
-        color="warn"
-        (click)="onClose()"
-        data-cy="modalButton"
-      >
-        Close
-      </button>
-    </mat-dialog-actions>
-  </div>
-  <div *ngIf="data.type === messageType.warning" class="warning">
-    <h1 mat-dialog-title>{{ data.title }}</h1>
-    <mat-dialog-content class="mat-typography">
-      {{ data.messageText }}
-    </mat-dialog-content>
-    <mat-dialog-actions align="center">
-      <button
-        mat-raised-button
-        mat-dialog-close
-        color="primary"
-        (click)="onClose()"
-        data-cy="modalButton"
-      >
-        Cancel
-      </button>
-      <button
-        mat-raised-button
-        mat-dialog-close
-        color="warn"
-        (click)="onAccept()"
-        data-cy="modalButton"
-      >
-        Ok
-      </button>
-    </mat-dialog-actions>
-    <div *ngIf="data.type === null" hidden></div>
-  </div>
+  @if (data.type === messageType.success) {
+    <div class="success">
+      <h1 mat-dialog-title>{{ data.title }}</h1>
+      <mat-dialog-content class="mat-typography"
+        >{{ data.messageText }}
+      </mat-dialog-content>
+      <mat-dialog-actions align="center">
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="onClose()"
+          data-cy="modalButton"
+          >
+          Close
+        </button>
+      </mat-dialog-actions>
+    </div>
+  }
+  @if (data.type === messageType.error) {
+    <div class="error">
+      <h1 mat-dialog-title>{{ data.title }}</h1>
+      <mat-dialog-content class="mat-typography">
+        The error have the following message: <br />{{ data.messageText }}
+      </mat-dialog-content>
+      <mat-dialog-actions align="center">
+        <button
+          mat-raised-button
+          mat-dialog-close
+          color="warn"
+          (click)="onClose()"
+          data-cy="modalButton"
+          >
+          Close
+        </button>
+      </mat-dialog-actions>
+    </div>
+  }
+  @if (data.type === messageType.warning) {
+    <div class="warning">
+      <h1 mat-dialog-title>{{ data.title }}</h1>
+      <mat-dialog-content class="mat-typography">
+        {{ data.messageText }}
+      </mat-dialog-content>
+      <mat-dialog-actions align="center">
+        <button
+          mat-raised-button
+          mat-dialog-close
+          color="primary"
+          (click)="onClose()"
+          data-cy="modalButton"
+          >
+          Cancel
+        </button>
+        <button
+          mat-raised-button
+          mat-dialog-close
+          color="warn"
+          (click)="onAccept()"
+          data-cy="modalButton"
+          >
+          Ok
+        </button>
+      </mat-dialog-actions>
+      @if (data.type === null) {
+        <div hidden></div>
+      }
+    </div>
+  }
 </div>
