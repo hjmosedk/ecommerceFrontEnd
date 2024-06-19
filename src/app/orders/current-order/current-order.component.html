@@ -1,16 +1,15 @@
-@if (isCurrentOrderEmpty | async) {
+@if ((currentOrder | async) === undefined ) {
 <div>
-  <h1>There is currently No Orders to show</h1>
+  <h1>There is currently no orders to show</h1>
 </div>
-} @if (currentOrder | async; as orders) {
+} @if (currentOrder | async; as order) {
 <div class="mainContainer">
-  @for (order of orders; track order) {
   <div>
     <div class="headline">
       <h1>Thank you for your order!</h1>
     </div>
     <hr />
-    <app-status-stepper [orderStatus]="testOrderStatus"></app-status-stepper>
+    <app-status-stepper [orderStatus]="order.orderStatus"></app-status-stepper>
     <hr />
     <div class="dataContainer">
       <div>
@@ -171,6 +170,5 @@
     </div>
     <div></div>
   </div>
-  }
 </div>
 }

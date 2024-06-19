@@ -17,6 +17,8 @@ import { AddressInformationComponent } from './address-information/address-infor
 import { OrdersRoutingModule } from './orders-routing.module';
 import { CurrentOrderComponent } from './current-order/current-order.component';
 import { StatusStepperComponent } from './status-stepper/status-stepper.component';
+import { ListOrdersComponent } from './list-orders/list-orders.component';
+import { ordersReducer } from './state/orders.reducers';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,7 @@ import { StatusStepperComponent } from './status-stepper/status-stepper.componen
     AddressInformationComponent,
     CurrentOrderComponent,
     StatusStepperComponent,
+    ListOrdersComponent,
   ],
   imports: [
     CommonModule,
@@ -36,6 +39,7 @@ import { StatusStepperComponent } from './status-stepper/status-stepper.componen
     EffectsModule.forFeature([OrdersEffect]),
     StoreModule.forFeature('cart', cartReducer),
     StoreModule.forFeature('order', orderReducer),
+    StoreModule.forFeature('orders', ordersReducer),
   ],
 })
 export class OrdersModule {}

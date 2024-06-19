@@ -1,4 +1,4 @@
-import { createActionGroup, emptyProps, props } from '@ngrx/store';
+import { createActionGroup, props } from '@ngrx/store';
 
 import { newOrderModel } from '../models/order.model';
 import { Ecommerce } from 'ckh-typings';

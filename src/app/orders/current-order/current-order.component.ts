@@ -1,8 +1,7 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { OrdersService } from '../orders.service';
-import { Observable } from 'rxjs';
+import { filter, Observable } from 'rxjs';
 import { Ecommerce } from 'ckh-typings';
-import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { CartService } from '../cart.service';
 import Dinero from 'dinero.js';
@@ -18,10 +17,11 @@ export class CurrentOrderComponent implements OnInit {
     private cartService: CartService
   ) {}
   baseUrl = environment.baseUri;
-  currentOrder: Observable<Ecommerce.OrderModel[]> | undefined;
+  currentOrder: Observable<Ecommerce.OrderModel | undefined> = new Observable(
+    undefined
+  );
   isCurrentOrderEmpty: Observable<boolean> | undefined;
-  testOrderStatus: Ecommerce.OrderStatus | undefined = undefined;
-  orderStatus: Ecommerce.OrderStatus[] = Object.values(Ecommerce.OrderStatus);
+  orderStatus: Ecommerce.OrderStatus | undefined;
 
   calculatePrice(price: number, currency: Ecommerce.CurrencyType) {
     return this.cartService.calculatePrice(price, currency);
@@ -37,17 +37,12 @@ export class CurrentOrderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.currentOrder = this.orderService.getCurrentOrder();
-    this.isCurrentOrderEmpty = this.currentOrder.pipe(
-      map((order) => order.length === 0)
-    );
+    this.currentOrder = this.orderService
+      .getCurrentOrder()
+      .pipe(filter((order) => order !== undefined));
   }
 
   onClick() {
     this.orderService.setCurrentOrder(11);
-  }
-
-  setOrderStatus(orderStatus: Ecommerce.OrderStatus) {
-    this.testOrderStatus = orderStatus;
   }
 }

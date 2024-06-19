@@ -1,16 +1,9 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { OrderState, orderAdapter } from './order.state';
+import { OrderState } from './order.state';
 
-const selectOrdersFeature = createFeatureSelector<OrderState>('order');
-
-export const ordersSelectors = orderAdapter.getSelectors();
-
-export const selectOrderEntities = createSelector(
-  selectOrdersFeature,
-  ordersSelectors.selectEntities
-);
+const selectOrderFeature = createFeatureSelector<OrderState>('order');
 
 export const selectOrder = createSelector(
-  selectOrdersFeature,
-  ordersSelectors.selectAll
+  selectOrderFeature,
+  (state: OrderState) => state.order
 );
