@@ -19,9 +19,8 @@ export class CurrentOrderComponent implements OnInit {
     private router: Router
   ) {}
   baseUrl = environment.baseUri;
-  currentOrder: Observable<Ecommerce.OrderModel | undefined> = new Observable(
-    undefined
-  );
+  currentOrder?: Observable<Ecommerce.OrderModel>;
+
   isCurrentOrderEmpty: Observable<boolean> | undefined;
   orderStatus: Ecommerce.OrderStatus | undefined;
 
@@ -42,10 +41,6 @@ export class CurrentOrderComponent implements OnInit {
     this.currentOrder = this.orderService
       .getCurrentOrder()
       .pipe(filter((order) => order !== undefined));
-  }
-
-  onClick() {
-    this.orderService.setCurrentOrder(11);
   }
 
   goBack(): void {
