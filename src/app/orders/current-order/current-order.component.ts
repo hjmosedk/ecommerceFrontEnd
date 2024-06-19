@@ -5,6 +5,7 @@ import { Ecommerce } from 'ckh-typings';
 import { environment } from 'src/environments/environment';
 import { CartService } from '../cart.service';
 import Dinero from 'dinero.js';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-current-order',
@@ -14,7 +15,8 @@ import Dinero from 'dinero.js';
 export class CurrentOrderComponent implements OnInit {
   constructor(
     private orderService: OrdersService,
-    private cartService: CartService
+    private cartService: CartService,
+    private router: Router
   ) {}
   baseUrl = environment.baseUri;
   currentOrder: Observable<Ecommerce.OrderModel | undefined> = new Observable(
@@ -44,5 +46,9 @@ export class CurrentOrderComponent implements OnInit {
 
   onClick() {
     this.orderService.setCurrentOrder(11);
+  }
+
+  goBack(): void {
+    this.router.navigate(['/']);
   }
 }

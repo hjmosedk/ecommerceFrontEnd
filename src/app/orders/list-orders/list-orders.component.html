@@ -1,10 +1,9 @@
-@if (allOrders | async) {
-
+@if (allOrders | async; as orders) { @if (orders) {
 <div class="table-container">
   <table mat-table [dataSource]="allOrders" class="mat-elevation-z8">
     <!--
-          Sku colum
-          -->
+              ID Column
+              -->
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef>Order ID</th>
       <td
@@ -17,8 +16,8 @@
     </ng-container>
 
     <!--
-          Name colum
-          -->
+              Order Date colum
+              -->
 
     <ng-container matColumnDef="orderDate">
       <th mat-header-cell *matHeaderCellDef>Order Date</th>
@@ -33,8 +32,8 @@
     </ng-container>
 
     <!--
-          Description colum
-          -->
+              Last Change colum
+              -->
 
     <ng-container matColumnDef="lastChange">
       <th mat-header-cell *matHeaderCellDef>Last Change</th>
@@ -48,8 +47,8 @@
     </ng-container>
 
     <!--
-          Brand colum
-          -->
+              Customer Name colum
+              -->
 
     <ng-container matColumnDef="customer">
       <th mat-header-cell *matHeaderCellDef>Customer</th>
@@ -65,8 +64,8 @@
     </ng-container>
 
     <!--
-          Price colum
-          -->
+              Order Price colum
+              -->
 
     <ng-container matColumnDef="totalPrice">
       <th mat-header-cell *matHeaderCellDef>Order Price</th>
@@ -80,11 +79,11 @@
     </ng-container>
 
     <!--
-          Quantity colum
-          -->
+              Currency colum
+              -->
 
     <ng-container matColumnDef="currency">
-      <th mat-header-cell *matHeaderCellDef>currency</th>
+      <th mat-header-cell *matHeaderCellDef>Currency</th>
       <td
         mat-cell
         *matCellDef="let element; let odd = odd"
@@ -95,8 +94,8 @@
     </ng-container>
 
     <!--
-          Percentage colum
-          -->
+              Order Items colum
+              -->
 
     <ng-container matColumnDef="items">
       <th mat-header-cell *matHeaderCellDef>Order Items</th>
@@ -112,8 +111,8 @@
     </ng-container>
 
     <!--
-          onSale colum
-          -->
+              Notes colum
+              -->
 
     <ng-container matColumnDef="notes">
       <th mat-header-cell *matHeaderCellDef>Notes</th>
@@ -127,8 +126,8 @@
     </ng-container>
 
     <!--
-          Picture colum
-          -->
+              Order Status colum
+              -->
 
     <ng-container matColumnDef="status">
       <th mat-header-cell *matHeaderCellDef>Order Status</th>
@@ -162,5 +161,8 @@
     ></tr>
   </table>
 </div>
-
-}
+} @if (!orders.length ) {
+<div class="mainContainer">
+  <h1>There is no order to show here - Please come back later</h1>
+</div>
+} }

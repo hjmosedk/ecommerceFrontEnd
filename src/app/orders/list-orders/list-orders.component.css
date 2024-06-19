@@ -16,3 +16,9 @@ img {
   /*margin-top: 20px;
     margin-bottom: 20px;*/
 }
+
+.mainContainer {
+  margin: 20px;
+  width: 95%;
+  padding: 16px;
+}

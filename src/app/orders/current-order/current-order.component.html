@@ -1,8 +1,9 @@
-@if ((currentOrder | async) === undefined ) {
-<div>
-  <h1>There is currently no orders to show</h1>
+@if (currentOrder | async; as order) { @if (!order.orderStatus) {
+<div class="mainContainer">
+  <h1>There is currently no orders to show - Try agin later</h1>
+  <button mat-raised-button color="primary" (click)="goBack()">Go Back?</button>
 </div>
-} @if (currentOrder | async; as order) {
+} @if (order.orderStatus) {
 <div class="mainContainer">
   <div>
     <div class="headline">
@@ -116,7 +117,7 @@
               {{ order.customer.shippingAddress.country }}
             </p>
           </div>
-          @if (!order.customer.billingAddress) {
+          @if (!order.customer.billingAddress.address) {
           <div class="shippingInformation">
             <h2>Billing Address</h2>
             <p>
@@ -138,7 +139,7 @@
               {{ order.customer.shippingAddress.country }}
             </p>
           </div>
-          } @if (order.customer.billingAddress) {
+          } @if (order.customer.billingAddress.address) {
           <div class="shippingInformation">
             <h2>Billing Address</h2>
             <p>
@@ -171,4 +172,4 @@
     <div></div>
   </div>
 </div>
-}
+} }
