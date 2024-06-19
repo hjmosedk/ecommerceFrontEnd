@@ -5,7 +5,9 @@ import { environment } from 'src/environments/environment';
 import { Store } from '@ngrx/store';
 import { OrderActions } from './state/order.actions';
 import { Ecommerce } from 'ckh-typings';
-import { selectOrder, selectOrderEntities } from './state/order.selectors';
+import { selectOrder } from './state/order.selectors';
+import { OrdersActions } from './state/orders.actions';
+import { selectAllOrdersFromStore } from './state/orders.selectors';
 
 @Injectable({
   providedIn: 'root',
@@ -37,5 +39,17 @@ export class OrdersService {
 
   getCurrentOrder() {
     return this.store.select(selectOrder);
+  }
+
+  getAllOrders() {
+    return this.http.get<Ecommerce.OrderModel[]>(`${this.baseUri}/orders`);
+  }
+
+  listAllOrders() {
+    this.store.dispatch(OrdersActions.loadOrders());
+  }
+
+  selectAllOrders() {
+    return this.store.select(selectAllOrdersFromStore);
   }
 }

@@ -1,0 +1,166 @@
+@if (allOrders | async) {
+
+<div class="table-container">
+  <table mat-table [dataSource]="allOrders" class="mat-elevation-z8">
+    <!--
+          Sku colum
+          -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef>Order ID</th>
+      <td
+        mat-cell
+        *matCellDef="let order; let odd = odd"
+        [ngClass]="{ striped: odd }"
+      >
+        {{ order.id }}
+      </td>
+    </ng-container>
+
+    <!--
+          Name colum
+          -->
+
+    <ng-container matColumnDef="orderDate">
+      <th mat-header-cell *matHeaderCellDef>Order Date</th>
+      <td
+        mat-cell
+        *matCellDef="let element; let odd = odd"
+        [ngClass]="{ striped: odd }"
+        data-cy="productName"
+      >
+        {{ element.orderDate }}
+      </td>
+    </ng-container>
+
+    <!--
+          Description colum
+          -->
+
+    <ng-container matColumnDef="lastChange">
+      <th mat-header-cell *matHeaderCellDef>Last Change</th>
+      <td
+        mat-cell
+        *matCellDef="let element; let odd = odd"
+        [ngClass]="{ striped: odd }"
+      >
+        {{ element.lastChange }}
+      </td>
+    </ng-container>
+
+    <!--
+          Brand colum
+          -->
+
+    <ng-container matColumnDef="customer">
+      <th mat-header-cell *matHeaderCellDef>Customer</th>
+      <td
+        mat-cell
+        *matCellDef="let element; let odd = odd"
+        [ngClass]="{ striped: odd }"
+      >
+        {{ element.customer.personalInformation.firstName }}
+        {{ element.customer.personalInformation.middleName }}
+        {{ element.customer.personalInformation.lastName }}
+      </td>
+    </ng-container>
+
+    <!--
+          Price colum
+          -->
+
+    <ng-container matColumnDef="totalPrice">
+      <th mat-header-cell *matHeaderCellDef>Order Price</th>
+      <td
+        mat-cell
+        *matCellDef="let element; let odd = odd"
+        [ngClass]="{ striped: odd }"
+      >
+        {{ element.orderTotalPrice }}
+      </td>
+    </ng-container>
+
+    <!--
+          Quantity colum
+          -->
+
+    <ng-container matColumnDef="currency">
+      <th mat-header-cell *matHeaderCellDef>currency</th>
+      <td
+        mat-cell
+        *matCellDef="let element; let odd = odd"
+        [ngClass]="{ striped: odd }"
+      >
+        {{ element.orderCurrency }}
+      </td>
+    </ng-container>
+
+    <!--
+          Percentage colum
+          -->
+
+    <ng-container matColumnDef="items">
+      <th mat-header-cell *matHeaderCellDef>Order Items</th>
+      <td
+        mat-cell
+        *matCellDef="let element; let odd = odd"
+        [ngClass]="{ striped: odd }"
+      >
+        @for(item of element.orderItems; track item ) {
+        {{ item.product.sku }}x{{ item.salesQuantity }}
+        }
+      </td>
+    </ng-container>
+
+    <!--
+          onSale colum
+          -->
+
+    <ng-container matColumnDef="notes">
+      <th mat-header-cell *matHeaderCellDef>Notes</th>
+      <td
+        mat-cell
+        *matCellDef="let element; let odd = odd"
+        [ngClass]="{ striped: odd }"
+      >
+        {{ element.orderNotes }}
+      </td>
+    </ng-container>
+
+    <!--
+          Picture colum
+          -->
+
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef>Order Status</th>
+      <td
+        mat-cell
+        *matCellDef="let element; let odd = odd"
+        [ngClass]="{ striped: odd }"
+      >
+        {{ element.orderStatus }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="view">
+      <th mat-header-cell *matHeaderCellDef>View Order</th>
+      <td
+        mat-cell
+        *matCellDef="let order; let odd = odd"
+        [ngClass]="{ striped: odd }"
+      >
+        <button mat-raised-button color="accent" (click)="viewOrder(order.id)">
+          View
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns" class="striped"></tr>
+    <tr
+      mat-row
+      *matRowDef="let row; let odd = odd; columns: displayedColumns"
+      [ngClass]="{ striped: odd }"
+    ></tr>
+  </table>
+</div>
+
+}

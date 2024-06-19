@@ -11,7 +11,6 @@ import { ProductComponent } from './product/product.component';
 import { CreateProductComponent } from './create-product/create-product.component';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { ProductListComponent } from './product-list/product-list.component';
-import { MatTableModule } from '@angular/material/table';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ProductFormComponent } from './product-form/product-form.component';
 import { FileUploadComponent } from './file-upload/file-upload.component';
@@ -39,7 +38,6 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     BrowserAnimationsModule,
     MatSelectModule,
     MatGridListModule,
-    MatTableModule,
     FlexLayoutModule,
     MatPaginatorModule,
     ProductsRoutingModule,

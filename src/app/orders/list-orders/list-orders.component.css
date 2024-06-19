@@ -1,0 +1,18 @@
+.striped {
+  background-color: #673ab7;
+  color: black;
+}
+
+th.mat.header-cell {
+  color: white;
+}
+
+img {
+  padding-top: 5px;
+}
+
+.table-container {
+  margin: 20px;
+  /*margin-top: 20px;
+    margin-bottom: 20px;*/
+}

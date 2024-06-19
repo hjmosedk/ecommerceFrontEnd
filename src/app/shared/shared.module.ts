@@ -16,6 +16,7 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatBadgeModule } from '@angular/material/badge';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [NavbarComponent, SplitterbarComponent, FooterComponent],
@@ -33,6 +34,7 @@ import { MatBadgeModule } from '@angular/material/badge';
     MatInputModule,
     MatSlideToggleModule,
     MatBadgeModule,
+    MatTableModule,
   ],
   imports: [
     CommonModule,
@@ -49,6 +51,7 @@ import { MatBadgeModule } from '@angular/material/badge';
     ReactiveFormsModule,
     MatSlideToggleModule,
     MatBadgeModule,
+    MatTableModule,
   ],
 })
 export class SharedModule {}

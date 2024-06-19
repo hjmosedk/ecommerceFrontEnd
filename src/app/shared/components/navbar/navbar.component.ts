@@ -36,4 +36,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
   viewAllProducts() {
     this.router.navigate(['products', 'admin']);
   }
+
+  listAllOrders() {
+    this.router.navigate(['orders', 'all']);
+  }
 }
