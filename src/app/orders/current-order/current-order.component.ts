@@ -19,7 +19,9 @@ export class CurrentOrderComponent implements OnInit {
     private router: Router
   ) {}
   baseUrl = environment.baseUri;
-  currentOrder?: Observable<Ecommerce.OrderModel>;
+  currentOrder: Observable<Ecommerce.OrderModel | undefined> = new Observable(
+    undefined
+  );
 
   isCurrentOrderEmpty: Observable<boolean> | undefined;
   orderStatus: Ecommerce.OrderStatus | undefined;

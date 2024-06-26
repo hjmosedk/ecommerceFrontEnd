@@ -136,9 +136,12 @@
         *matCellDef="let element; let odd = odd"
         [ngClass]="{ striped: odd }"
       >
-        {{ element.orderStatus }}
+        {{ capitalize(element.orderStatus) }}
       </td>
     </ng-container>
+    <!--
+              View Order colum
+              -->
 
     <ng-container matColumnDef="view">
       <th mat-header-cell *matHeaderCellDef>View Order</th>
@@ -149,6 +152,23 @@
       >
         <button mat-raised-button color="accent" (click)="viewOrder(order.id)">
           View
+        </button>
+      </td>
+    </ng-container>
+
+    <!--
+              Update Order colum
+              -->
+
+    <ng-container matColumnDef="update">
+      <th mat-header-cell *matHeaderCellDef>Update Order</th>
+      <td
+        mat-cell
+        *matCellDef="let order; let odd = odd"
+        [ngClass]="{ striped: odd }"
+      >
+        <button mat-raised-button color="warn" (click)="updateOrder(order)">
+          Update
         </button>
       </td>
     </ng-container>
