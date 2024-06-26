@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 import { CartService } from '../cart.service';
 import Dinero from 'dinero.js';
 import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-current-order',
@@ -16,7 +17,8 @@ export class CurrentOrderComponent implements OnInit {
   constructor(
     private orderService: OrdersService,
     private cartService: CartService,
-    private router: Router
+    private router: Router,
+    private location: Location
   ) {}
   baseUrl = environment.baseUri;
   currentOrder: Observable<Ecommerce.OrderModel | undefined> = new Observable(
@@ -46,6 +48,6 @@ export class CurrentOrderComponent implements OnInit {
   }
 
   goBack(): void {
-    this.router.navigate(['/']);
+    this.location.back();
   }
 }

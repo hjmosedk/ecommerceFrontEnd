@@ -1,70 +1,109 @@
 <div>
-  @if (data.type === messageType.success) {
-    <div class="success">
-      <h1 mat-dialog-title>{{ data.title }}</h1>
-      <mat-dialog-content class="mat-typography"
-        >{{ data.messageText }}
-      </mat-dialog-content>
-      <mat-dialog-actions align="center">
-        <button
-          mat-raised-button
-          color="primary"
-          (click)="onClose()"
-          data-cy="modalButton"
-          >
-          Close
-        </button>
-      </mat-dialog-actions>
-    </div>
+  @switch (data.type) { @case (messageType.success) {
+  <div class="success">
+    <h1 mat-dialog-title>{{ data.title }}</h1>
+    <mat-dialog-content class="mat-typography"
+      >{{ data.messageText }}
+    </mat-dialog-content>
+    <mat-dialog-actions align="center">
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="onClose()"
+        data-cy="modalButton"
+      >
+        Close
+      </button>
+    </mat-dialog-actions>
+  </div>
+  } @case (messageType.error) {
+  <div class="error">
+    <h1 mat-dialog-title>{{ data.title }}</h1>
+    <mat-dialog-content class="mat-typography">
+      The error have the following message: <br />{{ data.messageText }}
+    </mat-dialog-content>
+    <mat-dialog-actions align="center">
+      <button
+        mat-raised-button
+        mat-dialog-close
+        color="warn"
+        (click)="onClose()"
+        data-cy="modalButton"
+      >
+        Close
+      </button>
+    </mat-dialog-actions>
+  </div>
+  } @case (messageType.warning) {
+  <div class="warning">
+    <h1 mat-dialog-title>{{ data.title }}</h1>
+    <mat-dialog-content class="mat-typography">
+      {{ data.messageText }}
+    </mat-dialog-content>
+    <mat-dialog-actions align="center">
+      <button
+        mat-raised-button
+        mat-dialog-close
+        color="primary"
+        (click)="onClose()"
+        data-cy="modalButton"
+      >
+        Cancel
+      </button>
+      <button
+        mat-raised-button
+        mat-dialog-close
+        color="warn"
+        (click)="onAccept()"
+        data-cy="modalButton"
+      >
+        Ok
+      </button>
+    </mat-dialog-actions>
+  </div>
+  } @case (messageType.update) { @if (orderObservable$ | async; as order) { @if
+  (!order.orderStatus) {
+  <div><h1>No Order to update - Please try again</h1></div>
   }
-  @if (data.type === messageType.error) {
-    <div class="error">
-      <h1 mat-dialog-title>{{ data.title }}</h1>
-      <mat-dialog-content class="mat-typography">
-        The error have the following message: <br />{{ data.messageText }}
-      </mat-dialog-content>
-      <mat-dialog-actions align="center">
-        <button
-          mat-raised-button
-          mat-dialog-close
-          color="warn"
-          (click)="onClose()"
-          data-cy="modalButton"
-          >
-          Close
-        </button>
-      </mat-dialog-actions>
-    </div>
-  }
-  @if (data.type === messageType.warning) {
-    <div class="warning">
-      <h1 mat-dialog-title>{{ data.title }}</h1>
-      <mat-dialog-content class="mat-typography">
-        {{ data.messageText }}
-      </mat-dialog-content>
-      <mat-dialog-actions align="center">
-        <button
-          mat-raised-button
-          mat-dialog-close
-          color="primary"
-          (click)="onClose()"
-          data-cy="modalButton"
-          >
-          Cancel
-        </button>
-        <button
-          mat-raised-button
-          mat-dialog-close
-          color="warn"
-          (click)="onAccept()"
-          data-cy="modalButton"
-          >
-          Ok
-        </button>
-      </mat-dialog-actions>
-      @if (data.type === null) {
-        <div hidden></div>
-      }
-    </div>
-  }
+  <div>
+    <h1 mat-dialog-title>Id: {{ order.id }}</h1>
+    <mat-dialog-content class="mat-typography">
+      <h2><em>Status:</em> {{ order.orderStatus | capitalize }}</h2>
+      <p>
+        <em>Order Items:</em> <br />
+        @for(item of order.orderItems; track item) { {{ item.product.name }}x{{
+          item.salesQuantity
+        }}
+        <br />
+        }
+      </p>
+      <h3>
+        <em>Total Order Price:</em> <br />
+        {{ order.orderTotalPrice | calculatePrice : order.orderCurrency }}
+      </h3>
+    </mat-dialog-content>
+    <mat-dialog-actions align="center">
+      <button
+        mat-raised-button
+        mat-dialog-close
+        color="primary"
+        (click)="onClose()"
+        data-cy="modalButton"
+      >
+        Rollback
+      </button>
+      <button
+        mat-raised-button
+        mat-dialog-close
+        color="warn"
+        (click)="onAccept()"
+        data-cy="modalButton"
+      >
+        Next Status
+      </button>
+    </mat-dialog-actions>
+  </div>
+  } } @default {
+  <div hidden></div>
+  } }
 </div>

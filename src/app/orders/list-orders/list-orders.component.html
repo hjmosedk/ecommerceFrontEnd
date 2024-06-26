@@ -74,7 +74,7 @@
         *matCellDef="let element; let odd = odd"
         [ngClass]="{ striped: odd }"
       >
-        {{ element.orderTotalPrice }}
+        {{ element.orderTotalPrice | calculatePrice : element.orderCurrency }}
       </td>
     </ng-container>
 
@@ -167,7 +167,12 @@
         *matCellDef="let order; let odd = odd"
         [ngClass]="{ striped: odd }"
       >
-        <button mat-raised-button color="warn" (click)="updateOrder(order)">
+        <button
+          mat-raised-button
+          color="warn"
+          (click)="updateOrder(order)"
+          [disabled]="isButtonActive(order.id)"
+        >
           Update
         </button>
       </td>

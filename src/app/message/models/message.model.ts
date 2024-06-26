@@ -1,7 +1,8 @@
 export enum MessageType {
-  success = 'success',
-  error = 'error',
-  warning = 'warning',
+  success = 'SUCCESS',
+  error = 'ERROR',
+  warning = 'WARNING',
+  update = 'UPDATE',
 }
 export interface MessageData {
   type: MessageType | null;

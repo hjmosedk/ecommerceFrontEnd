@@ -17,9 +17,17 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatTableModule } from '@angular/material/table';
+import { CapitalizePipe } from './pipes/capitalize.pipe';
+import { CalculatePricePipe } from './pipes/calculate-price.pipe';
 
 @NgModule({
-  declarations: [NavbarComponent, SplitterbarComponent, FooterComponent],
+  declarations: [
+    NavbarComponent,
+    SplitterbarComponent,
+    FooterComponent,
+    CapitalizePipe,
+    CalculatePricePipe,
+  ],
   exports: [
     NavbarComponent,
     MatIconModule,
@@ -35,6 +43,8 @@ import { MatTableModule } from '@angular/material/table';
     MatSlideToggleModule,
     MatBadgeModule,
     MatTableModule,
+    CapitalizePipe,
+    CalculatePricePipe,
   ],
   imports: [
     CommonModule,
