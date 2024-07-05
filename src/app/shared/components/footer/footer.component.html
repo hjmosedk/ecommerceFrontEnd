@@ -14,12 +14,20 @@
 </mat-toolbar>
 <mat-toolbar color="primary">
   <span class="spacer-small"></span>
-  <button mat-button color="white"><h2>About</h2></button>
+  <button mat-button (click)="navigateToPage('about')">
+    <h2>About</h2>
+  </button>
   <span class="spacer-small"></span>
-  <button mat-button color="white"><h2>Terms</h2></button>
+  <button mat-button (click)="navigateToPage('terms')">
+    <h2>Terms</h2>
+  </button>
   <span class="spacer-small"></span>
-  <button mat-button color="white"><h2>Policies</h2></button>
+  <button mat-button (click)="navigateToPage('policies')">
+    <h2>Policies</h2>
+  </button>
   <span class="spacer-small"></span>
-  <button mat-button color="white"><h2>Contact</h2></button>
+  <button mat-button (click)="navigateToPage('contact')">
+    <h2>Contact</h2>
+  </button>
   <span class="spacer-small"></span>
 </mat-toolbar>
