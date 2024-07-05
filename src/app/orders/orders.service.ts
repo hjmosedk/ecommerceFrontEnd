@@ -16,31 +16,6 @@ export class OrdersService {
   baseUri = environment.baseUri;
   constructor(private http: HttpClient, private store: Store) {}
 
-  createNewOrder(newOrder: newOrderModel) {
-    return this.http.post<Ecommerce.OrderModel>(
-      `${this.baseUri}/orders`,
-      newOrder
-    );
-  }
-
-  dispatchNewOrder(newOrder: newOrderModel) {
-    this.store.dispatch(OrderActions.createOrder({ newOrder }));
-  }
-
-  getOrder(orderId: number) {
-    return this.http.get<Ecommerce.OrderModel>(
-      `${this.baseUri}/orders/${orderId}`
-    );
-  }
-
-  setCurrentOrder(orderId: number) {
-    this.store.dispatch(OrderActions.getOrder({ orderId }));
-  }
-
-  getCurrentOrder() {
-    return this.store.select(selectOrder);
-  }
-
   getAllOrders() {
     return this.http.get<Ecommerce.OrderModel[]>(`${this.baseUri}/orders`);
   }

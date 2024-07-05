@@ -136,7 +136,7 @@
         *matCellDef="let element; let odd = odd"
         [ngClass]="{ striped: odd }"
       >
-        {{ capitalize(element.orderStatus) }}
+        {{ element.orderStatus | capitalize }}
       </td>
     </ng-container>
     <!--
@@ -161,19 +161,14 @@
               -->
 
     <ng-container matColumnDef="update">
-      <th mat-header-cell *matHeaderCellDef>Update Order</th>
+      <th mat-header-cell *matHeaderCellDef>Change Order Status</th>
       <td
         mat-cell
         *matCellDef="let order; let odd = odd"
         [ngClass]="{ striped: odd }"
       >
-        <button
-          mat-raised-button
-          color="warn"
-          (click)="updateOrder(order)"
-          [disabled]="isButtonActive(order.id)"
-        >
-          Update
+        <button mat-raised-button color="accent" (click)="updateOrder(order)">
+          {{ nextOrderStatus(order.orderStatus) | capitalize }}
         </button>
       </td>
     </ng-container>

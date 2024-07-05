@@ -10,5 +10,12 @@ export const OrderActions = createActionGroup({
     'Create Order Success': props<{ createdOrder: Ecommerce.OrderModel }>(),
     'Get Order': props<{ orderId: number }>(),
     'Get Order Success': props<{ order: Ecommerce.OrderModel }>(),
+    'Update Order Status': props<{
+      orderId: number;
+      newStatus: Ecommerce.OrderStatus;
+    }>(),
+    'Update Order Status Success': props<{
+      updatedOrder: Ecommerce.OrderModel;
+    }>(),
   },
 });

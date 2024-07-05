@@ -61,49 +61,34 @@
       </button>
     </mat-dialog-actions>
   </div>
-  } @case (messageType.update) { @if (orderObservable$ | async; as order) { @if
-  (!order.orderStatus) {
-  <div><h1>No Order to update - Please try again</h1></div>
-  }
+  } @case (messageType.update) {
   <div>
-    <h1 mat-dialog-title>Id: {{ order.id }}</h1>
+    <h1 mat-dialog-title>Change to status to: {{ data.title | capitalize }}</h1>
     <mat-dialog-content class="mat-typography">
-      <h2><em>Status:</em> {{ order.orderStatus | capitalize }}</h2>
-      <p>
-        <em>Order Items:</em> <br />
-        @for(item of order.orderItems; track item) { {{ item.product.name }}x{{
-          item.salesQuantity
-        }}
-        <br />
-        }
-      </p>
-      <h3>
-        <em>Total Order Price:</em> <br />
-        {{ order.orderTotalPrice | calculatePrice : order.orderCurrency }}
-      </h3>
+      <h2>{{ data.messageText }}</h2>
     </mat-dialog-content>
     <mat-dialog-actions align="center">
       <button
         mat-raised-button
         mat-dialog-close
-        color="primary"
+        color="warn"
         (click)="onClose()"
         data-cy="modalButton"
       >
-        Rollback
+        Cancel
       </button>
       <button
         mat-raised-button
         mat-dialog-close
-        color="warn"
+        color="primary"
         (click)="onAccept()"
         data-cy="modalButton"
       >
-        Next Status
+        Confirm
       </button>
     </mat-dialog-actions>
   </div>
-  } } @default {
+  } @default {
   <div hidden></div>
-  } }
+  }}
 </div>

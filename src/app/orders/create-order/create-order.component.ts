@@ -10,7 +10,7 @@ import { CartItemModel } from '../models/cartItem.model';
 import { Observable, Subscription, take } from 'rxjs';
 import { Ecommerce } from 'ckh-typings';
 import Dinero from 'dinero.js';
-import { OrdersService } from '../orders.service';
+import { OrderService } from '../order.service';
 import { newOrderModel } from '../models/order.model';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -24,7 +24,7 @@ export class CreateOrderComponent implements OnInit, OnDestroy {
   constructor(
     private formBuilder: FormBuilder,
     private cartService: CartService,
-    private orderService: OrdersService,
+    private orderService: OrderService,
     private router: Router,
     private route: ActivatedRoute
   ) {}

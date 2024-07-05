@@ -8,7 +8,7 @@ import { SharedModule } from '../shared/shared.module';
 import { CartItemCardComponent } from './cart-item-card/cart-item-card.component';
 import { CreateOrderComponent } from './create-order/create-order.component';
 import { EffectsModule } from '@ngrx/effects';
-import { OrdersEffect } from './state/order.effects';
+import { OrdersEffect } from './state/orders.effects';
 
 //Material Modules
 import { MatStepperModule } from '@angular/material/stepper';
@@ -19,6 +19,7 @@ import { CurrentOrderComponent } from './current-order/current-order.component';
 import { StatusStepperComponent } from './status-stepper/status-stepper.component';
 import { ListOrdersComponent } from './list-orders/list-orders.component';
 import { ordersReducer } from './state/orders.reducers';
+import { OrderEffect } from './state/order.effects';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,7 @@ import { ordersReducer } from './state/orders.reducers';
     SharedModule,
     MatStepperModule,
     OrdersRoutingModule,
-    EffectsModule.forFeature([OrdersEffect]),
+    EffectsModule.forFeature([OrdersEffect, OrderEffect]),
     StoreModule.forFeature('cart', cartReducer),
     StoreModule.forFeature('order', orderReducer),
     StoreModule.forFeature('orders', ordersReducer),

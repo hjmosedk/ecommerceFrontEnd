@@ -1,3 +1,4 @@
+import { OrderModel } from 'ckh-typings/dist/ecommerce';
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
 import { Ecommerce } from 'ckh-typings';
 

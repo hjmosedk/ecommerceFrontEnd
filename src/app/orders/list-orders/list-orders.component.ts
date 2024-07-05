@@ -1,11 +1,16 @@
+import { SettingService } from './../../settings/setting.service';
 import { Component, OnInit, Pipe } from '@angular/core';
+import { OrderService } from '../order.service';
 import { OrdersService } from '../orders.service';
 import { Observable } from 'rxjs';
 import { Ecommerce } from 'ckh-typings';
 import { Router } from '@angular/router';
 import { OrderModel } from 'ckh-typings/dist/ecommerce';
 import { MessageService } from 'src/app/message/message.service';
-import { MessageType } from 'src/app/message/models/message.model';
+import {
+  MessageType,
+  DialogResult,
+} from 'src/app/message/models/message.model';
 
 @Component({
   selector: 'app-list-orders',
@@ -14,9 +19,11 @@ import { MessageType } from 'src/app/message/models/message.model';
 })
 export class ListOrdersComponent implements OnInit {
   constructor(
+    private orderService: OrderService,
     private ordersService: OrdersService,
     private router: Router,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private settingService: SettingService
   ) {}
   allOrders: Observable<Ecommerce.OrderModel[]> =
     this.ordersService.selectAllOrders();
@@ -40,34 +47,47 @@ export class ListOrdersComponent implements OnInit {
   }
 
   viewOrder(id: number) {
-    this.ordersService.setCurrentOrder(id);
+    console.log('Called');
+    console.log(id);
+    this.orderService.setCurrentOrder(id);
     this.router.navigate(['orders', 'current']);
   }
 
   updateOrder(order: OrderModel) {
-    this.ordersService.setCurrentOrder(order.id);
-    this.messageService.sendSystemMessage({
+    const { message, newStatus } = this.settingService.getOrderMessage(
+      order.orderStatus
+    );
+    const dialogRef = this.messageService.sendSystemMessage({
       type: MessageType.update,
-      title: `Order: ${order.id}`,
-      messageText: '',
+      title: newStatus,
+      messageText: message,
     });
-    console.log('Order updated');
-    console.log('Order data: ', order);
-    console.log('Function not implemented!');
-  }
 
-  capitalize(orderStatus: string) {
-    const lowerCaseStatus = orderStatus.toLowerCase();
-    return lowerCaseStatus.charAt(0).toUpperCase() + lowerCaseStatus.slice(1);
-  }
-
-  isButtonActive(id: number): boolean {
-    let isActive = true;
-    this.ordersService.getCurrentOrder().subscribe((order) => {
-      if (order?.id === id) {
-        isActive = false;
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === DialogResult.ok) {
+        this.orderService.dispatchUpdateOrder(order.id, newStatus);
+      } else {
+        return;
       }
     });
-    return isActive;
+  }
+
+  nextOrderStatus(orderStatus: Ecommerce.OrderStatus): string {
+    switch (orderStatus) {
+      case Ecommerce.OrderStatus.RECEIVED:
+        return 'Confirm Order';
+      case Ecommerce.OrderStatus.CONFIRMED:
+        return 'Pack Order';
+      case Ecommerce.OrderStatus.PACKED:
+        return 'Ship Order';
+      case Ecommerce.OrderStatus.SHIPPED:
+        return 'Manually Close Order';
+      case Ecommerce.OrderStatus.RESERVED:
+        return 'Make a Backorder';
+      case Ecommerce.OrderStatus.CLOSED:
+        return 'Reopen Order';
+      default:
+        return 'Receive Order';
+    }
   }
 }

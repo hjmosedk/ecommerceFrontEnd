@@ -7,6 +7,7 @@ import { CartService } from '../cart.service';
 import Dinero from 'dinero.js';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
+import { OrderService } from '../order.service';
 
 @Component({
   selector: 'app-current-order',
@@ -15,10 +16,11 @@ import { Location } from '@angular/common';
 })
 export class CurrentOrderComponent implements OnInit {
   constructor(
-    private orderService: OrdersService,
+    private ordersService: OrdersService,
     private cartService: CartService,
     private router: Router,
-    private location: Location
+    private location: Location,
+    private orderService: OrderService
   ) {}
   baseUrl = environment.baseUri;
   currentOrder: Observable<Ecommerce.OrderModel | undefined> = new Observable(
