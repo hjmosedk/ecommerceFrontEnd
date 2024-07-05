@@ -1,6 +1,70 @@
 # Changelog
 
-All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
+
+## [0.2.2](https://github.com/hjmosedk/ecommerceFrontEnd/compare/v0.2.1...v0.2.2) (2024-07-05)
+
+
+### Features
+
+* **cartBadge:** added a badge to the cart ([b8db4bb](https://github.com/hjmosedk/ecommerceFrontEnd/commits/b8db4bbb74351cb99d855daf11d9387038f5f7bb))
+* **createOrder:** t¨he shop can now created orders ([0fccb69](https://github.com/hjmosedk/ecommerceFrontEnd/commits/0fccb6914397feb6f43d24805759eebf496a47d6))
+* **createOrder:** the create order component is now implemented ([6e23937](https://github.com/hjmosedk/ecommerceFrontEnd/commits/6e23937769ad3c141f899178e4be8239fc8c40a7))
+* **currenOrder:** currentOrder can now be seen ([83e349d](https://github.com/hjmosedk/ecommerceFrontEnd/commits/83e349d5927d11175db13d73cc819e7b8a82d42b))
+* **currentOrder:** added current order ([3d5fba1](https://github.com/hjmosedk/ecommerceFrontEnd/commits/3d5fba16a71950798ce5ddbf1b7981dd5b7f2a4b))
+* **listAllOrders:** all orders can now be seen ([34cc177](https://github.com/hjmosedk/ecommerceFrontEnd/commits/34cc177042b91495ea1914cc51f4593bdc292472))
+* **listOrder:** orderList now works ([10dfe69](https://github.com/hjmosedk/ecommerceFrontEnd/commits/10dfe693c9309eb3f76a23eecbf207a486f8eeea))
+* **orderList:** added the support of status ([f94bc09](https://github.com/hjmosedk/ecommerceFrontEnd/commits/f94bc0909c2cea47bda85292cc6aa4fe17dc7a15))
+* **orderList:** expanede on the orderList feature ([8b3ecfa](https://github.com/hjmosedk/ecommerceFrontEnd/commits/8b3ecfaec7d9362398564de909ac376f59fb3e58))
+* **orderNotes:** fixed order notes, so they are now supported ([9b24d5e](https://github.com/hjmosedk/ecommerceFrontEnd/commits/9b24d5ea36b964702dc8e82e0fad170d0c00ba25))
+* **orderStatus:** the orderStatus is now reflected on currentOrder ([0c869f4](https://github.com/hjmosedk/ecommerceFrontEnd/commits/0c869f43c1ed054e47726c810cfd5895f404aeb0))
+* **pipes:** added custom pipes ([6be7d2d](https://github.com/hjmosedk/ecommerceFrontEnd/commits/6be7d2d5cbce24f67f40ec0c2e285d57b72c3cce))
+* **settings:** settingsmodule created ([4c26cf9](https://github.com/hjmosedk/ecommerceFrontEnd/commits/4c26cf9109f5b0fb4a9bd0947c512c5a100fc151))
+* **various:** added assorted code to system ([3df9a07](https://github.com/hjmosedk/ecommerceFrontEnd/commits/3df9a077ed68ade7ead3e71c376b31c9982ce2af))
+
+
+### Bug Fixes
+
+* **createOrder:** fixed a bug in the view of a new order ([46c96b4](https://github.com/hjmosedk/ecommerceFrontEnd/commits/46c96b45b1a941825a754864bbc298478736bf6b))
+* **store:** fixed an issue with the store ([677cd6f](https://github.com/hjmosedk/ecommerceFrontEnd/commits/677cd6f60a9443bc8e508b116c614db5e5061315))
+
+
+### Minor Changes
+
+* **@if:** updated from ngIf to [@if](https://github.com/if) ([572a55d](https://github.com/hjmosedk/ecommerceFrontEnd/commits/572a55d05362085faf77ddce2e1ee6d31d2edfd4))
+* **currentOrder:** removed legacy code ([7786537](https://github.com/hjmosedk/ecommerceFrontEnd/commits/7786537d4417f97dd255079b711680f3bae21f3d))
+* **depsCLI:** updated cli ([5ebd262](https://github.com/hjmosedk/ecommerceFrontEnd/commits/5ebd2620e0573674c5e37d3daf9c0b3395a9abf9))
+* **deps:** updated all deps ([d1ad915](https://github.com/hjmosedk/ecommerceFrontEnd/commits/d1ad9154ca83bd5d80c3627f7283382fe89b0e74))
+* **deps:** updated all deps ([6b3e202](https://github.com/hjmosedk/ecommerceFrontEnd/commits/6b3e2027608b26717bc5e9e24f0b4e16e8ab0688))
+* **deps:** updated all deps ([e8ec630](https://github.com/hjmosedk/ecommerceFrontEnd/commits/e8ec6301e2a64e282e36502be4bb2925ab9d6bae))
+* **deps:** updated all deps ([5898122](https://github.com/hjmosedk/ecommerceFrontEnd/commits/58981223fde8f2c42b3e9ba584b306ebc4188bd2))
+* **deps:** updated all deps ([1a53a47](https://github.com/hjmosedk/ecommerceFrontEnd/commits/1a53a472e9151d1271729c4678386b0e338b8ebc))
+* **deps:** updated all deps ([fdd3a80](https://github.com/hjmosedk/ecommerceFrontEnd/commits/fdd3a809eb70eba1b10e6b5c8bd3f12f96e934bf))
+* **deps:** updated all deps ([21b00e9](https://github.com/hjmosedk/ecommerceFrontEnd/commits/21b00e93a4cf2e524f8ffdc6c951ca9234aab748))
+* **deps:** updated angulard deps ([917f8dc](https://github.com/hjmosedk/ecommerceFrontEnd/commits/917f8dc42163eb6b92f3aea1f7596143342e5220))
+* **deps:** updated deps ([1874efa](https://github.com/hjmosedk/ecommerceFrontEnd/commits/1874efacc9de8fec04e20f6f648842a92058dd77))
+* **depsUp:** updated all deps ([ab9d6d8](https://github.com/hjmosedk/ecommerceFrontEnd/commits/ab9d6d8044be5011704b8c9c270ed1fbefe803fe))
+* **ngUpdate:** updated angular to 18 ([fc0e810](https://github.com/hjmosedk/ecommerceFrontEnd/commits/fc0e810eb32f036736132b9ab30da8a125bd9dd1))
+
+
+### Optimizations
+
+* **models:** adjusted some models in the product module ([ba2e129](https://github.com/hjmosedk/ecommerceFrontEnd/commits/ba2e129da7f2a589d04cee7b60859e394ac2f36b))
+* **orderComponent:** refactor oder component to be smaller ([75288f8](https://github.com/hjmosedk/ecommerceFrontEnd/commits/75288f84b661f12164dede51d7f50556110866e5))
+* **orderList:** adjusted currentOrder and OrderList ([11f6b0b](https://github.com/hjmosedk/ecommerceFrontEnd/commits/11f6b0b59b4d5b96e12f4f579b0d55982c41ee9c))
+* **orders:** the orders module have been refactored infor more files ([1f20c4d](https://github.com/hjmosedk/ecommerceFrontEnd/commits/1f20c4d01d201bed9323574104f9c45be5b4b89e))
+* **standardversion:** moved tom standard-version to commit-and-tag-version ([966e6b8](https://github.com/hjmosedk/ecommerceFrontEnd/commits/966e6b8ce4a927ebcf70d8809ab76356e8fd4e64))
+* **state:** the state where renamed to account for order state ([a370fb0](https://github.com/hjmosedk/ecommerceFrontEnd/commits/a370fb036dcdb3d862df55d4b4ba69c321d96737))
+
+
+### Test
+
+* **objest:** due to change in the structure of the app, this have been adjustedW ([d1a5e25](https://github.com/hjmosedk/ecommerceFrontEnd/commits/d1a5e258dd26ef91046874cc0487a76f18c4e711))
+
+
+### Build Pipeline Adjustments
+
+* **package.json:** changes release function ([e9a19e6](https://github.com/hjmosedk/ecommerceFrontEnd/commits/e9a19e68fcedbef41c7f0c26f2370aed7ebf655c))
 
 ### [0.2.1](https://codeberg.org/hjmosedk/ecommerceFrontEnd/compare/v0.2.0...v0.2.1) (2024-03-22)
 
