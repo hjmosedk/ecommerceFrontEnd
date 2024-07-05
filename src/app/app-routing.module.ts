@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AllProductsComponent } from './product/all-products/all-products.component';
+import { LandingPageComponent } from './shared/components/landing-page/landing-page.component';
 
 const routes: Routes = [
-  { path: '', component: AllProductsComponent },
+  { path: '', component: LandingPageComponent },
   {
     path: 'products',
     loadChildren: () =>
@@ -18,7 +18,7 @@ const routes: Routes = [
         (m) => m.OrdersRoutingModule
       ),
   },
-  { path: '**', component: AllProductsComponent },
+  { path: '**', component: LandingPageComponent },
 ];
 
 @NgModule({

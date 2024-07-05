@@ -19,6 +19,8 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { MatTableModule } from '@angular/material/table';
 import { CapitalizePipe } from './pipes/capitalize.pipe';
 import { CalculatePricePipe } from './pipes/calculate-price.pipe';
+import { LandingPageComponent } from './components/landing-page/landing-page.component';
+import { HeroBannerComponent } from './components/hero-banner/hero-banner.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,8 @@ import { CalculatePricePipe } from './pipes/calculate-price.pipe';
     FooterComponent,
     CapitalizePipe,
     CalculatePricePipe,
+    LandingPageComponent,
+    HeroBannerComponent,
   ],
   exports: [
     NavbarComponent,
@@ -45,6 +49,7 @@ import { CalculatePricePipe } from './pipes/calculate-price.pipe';
     MatTableModule,
     CapitalizePipe,
     CalculatePricePipe,
+    LandingPageComponent,
   ],
   imports: [
     CommonModule,
