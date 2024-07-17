@@ -1,4 +1,7 @@
-import { SettingService } from './../../settings/setting.service';
+import {
+  orderStatusChange,
+  SettingService,
+} from './../../settings/setting.service';
 import { Component, OnInit, Pipe } from '@angular/core';
 import { OrderService } from '../order.service';
 import { OrdersService } from '../orders.service';
@@ -42,34 +45,38 @@ export class ListOrdersComponent implements OnInit {
     'update',
   ];
 
+  orderMessage!: orderStatusChange;
+
   ngOnInit(): void {
     this.ordersService.listAllOrders();
   }
 
   viewOrder(id: number) {
-    console.log('Called');
-    console.log(id);
     this.orderService.setCurrentOrder(id);
     this.router.navigate(['orders', 'current']);
   }
 
   updateOrder(order: OrderModel) {
-    const { message, newStatus } = this.settingService.getOrderMessage(
-      order.orderStatus
-    );
-    const dialogRef = this.messageService.sendSystemMessage({
-      type: MessageType.update,
-      title: newStatus,
-      messageText: message,
-    });
+    this.settingService
+      .getOrderMessage(order.orderStatus)
+      .subscribe((message) => {
+        this.orderMessage = message;
 
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result === DialogResult.ok) {
-        this.orderService.dispatchUpdateOrder(order.id, newStatus);
-      } else {
-        return;
-      }
-    });
+        const { title, content } = this.orderMessage;
+        const dialogRef = this.messageService.sendSystemMessage({
+          type: MessageType.update,
+          title,
+          messageText: content,
+        });
+
+        dialogRef.afterClosed().subscribe((result) => {
+          if (result === DialogResult.ok) {
+            this.orderService.dispatchUpdateOrder(order.id, title);
+          } else {
+            return;
+          }
+        });
+      });
   }
 
   nextOrderStatus(orderStatus: Ecommerce.OrderStatus): string {

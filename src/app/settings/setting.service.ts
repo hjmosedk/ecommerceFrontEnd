@@ -1,16 +1,22 @@
+import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Ecommerce } from 'ckh-typings';
 
-interface orderStatusChange {
-  message: string;
-  newStatus: Ecommerce.OrderStatus;
+export interface orderStatusChange {
+  content: string;
+  title: Ecommerce.OrderStatus;
 }
 
 @Injectable({
   providedIn: 'root',
 })
 export class SettingService {
-  constructor() {}
+  constructor(private http: HttpClient) {}
+
+  statusMessage!: orderStatusChange;
+  baseUri = environment.baseUri;
 
   receiveOrderMessage: string =
     'You will put the order into received, this will reserve the order on the customers account - This is the default status';
@@ -23,40 +29,33 @@ export class SettingService {
   shipOrderMessage: string = 'The order will be marked as shipped';
   closeOrderMessage: string = 'The order will be marked as shipped';
 
-  getOrderMessage(orderStatus: Ecommerce.OrderStatus): orderStatusChange {
+  getOrderNextStatus(
+    orderStatus: Ecommerce.OrderStatus
+  ): Ecommerce.OrderStatus {
     switch (orderStatus) {
       case Ecommerce.OrderStatus.RECEIVED:
       default:
-        return {
-          message: this.confirmOrderMessage,
-          newStatus: Ecommerce.OrderStatus.CONFIRMED,
-        };
-
+        return Ecommerce.OrderStatus.CONFIRMED;
       case Ecommerce.OrderStatus.CONFIRMED:
-        return {
-          message: this.packOrderMessage,
-          newStatus: Ecommerce.OrderStatus.PACKED,
-        };
+        return Ecommerce.OrderStatus.PACKED;
       case Ecommerce.OrderStatus.PACKED:
-        return {
-          message: this.shipOrderMessage,
-          newStatus: Ecommerce.OrderStatus.SHIPPED,
-        };
+        return Ecommerce.OrderStatus.SHIPPED;
       case Ecommerce.OrderStatus.SHIPPED:
-        return {
-          message: this.closeOrderMessage,
-          newStatus: Ecommerce.OrderStatus.CLOSED,
-        };
+        return Ecommerce.OrderStatus.CLOSED;
       case Ecommerce.OrderStatus.RESERVED:
-        return {
-          message: this.reserveOrderMessage,
-          newStatus: Ecommerce.OrderStatus.RESERVED,
-        };
+        return Ecommerce.OrderStatus.RESERVED;
       case Ecommerce.OrderStatus.CLOSED:
-        return {
-          message: this.receiveOrderMessage,
-          newStatus: Ecommerce.OrderStatus.RECEIVED,
-        };
+        return Ecommerce.OrderStatus.RECEIVED;
     }
+  }
+
+  getOrderMessage(
+    status: Ecommerce.OrderStatus
+  ): Observable<orderStatusChange> {
+    const nextStatus = this.getOrderNextStatus(status);
+
+    return this.http.get<orderStatusChange>(
+      `${this.baseUri}/settings/${nextStatus}`
+    );
   }
 }
