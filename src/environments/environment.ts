@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  baseUri: 'http://192.168.1.135:3000',
+  baseUri: 'https://192.168.1.135:3000',
   imagePath: '/images/',
   // deepcode ignore HardcodedNonCryptoSecret: This is a public key
   stripe_key:
