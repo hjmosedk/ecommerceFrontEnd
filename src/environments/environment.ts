@@ -6,6 +6,9 @@ export const environment = {
   production: false,
   baseUri: 'http://192.168.1.135:3000',
   imagePath: '/images/',
+  // deepcode ignore HardcodedNonCryptoSecret: This is a public key
+  stripe_key:
+    'pk_test_51Kx6GeBOi2EKhn6tCkRqyqsirt955w7DHuWVoAequK4wu0rSFvv3jyWBfVDnqVMz6pKuBgDVor7tj8LpcHlm5ChU00tJFTcpXa',
 };
 
 /*

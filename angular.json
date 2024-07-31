@@ -17,9 +17,7 @@
               "base": "dist/web-shop"
             },
             "index": "src/index.html",
-            "polyfills": [
-              "src/polyfills.ts"
-            ],
+            "polyfills": ["src/polyfills.ts"],
             "tsConfig": "tsconfig.app.json",
             "assets": ["src/favicon.ico", "src/assets", "src/assets/images"],
             "styles": [
@@ -70,7 +68,12 @@
               "buildTarget": "webShop:build:development"
             }
           },
-          "defaultConfiguration": "development"
+          "defaultConfiguration": "development",
+          "options": {
+            "ssl": true,
+            "sslKey": "./src/cert/192.168.1.135-key.pem",
+            "sslCert": "./src/cert/192.168.1.135.pem"
+          }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
