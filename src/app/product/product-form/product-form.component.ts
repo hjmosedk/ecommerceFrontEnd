@@ -77,7 +77,9 @@ export class ProductFormComponent implements OnInit {
       }),
       percentage: new FormControl(this.product?.percentage || 0),
       onSale: new FormControl(this.product?.onSale, {
-        nonNullable: true,
+        validators: [Validators.required],
+      }),
+      isPublic: new FormControl(this.product?.isPublic, {
         validators: [Validators.required],
       }),
     });
