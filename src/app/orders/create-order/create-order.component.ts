@@ -14,6 +14,12 @@ import { OrderService } from '../order.service';
 import { newOrderModel } from '../models/order.model';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { Router, ActivatedRoute } from '@angular/router';
+import {
+  StripeCardElementOptions,
+  StripeElementsOptions,
+} from '@stripe/stripe-js';
+import { StripeFactoryService, injectStripe } from 'ngx-stripe';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-create-order',
@@ -26,14 +32,22 @@ export class CreateOrderComponent implements OnInit, OnDestroy {
     private cartService: CartService,
     private orderService: OrderService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private stripeService: StripeFactoryService
   ) {}
 
+  stripe = injectStripe(environment.stripe_key);
+  elementsOptions: StripeElementsOptions = {
+    locale: 'en',
+    clientSecret: '',
+  };
+  cardOptions!: StripeCardElementOptions;
   cartContent: Observable<CartItemModel[]> | undefined = undefined;
   totalPriceSubscription!: Subscription;
   totalPrice: DineroModel = Dinero({ amount: 1, currency: 'DKK' }); //* This currency is only set to defined the object, it is being dynamically set by each product;
   disableDisplay: boolean = false;
   displayAddress: AddressModel = new AddressModel();
+  paymentIntent: Observable<string> = new Observable();
 
   personalInformation: PersonalInformationModel =
     new PersonalInformationModel();
@@ -54,6 +68,10 @@ export class CreateOrderComponent implements OnInit, OnDestroy {
     }),
     orderItems: this.orderItems,
     orderNotes: '',
+  });
+
+  stripeForm = this.formBuilder.group({
+    amount: this.totalPrice.getAmount(),
   });
 
   calculatePrice(price: number, currency: Ecommerce.CurrencyType) {
@@ -79,6 +97,8 @@ export class CreateOrderComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
+    const { clientSecret } = this.elementsOptions;
+    this.orderService.processPayment(clientSecret);
     this.cartService
       .cartContent()
       .pipe(take(1))
@@ -94,7 +114,7 @@ export class CreateOrderComponent implements OnInit, OnDestroy {
           orderNotes: this.newOrderForm.get('orderNotes')?.value,
           orderStatus: Ecommerce.OrderStatus.RECEIVED,
         } as newOrderModel;
-        this.orderService.dispatchNewOrder(newOrder);
+        //this.orderService.dispatchNewOrder(newOrder);
         this.cartService.clearCart();
       });
     this.router.navigate(['completed'], { relativeTo: this.route });
@@ -121,6 +141,22 @@ export class CreateOrderComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.cartContent = this.cartService.cartContent();
     this.calculateTotalPrice();
+    this.paymentIntent = this.orderService.getPaymentIntent(
+      this.totalPrice.getAmount(),
+      this.totalPrice.getCurrency()
+    ); /* .subscribe({
+        next: (paymentIntent) => {
+          console.log('paymentIntent:', paymentIntent);
+          this.elementsOptions.clientSecret = paymentIntent;
+          console.log('ElementsOptions:', this.elementsOptions);
+        },
+        error: (error) => {
+          console.error('Error:', error);
+        },
+        complete: () => {
+          console.log('Request completed');
+        },
+      });*/
   }
 
   ngOnDestroy(): void {

@@ -17,10 +17,7 @@
   </mat-paginator>
   <div class="product-list">
     @for (product of pagesProducts; track product; let i = $index) {
-    <app-product-card
-      [product]="product"
-      (click)="onClick(product.id)"
-    ></app-product-card>
+    <app-product-card [product]="product"></app-product-card>
     }
   </div>
 

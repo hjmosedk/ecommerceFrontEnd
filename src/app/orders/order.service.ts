@@ -6,13 +6,22 @@ import { Store } from '@ngrx/store';
 import { OrderActions } from './state/order.actions';
 import { Ecommerce } from 'ckh-typings';
 import { selectOrder } from './state/order.selectors';
+import { StripeService } from 'ngx-stripe';
+import { tap } from 'rxjs';
+import { ProductService } from '../product/product.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class OrderService {
   baseUri = environment.baseUri;
-  constructor(private http: HttpClient, private store: Store) {}
+  clientSecret: string = 'helloWOrld!';
+
+  constructor(
+    private http: HttpClient,
+    private store: Store,
+    private stripeService: StripeService
+  ) {}
 
   createNewOrder(newOrder: newOrderModel) {
     return this.http.post<Ecommerce.OrderModel>(
@@ -49,5 +58,22 @@ export class OrderService {
 
   dispatchUpdateOrder(orderId: number, newStatus: Ecommerce.OrderStatus) {
     this.store.dispatch(OrderActions.updateOrderStatus({ orderId, newStatus }));
+  }
+
+  getPaymentIntent(
+    orderPrice: number,
+    orderCurrency: any = Ecommerce.CurrencyType.DKK
+  ) {
+    return this.http.post<string>(`${this.baseUri}/payment`, {
+      orderPrice,
+      orderCurrency,
+    });
+  }
+
+  processPayment(paymentIntent: string | undefined) {
+    if (!paymentIntent) {
+      return;
+    }
+    return this.stripeService.confirmCardPayment(paymentIntent);
   }
 }

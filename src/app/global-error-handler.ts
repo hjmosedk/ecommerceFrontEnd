@@ -30,6 +30,7 @@ export class GlobalErrorHandler implements ErrorHandler {
     } else {
       systemMessage = errorService.getClientSideErrorMessage(error);
       stackTrace = errorService.getClientSideStack(error);
+
       const clientErrorMessage: MessageData = {
         type: MessageType.error,
         title: 'Oops - Something went wrong on your end!',

@@ -2,7 +2,7 @@ import {
   orderStatusChange,
   SettingService,
 } from './../../settings/setting.service';
-import { Component, OnInit, Pipe } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { OrderService } from '../order.service';
 import { OrdersService } from '../orders.service';
 import { Observable } from 'rxjs';

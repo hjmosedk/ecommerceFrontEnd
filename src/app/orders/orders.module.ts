@@ -9,7 +9,7 @@ import { CartItemCardComponent } from './cart-item-card/cart-item-card.component
 import { CreateOrderComponent } from './create-order/create-order.component';
 import { EffectsModule } from '@ngrx/effects';
 import { OrdersEffect } from './state/orders.effects';
-
+import { environment } from 'src/environments/environment';
 //Material Modules
 import { MatStepperModule } from '@angular/material/stepper';
 import { PersonalInformationComponent } from './personal-information/personal-information.component';
@@ -20,6 +20,8 @@ import { StatusStepperComponent } from './status-stepper/status-stepper.componen
 import { ListOrdersComponent } from './list-orders/list-orders.component';
 import { ordersReducer } from './state/orders.reducers';
 import { OrderEffect } from './state/order.effects';
+
+import { NgxStripeModule } from 'ngx-stripe';
 
 @NgModule({
   declarations: [
@@ -41,6 +43,7 @@ import { OrderEffect } from './state/order.effects';
     StoreModule.forFeature('cart', cartReducer),
     StoreModule.forFeature('order', orderReducer),
     StoreModule.forFeature('orders', ordersReducer),
+    NgxStripeModule.forRoot(environment.stripe_key),
   ],
 })
 export class OrdersModule {}

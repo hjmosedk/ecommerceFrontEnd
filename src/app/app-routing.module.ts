@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { LandingPageComponent } from './shared/components/landing-page/landing-page.component';
 
 const routes: Routes = [
-  { path: '', component: LandingPageComponent },
   {
     path: 'products',
     loadChildren: () =>
@@ -17,6 +16,10 @@ const routes: Routes = [
       import('./orders/orders-routing.module').then(
         (m) => m.OrdersRoutingModule
       ),
+  },
+  {
+    path: '',
+    component: LandingPageComponent,
   },
   { path: '**', component: LandingPageComponent },
 ];

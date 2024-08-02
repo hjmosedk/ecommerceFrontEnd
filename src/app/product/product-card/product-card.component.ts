@@ -40,6 +40,6 @@ export class ProductCardComponent {
 
   onClick(productId: number) {
     this.scrollToTop();
-    this.router.navigate(['/product', productId]);
+    this.router.navigate(['/products', productId]);
   }
 }

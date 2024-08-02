@@ -4,6 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { provideHttpClient } from '@angular/common/http';
 import { GlobalErrorHandler } from './global-error-handler';
+import { environment } from 'src/environments/environment';
 
 //Internal Modules
 import { ProductModule } from './product/product.module';
