@@ -6,22 +6,24 @@ import { Store } from '@ngrx/store';
 import { OrderActions } from './state/order.actions';
 import { Ecommerce } from 'ckh-typings';
 import { selectOrder } from './state/order.selectors';
-import { StripeService } from 'ngx-stripe';
-import { tap } from 'rxjs';
+import { injectStripe, StripeService } from 'ngx-stripe';
+import { tap, throwError } from 'rxjs';
 import { ProductService } from '../product/product.service';
+import {
+  StripeCardElement,
+  StripeElement,
+  StripeElements,
+} from '@stripe/stripe-js';
 
 @Injectable({
   providedIn: 'root',
 })
 export class OrderService {
   baseUri = environment.baseUri;
-  clientSecret: string = 'helloWOrld!';
 
-  constructor(
-    private http: HttpClient,
-    private store: Store,
-    private stripeService: StripeService
-  ) {}
+  constructor(private http: HttpClient, private store: Store) {}
+
+  private _stripe = injectStripe(environment.stripe_key);
 
   createNewOrder(newOrder: newOrderModel) {
     return this.http.post<Ecommerce.OrderModel>(
@@ -64,16 +66,30 @@ export class OrderService {
     orderPrice: number,
     orderCurrency: any = Ecommerce.CurrencyType.DKK
   ) {
-    return this.http.post<string>(`${this.baseUri}/payment`, {
+    return this.http.post<{ clientSecret: string }>(`${this.baseUri}/payment`, {
       orderPrice,
       orderCurrency,
     });
   }
 
-  processPayment(paymentIntent: string | undefined) {
-    if (!paymentIntent) {
-      return;
+  processPayment(clientSecret: string | undefined, elements: StripeElements) {
+    if (!clientSecret || !elements) {
+      return throwError(() => new Error('Client Secret or elements missing'));
     }
-    return this.stripeService.confirmCardPayment(paymentIntent);
+
+    try {
+      elements.submit();
+    } catch (error: any) {
+      return throwError(() => new Error(`${error.message}`));
+    }
+    return this._stripe.confirmPayment({
+      clientSecret,
+      elements,
+      redirect: 'if_required',
+    });
+  }
+
+  get stripe() {
+    return this._stripe;
   }
 }

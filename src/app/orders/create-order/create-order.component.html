@@ -1,5 +1,4 @@
 <div>
-  <button>Click Me!</button>
   <mat-stepper [linear]="false" orientation="vertical" #stepper>
     <mat-step
       [stepControl]="
@@ -105,23 +104,33 @@
           </tr>
         </table>
         <br />
-        @if(paymentIntent | async) {
-        <div>{{ paymentIntent | async }}</div>
-        }
-        <!--
+        @if (!elementsOptions.clientSecret) {
+        <div>Payment loading - Please wait</div>
+        } @if (elementsOptions.clientSecret) {
         <form [formGroup]="stripeForm">
-          <h1>HELLO WORLD!</h1>
           <ngx-stripe-elements
+            [hidden]="paymentLoading"
             [stripe]="stripe"
             [elementsOptions]="elementsOptions"
             ><ngx-stripe-payment
+              [doNotCreateUntilClientSecretIsSet]="true"
+              #paymentElement
+              [options]="paymentElementOptions"
           /></ngx-stripe-elements>
         </form>
-        -->
+        } @if (paymentLoading) {Payment Processing - Please wait} @if
+        (!paymentLoading) {
         <button mat-button color="warn" matStepperPrevious>Back</button>
-        <button mat-button color="primary" matStepperNext (click)="onSubmit()">
+        <button
+          type="submit"
+          mat-button
+          color="primary"
+          matStepperNext
+          (click)="onSubmit()"
+        >
           Confirm
         </button>
+        }
       </form>
     </mat-step>
   </mat-stepper>
