@@ -1,3 +1,4 @@
+import { Currency } from 'dinero.js';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { newOrderModel } from './models/order.model';
@@ -7,13 +8,15 @@ import { OrderActions } from './state/order.actions';
 import { Ecommerce } from 'ckh-typings';
 import { selectOrder } from './state/order.selectors';
 import { injectStripe, StripeService } from 'ngx-stripe';
-import { tap, throwError } from 'rxjs';
+import { Observable, tap, throwError, switchMap, catchError } from 'rxjs';
 import { ProductService } from '../product/product.service';
 import {
   StripeCardElement,
   StripeElement,
   StripeElements,
 } from '@stripe/stripe-js';
+import { OrderItemModel } from 'ckh-typings/dist/ecommerce';
+import { CartItemModel } from './models/cartItem.model';
 
 @Injectable({
   providedIn: 'root',
@@ -63,13 +66,20 @@ export class OrderService {
   }
 
   getPaymentIntent(
-    orderPrice: number,
-    orderCurrency: any = Ecommerce.CurrencyType.DKK
+    orderCurrency: any = Ecommerce.CurrencyType.DKK,
+    cartItems: Observable<CartItemModel[]>
   ) {
-    return this.http.post<{ clientSecret: string }>(`${this.baseUri}/payment`, {
-      orderPrice,
-      orderCurrency,
-    });
+    return cartItems.pipe(
+      switchMap((orderItems) => {
+        return this.http.post<{ clientSecret: string }>(
+          `${this.baseUri}/payment`,
+          {
+            orderCurrency,
+            orderItems: orderItems,
+          }
+        );
+      })
+    );
   }
 
   processPayment(clientSecret: string | undefined, elements: StripeElements) {

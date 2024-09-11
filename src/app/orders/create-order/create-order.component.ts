@@ -126,7 +126,12 @@ export class CreateOrderComponent implements OnInit, OnDestroy {
     this.orderService
       .processPayment(clientSecret, this.paymentElement.elements)
       ?.subscribe(({ paymentIntent }) => {
-        if (paymentIntent && paymentIntent.status === 'succeeded') {
+        console.log(paymentIntent);
+        if (
+          paymentIntent &&
+          (paymentIntent.status === 'succeeded' ||
+            paymentIntent.status === 'requires_capture')
+        ) {
           this.cartService
             .cartContent()
             .pipe(take(1))
@@ -174,12 +179,10 @@ export class CreateOrderComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.cartContent = this.cartService.cartContent();
+
     this.calculateTotalPrice();
     this.orderService
-      .getPaymentIntent(
-        this.totalPrice.getAmount(),
-        this.totalPrice.getCurrency()
-      )
+      .getPaymentIntent(this.totalPrice.getCurrency(), this.cartContent)
       .subscribe((paymentIntent) => {
         this.elementsOptions.clientSecret = paymentIntent.clientSecret;
       });

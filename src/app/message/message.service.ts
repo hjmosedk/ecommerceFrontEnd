@@ -13,7 +13,6 @@ export class MessageService {
   dialogResult: any;
 
   sendSystemMessage(message: MessageData) {
-    console.log(message);
     return this.dialog.open(ModalComponent, { data: message });
   }
 
