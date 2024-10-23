@@ -2,6 +2,42 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.3.0](https://github.com/hjmosedk/ecommerceFrontEnd/compare/v0.2.2...v0.3.0) (2024-10-23)
+
+
+### Features
+
+* **landingPage:** landingPage added ([5d96755](https://github.com/hjmosedk/ecommerceFrontEnd/commits/5d96755a1370aa70cbe665f61b11e6f9a7c4120b))
+* **OrderList:** change status on orders works ([6fd0477](https://github.com/hjmosedk/ecommerceFrontEnd/commits/6fd0477c9e1db0a7363a1231006a5bfdf378b3ee))
+* **payment:** added needCapture to payment ([a98217a](https://github.com/hjmosedk/ecommerceFrontEnd/commits/a98217a9d72830373fe910f4d90d1adec51510f0))
+
+
+### Bug Fixes
+
+* **navigation:** fixed a navigation bug ([ebb0545](https://github.com/hjmosedk/ecommerceFrontEnd/commits/ebb0545b402184c6bf8300903f7aa4f11d6aa598))
+* **newProduct:** fixed a bug in the create product ([8e9b082](https://github.com/hjmosedk/ecommerceFrontEnd/commits/8e9b082d5540d6fbae8e08b9dcd356e5cad95016))
+* **orderPayment:** fixed some bugs in order payment ([3e695c3](https://github.com/hjmosedk/ecommerceFrontEnd/commits/3e695c38ccc6341216dcaaa6d699cc2293cd80b6))
+* **payment:** fixed the double payment request ([4859631](https://github.com/hjmosedk/ecommerceFrontEnd/commits/48596315b676b42e7f67bc488facdd071e87d168))
+
+
+### Minor Changes
+
+* **angularCli:** updated deps ([85b79e1](https://github.com/hjmosedk/ecommerceFrontEnd/commits/85b79e1a853e363452cf12b6ca4bb8cf60792eaf))
+* **deps:** update all dependencies ([9526740](https://github.com/hjmosedk/ecommerceFrontEnd/commits/95267406a10d3fb8515482e230eca6a42172aad4))
+* **deps:** updated all deps ([aafbeeb](https://github.com/hjmosedk/ecommerceFrontEnd/commits/aafbeebea3ce4ce6544bfff22617301b99e64653))
+* **deps:** updated all deps, including angular ([bb384cc](https://github.com/hjmosedk/ecommerceFrontEnd/commits/bb384ccbe1be7e223ae1a807d686de92128dbeac))
+* **deps:** updated deps ([0a868a6](https://github.com/hjmosedk/ecommerceFrontEnd/commits/0a868a6a1caed4f5a2dd71ff0854421d1a5c6395))
+* **footer:** fixed some graphical errors in the footer ([79afa9c](https://github.com/hjmosedk/ecommerceFrontEnd/commits/79afa9c64d827b1e374f1b0f1acc64a495c50e52))
+* **housekeeping:** some housekeeping done ([0e121e7](https://github.com/hjmosedk/ecommerceFrontEnd/commits/0e121e71a422cd6509ddd3cd0e0acad81ecc0514))
+* **https:** added httpssupport ([afa81e4](https://github.com/hjmosedk/ecommerceFrontEnd/commits/afa81e4d2947a8580de09e2c27c0dacdb5984ad7))
+* **https:** adjusted the HTTP functions ([4bf05cc](https://github.com/hjmosedk/ecommerceFrontEnd/commits/4bf05cc7276cc58577def18bdc539aae70339ea2))
+* **ngDeps:** updated all ngDeps ([c3316d6](https://github.com/hjmosedk/ecommerceFrontEnd/commits/c3316d64ba2f981a0234d66e5e4187ef9202baad))
+
+
+### Optimizations
+
+* **standAlone:** codebase updated to standalone components, from modules ([f04144d](https://github.com/hjmosedk/ecommerceFrontEnd/commits/f04144db6ca6f9074b8e9992f8c95c26a3512335))
+
 ## [0.2.2](https://github.com/hjmosedk/ecommerceFrontEnd/compare/v0.2.1...v0.2.2) (2024-07-05)
 
 
