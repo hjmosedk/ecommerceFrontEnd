@@ -24,26 +24,24 @@ import { OrderEffect } from './state/order.effects';
 import { NgxStripeModule } from 'ngx-stripe';
 
 @NgModule({
-  declarations: [
-    CartListComponent,
-    CartItemCardComponent,
-    CreateOrderComponent,
-    PersonalInformationComponent,
-    AddressInformationComponent,
-    CurrentOrderComponent,
-    StatusStepperComponent,
-    ListOrdersComponent,
-  ],
-  imports: [
-    CommonModule,
-    SharedModule,
-    MatStepperModule,
-    OrdersRoutingModule,
-    EffectsModule.forFeature([OrdersEffect, OrderEffect]),
-    StoreModule.forFeature('cart', cartReducer),
-    StoreModule.forFeature('order', orderReducer),
-    StoreModule.forFeature('orders', ordersReducer),
-    NgxStripeModule.forRoot(environment.stripe_key),
-  ],
+    imports: [
+        CommonModule,
+        SharedModule,
+        MatStepperModule,
+        OrdersRoutingModule,
+        EffectsModule.forFeature([OrdersEffect, OrderEffect]),
+        StoreModule.forFeature('cart', cartReducer),
+        StoreModule.forFeature('order', orderReducer),
+        StoreModule.forFeature('orders', ordersReducer),
+        NgxStripeModule.forRoot(environment.stripe_key),
+        CartListComponent,
+        CartItemCardComponent,
+        CreateOrderComponent,
+        PersonalInformationComponent,
+        AddressInformationComponent,
+        CurrentOrderComponent,
+        StatusStepperComponent,
+        ListOrdersComponent,
+    ],
 })
 export class OrdersModule {}

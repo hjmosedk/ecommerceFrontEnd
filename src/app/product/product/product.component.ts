@@ -5,11 +5,15 @@ import { ProductsActions } from '../state/actions';
 import { selectOneProduct } from '../state/selectors';
 import { Observable } from 'rxjs';
 import { Ecommerce } from 'ckh-typings';
+import { ProductCardComponent } from '../product-card/product-card.component';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
-  selector: 'app-product',
-  templateUrl: './product.component.html',
-  styleUrls: ['./product.component.css'],
+    selector: 'app-product',
+    templateUrl: './product.component.html',
+    styleUrls: ['./product.component.css'],
+    standalone: true,
+    imports: [ProductCardComponent, AsyncPipe],
 })
 export class ProductComponent implements OnInit {
   public product: Observable<Ecommerce.ProductModel | undefined> =

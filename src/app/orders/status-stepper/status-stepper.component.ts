@@ -1,10 +1,20 @@
 import { Component, Input } from '@angular/core';
 import { Ecommerce } from 'ckh-typings';
+import { MatStepper, MatStep, MatStepLabel, MatStepperIcon } from '@angular/material/stepper';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
-  selector: 'app-status-stepper',
-  templateUrl: './status-stepper.component.html',
-  styleUrl: './status-stepper.component.css',
+    selector: 'app-status-stepper',
+    templateUrl: './status-stepper.component.html',
+    styleUrl: './status-stepper.component.css',
+    standalone: true,
+    imports: [
+        MatStepper,
+        MatStep,
+        MatStepLabel,
+        MatStepperIcon,
+        MatIcon,
+    ],
 })
 export class StatusStepperComponent {
   @Input() orderStatus: Ecommerce.OrderStatus | undefined;

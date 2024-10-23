@@ -9,11 +9,20 @@ import {
   MessageData,
   MessageType,
 } from 'src/app/message/models/message.model';
+import { MatButton } from '@angular/material/button';
+import { CartItemCardComponent } from '../cart-item-card/cart-item-card.component';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
-  selector: 'app-cart-list',
-  templateUrl: './cart-list.component.html',
-  styleUrl: './cart-list.component.css',
+    selector: 'app-cart-list',
+    templateUrl: './cart-list.component.html',
+    styleUrl: './cart-list.component.css',
+    standalone: true,
+    imports: [
+        MatButton,
+        CartItemCardComponent,
+        AsyncPipe,
+    ],
 })
 export class CartListComponent implements OnInit, OnDestroy {
   constructor(

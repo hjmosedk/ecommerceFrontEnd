@@ -14,11 +14,34 @@ import {
   MessageType,
   DialogResult,
 } from 'src/app/message/models/message.model';
+import { MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, MatCell, MatHeaderRowDef, MatHeaderRow, MatRowDef, MatRow } from '@angular/material/table';
+import { NgClass, AsyncPipe } from '@angular/common';
+import { MatButton } from '@angular/material/button';
+import { CapitalizePipe } from '../../shared/pipes/capitalize.pipe';
+import { CalculatePricePipe } from '../../shared/pipes/calculate-price.pipe';
 
 @Component({
-  selector: 'app-list-orders',
-  templateUrl: './list-orders.component.html',
-  styleUrl: './list-orders.component.css',
+    selector: 'app-list-orders',
+    templateUrl: './list-orders.component.html',
+    styleUrl: './list-orders.component.css',
+    standalone: true,
+    imports: [
+        MatTable,
+        MatColumnDef,
+        MatHeaderCellDef,
+        MatHeaderCell,
+        MatCellDef,
+        MatCell,
+        NgClass,
+        MatButton,
+        MatHeaderRowDef,
+        MatHeaderRow,
+        MatRowDef,
+        MatRow,
+        AsyncPipe,
+        CapitalizePipe,
+        CalculatePricePipe,
+    ],
 })
 export class ListOrdersComponent implements OnInit {
   constructor(

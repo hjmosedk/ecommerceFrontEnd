@@ -6,13 +6,21 @@ import { environment } from 'src/environments/environment';
 import { CartService } from '../cart.service';
 import Dinero from 'dinero.js';
 import { Router } from '@angular/router';
-import { Location } from '@angular/common';
+import { Location, AsyncPipe } from '@angular/common';
 import { OrderService } from '../order.service';
+import { MatButton } from '@angular/material/button';
+import { StatusStepperComponent } from '../status-stepper/status-stepper.component';
 
 @Component({
-  selector: 'app-current-order',
-  templateUrl: './current-order.component.html',
-  styleUrl: './current-order.component.css',
+    selector: 'app-current-order',
+    templateUrl: './current-order.component.html',
+    styleUrl: './current-order.component.css',
+    standalone: true,
+    imports: [
+        MatButton,
+        StatusStepperComponent,
+        AsyncPipe,
+    ],
 })
 export class CurrentOrderComponent implements OnInit {
   constructor(

@@ -1,17 +1,37 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import {
-  FormControl,
-  FormGroup,
-  Validators,
-  AbstractControl,
-} from '@angular/forms';
+import { FormControl, FormGroup, Validators, AbstractControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { Ecommerce } from 'ckh-typings';
+import { MatFormField, MatInput } from '@angular/material/input';
+import { MatLabel, MatHint, MatError } from '@angular/material/form-field';
+import { FileUploadComponent } from '../file-upload/file-upload.component';
+import { MatCard, MatCardLgImage } from '@angular/material/card';
+import { MatSelect } from '@angular/material/select';
+import { MatOption } from '@angular/material/core';
+import { MatSlideToggle } from '@angular/material/slide-toggle';
+import { MatButton } from '@angular/material/button';
 
 @Component({
-  selector: 'app-product-form',
-  templateUrl: './product-form.component.html',
-  styleUrls: ['./product-form.component.css'],
+    selector: 'app-product-form',
+    templateUrl: './product-form.component.html',
+    styleUrls: ['./product-form.component.css'],
+    standalone: true,
+    imports: [
+        FormsModule,
+        ReactiveFormsModule,
+        MatFormField,
+        MatLabel,
+        MatInput,
+        MatHint,
+        MatError,
+        FileUploadComponent,
+        MatCard,
+        MatCardLgImage,
+        MatSelect,
+        MatOption,
+        MatSlideToggle,
+        MatButton,
+    ],
 })
 export class ProductFormComponent implements OnInit {
   productDataForm!: FormGroup;

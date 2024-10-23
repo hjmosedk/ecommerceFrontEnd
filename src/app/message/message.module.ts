@@ -6,11 +6,11 @@ import { EffectsModule } from '@ngrx/effects';
 import { MessageEffects } from './state/effects';
 
 @NgModule({
-  declarations: [ModalComponent],
-  imports: [
-    CommonModule,
-    EffectsModule.forFeature([MessageEffects]),
-    SharedModule,
-  ],
+    imports: [
+        CommonModule,
+        EffectsModule.forFeature([MessageEffects]),
+        SharedModule,
+        ModalComponent,
+    ],
 })
 export class MessageModule {}

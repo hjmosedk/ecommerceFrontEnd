@@ -3,8 +3,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { Ecommerce } from 'ckh-typings';
 
 @Pipe({
-  name: 'calculatePrice',
-  standalone: false,
+    name: 'calculatePrice',
+    standalone: true,
 })
 export class CalculatePricePipe implements PipeTransform {
   constructor(private cartService: CartService) {}

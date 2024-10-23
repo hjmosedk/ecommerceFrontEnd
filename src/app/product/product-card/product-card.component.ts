@@ -6,11 +6,24 @@ import { PriceService } from '../price.service';
 import { environment } from 'src/environments/environment';
 import { CartService } from 'src/app/orders/cart.service';
 import { Ecommerce } from 'ckh-typings';
+import { MatCard, MatCardHeader, MatCardTitle, MatCardSubtitle, MatCardImage, MatCardContent, MatCardActions } from '@angular/material/card';
+import { MatButton } from '@angular/material/button';
 
 @Component({
-  selector: 'app-product-card',
-  templateUrl: './product-card.component.html',
-  styleUrls: ['./product-card.component.css'],
+    selector: 'app-product-card',
+    templateUrl: './product-card.component.html',
+    styleUrls: ['./product-card.component.css'],
+    standalone: true,
+    imports: [
+        MatCard,
+        MatCardHeader,
+        MatCardTitle,
+        MatCardSubtitle,
+        MatCardImage,
+        MatCardContent,
+        MatCardActions,
+        MatButton,
+    ],
 })
 export class ProductCardComponent {
   baseUrl = environment.baseUri;

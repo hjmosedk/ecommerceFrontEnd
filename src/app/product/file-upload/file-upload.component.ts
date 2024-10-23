@@ -1,11 +1,20 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { v4 as uuid } from 'uuid';
 import { HttpClient } from '@angular/common/http';
+import { MatLabel } from '@angular/material/form-field';
+import { MatMiniFabButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
-  selector: 'app-file-upload',
-  templateUrl: './file-upload.component.html',
-  styleUrls: ['./file-upload.component.css'],
+    selector: 'app-file-upload',
+    templateUrl: './file-upload.component.html',
+    styleUrls: ['./file-upload.component.css'],
+    standalone: true,
+    imports: [
+        MatLabel,
+        MatMiniFabButton,
+        MatIcon,
+    ],
 })
 export class FileUploadComponent {
   fileName: string = '';

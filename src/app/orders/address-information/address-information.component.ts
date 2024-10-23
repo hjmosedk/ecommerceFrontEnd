@@ -6,14 +6,31 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { AddressModel } from 'src/app/shared/models/customer.model';
+import { MatFormField, MatInput } from '@angular/material/input';
+import { MatLabel, MatHint, MatError } from '@angular/material/form-field';
+import { MatButton } from '@angular/material/button';
+import { MatStepperPrevious, MatStepperNext } from '@angular/material/stepper';
 
 @Component({
-  selector: 'app-address-information',
-  templateUrl: './address-information.component.html',
-  styleUrl: './address-information.component.css',
+    selector: 'app-address-information',
+    templateUrl: './address-information.component.html',
+    styleUrl: './address-information.component.css',
+    standalone: true,
+    imports: [
+        FormsModule,
+        ReactiveFormsModule,
+        MatFormField,
+        MatLabel,
+        MatInput,
+        MatHint,
+        MatError,
+        MatButton,
+        MatStepperPrevious,
+        MatStepperNext,
+    ],
 })
 export class AddressInformationComponent implements OnInit, OnDestroy {
   constructor(private formBuilder: FormBuilder) {}

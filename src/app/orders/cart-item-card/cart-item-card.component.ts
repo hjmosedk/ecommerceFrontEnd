@@ -4,11 +4,27 @@ import { CartItemModel } from '../models/cartItem.model';
 import { CartService } from '../cart.service';
 import { Ecommerce } from 'ckh-typings';
 import { Subscription } from 'rxjs';
+import { MatCard, MatCardHeader, MatCardTitleGroup, MatCardTitle, MatCardSubtitle, MatCardSmImage, MatCardContent, MatCardActions } from '@angular/material/card';
+import { MatIconButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
-  selector: 'app-cart-item-card',
-  templateUrl: './cart-item-card.component.html',
-  styleUrl: './cart-item-card.component.css',
+    selector: 'app-cart-item-card',
+    templateUrl: './cart-item-card.component.html',
+    styleUrl: './cart-item-card.component.css',
+    standalone: true,
+    imports: [
+        MatCard,
+        MatCardHeader,
+        MatCardTitleGroup,
+        MatCardTitle,
+        MatCardSubtitle,
+        MatCardSmImage,
+        MatCardContent,
+        MatCardActions,
+        MatIconButton,
+        MatIcon,
+    ],
 })
 export class CartItemCardComponent implements OnInit, OnDestroy {
   baseUrl = environment.baseUri;

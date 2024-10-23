@@ -6,14 +6,31 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { PersonalInformationModel } from 'src/app/shared/models/customer.model';
+import { MatFormField, MatInput } from '@angular/material/input';
+import { MatLabel, MatHint, MatError } from '@angular/material/form-field';
+import { MatButton } from '@angular/material/button';
+import { MatStepperPrevious, MatStepperNext } from '@angular/material/stepper';
 
 @Component({
-  selector: 'app-personal-information',
-  templateUrl: './personal-information.component.html',
-  styleUrl: './personal-information.component.css',
+    selector: 'app-personal-information',
+    templateUrl: './personal-information.component.html',
+    styleUrl: './personal-information.component.css',
+    standalone: true,
+    imports: [
+        FormsModule,
+        ReactiveFormsModule,
+        MatFormField,
+        MatLabel,
+        MatInput,
+        MatHint,
+        MatError,
+        MatButton,
+        MatStepperPrevious,
+        MatStepperNext,
+    ],
 })
 export class PersonalInformationComponent implements OnInit, OnDestroy {
   constructor(private formBuilder: FormBuilder) {}

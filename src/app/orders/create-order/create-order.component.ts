@@ -1,6 +1,6 @@
 import { CartService } from 'src/app/orders/cart.service';
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
   AddressModel,
   PersonalInformationModel,
@@ -12,20 +12,48 @@ import { Ecommerce } from 'ckh-typings';
 import Dinero from 'dinero.js';
 import { OrderService } from '../order.service';
 import { newOrderModel } from '../models/order.model';
-import { MatSlideToggleChange } from '@angular/material/slide-toggle';
+import { MatSlideToggleChange, MatSlideToggle } from '@angular/material/slide-toggle';
 import { Router, ActivatedRoute } from '@angular/router';
 import {
   StripeElementsOptions,
   StripePaymentElementOptions,
 } from '@stripe/stripe-js';
-import { StripePaymentElementComponent } from 'ngx-stripe';
+import { StripePaymentElementComponent, StripeElementsDirective } from 'ngx-stripe';
 
 import { Store } from '@ngrx/store';
+import { MatStepper, MatStep, MatStepLabel, MatStepperPrevious, MatStepperNext } from '@angular/material/stepper';
+import { PersonalInformationComponent } from '../personal-information/personal-information.component';
+import { AddressInformationComponent } from '../address-information/address-information.component';
+import { MatFormField, MatInput } from '@angular/material/input';
+import { MatLabel, MatHint } from '@angular/material/form-field';
+import { MatButton } from '@angular/material/button';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
-  selector: 'app-create-order',
-  templateUrl: './create-order.component.html',
-  styleUrl: './create-order.component.css',
+    selector: 'app-create-order',
+    templateUrl: './create-order.component.html',
+    styleUrl: './create-order.component.css',
+    standalone: true,
+    imports: [
+        MatStepper,
+        MatStep,
+        MatStepLabel,
+        PersonalInformationComponent,
+        AddressInformationComponent,
+        FormsModule,
+        ReactiveFormsModule,
+        MatSlideToggle,
+        MatFormField,
+        MatLabel,
+        MatInput,
+        MatHint,
+        MatButton,
+        MatStepperPrevious,
+        MatStepperNext,
+        StripeElementsDirective,
+        StripePaymentElementComponent,
+        AsyncPipe,
+    ],
 })
 export class CreateOrderComponent implements OnInit, OnDestroy {
   constructor(

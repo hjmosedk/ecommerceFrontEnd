@@ -6,11 +6,20 @@ import { selectActiveProducts } from '../state/selectors';
 import { Observable, Subscription, take } from 'rxjs';
 import { Ecommerce } from 'ckh-typings';
 import { ViewportScroller } from '@angular/common';
+import { SplitterbarComponent } from '../../shared/components/splitterbar/splitterbar.component';
+import { MatPaginator } from '@angular/material/paginator';
+import { ProductCardComponent } from '../product-card/product-card.component';
 
 @Component({
-  selector: 'app-all-products',
-  templateUrl: './all-products.component.html',
-  styleUrls: ['./all-products.component.css'],
+    selector: 'app-all-products',
+    templateUrl: './all-products.component.html',
+    styleUrls: ['./all-products.component.css'],
+    standalone: true,
+    imports: [
+        SplitterbarComponent,
+        MatPaginator,
+        ProductCardComponent,
+    ],
 })
 export class AllProductsComponent implements OnInit, OnDestroy {
   productList$: Observable<Ecommerce.ProductModel[]> =
