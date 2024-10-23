@@ -16,9 +16,7 @@ import { OrderService } from '../order.service';
 })
 export class CurrentOrderComponent implements OnInit {
   constructor(
-    private ordersService: OrdersService,
     private cartService: CartService,
-    private router: Router,
     private location: Location,
     private orderService: OrderService
   ) {}
@@ -27,7 +25,6 @@ export class CurrentOrderComponent implements OnInit {
     undefined
   );
 
-  isCurrentOrderEmpty: Observable<boolean> | undefined;
   orderStatus: Ecommerce.OrderStatus | undefined;
 
   calculatePrice(price: number, currency: Ecommerce.CurrencyType) {

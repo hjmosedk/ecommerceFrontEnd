@@ -10,7 +10,7 @@ import {
   selectTotalPrice,
 } from './state/cart.selectors';
 import { PriceService } from '../product/price.service';
-import { take, map } from 'rxjs';
+import { take, map, lastValueFrom } from 'rxjs';
 import { Ecommerce } from 'ckh-typings';
 @Injectable({
   providedIn: 'root',
@@ -55,7 +55,7 @@ export class CartService {
   }
 
   clearCart() {
-    this.store.dispatch(CartActions.clearCart());
+    return this.store.dispatch(CartActions.clearCart());
   }
 
   cartLength() {

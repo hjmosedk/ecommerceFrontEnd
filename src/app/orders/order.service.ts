@@ -1,4 +1,4 @@
-import { Currency } from 'dinero.js';
+import { Currency, Dinero } from 'dinero.js';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { newOrderModel } from './models/order.model';
@@ -8,9 +8,18 @@ import { OrderActions } from './state/order.actions';
 import { Ecommerce } from 'ckh-typings';
 import { selectOrder } from './state/order.selectors';
 import { injectStripe, StripeService } from 'ngx-stripe';
-import { Observable, tap, throwError, switchMap, catchError } from 'rxjs';
+import {
+  Observable,
+  throwError,
+  switchMap,
+  catchError,
+  scheduled,
+  asyncScheduler,
+} from 'rxjs';
 import { ProductService } from '../product/product.service';
 import {
+  PaymentIntent,
+  SetupIntent,
   StripeCardElement,
   StripeElement,
   StripeElements,
@@ -40,7 +49,6 @@ export class OrderService {
   }
 
   getOrder(orderId: number) {
-    console.log('Called! - Get Order Service');
     return this.http.get<Ecommerce.OrderModel>(
       `${this.baseUri}/orders/${orderId}`
     );
@@ -65,38 +73,31 @@ export class OrderService {
     this.store.dispatch(OrderActions.updateOrderStatus({ orderId, newStatus }));
   }
 
-  getPaymentIntent(
+  createPaymentIntent(
     orderCurrency: any = Ecommerce.CurrencyType.DKK,
     cartItems: Observable<CartItemModel[]>
   ) {
     return cartItems.pipe(
       switchMap((orderItems) => {
-        return this.http.post<{ clientSecret: string }>(
-          `${this.baseUri}/payment`,
-          {
-            orderCurrency,
-            orderItems: orderItems,
-          }
-        );
+        return this.http.post<PaymentIntent>(`${this.baseUri}/payment`, {
+          orderCurrency,
+          orderItems: orderItems,
+        });
       })
     );
   }
 
-  processPayment(clientSecret: string | undefined, elements: StripeElements) {
-    if (!clientSecret || !elements) {
+  confirmPayment(elements: StripeElements) {
+    if (!elements) {
       return throwError(() => new Error('Client Secret or elements missing'));
     }
 
     try {
       elements.submit();
+      return this._stripe.confirmPayment({ elements, redirect: 'if_required' });
     } catch (error: any) {
       return throwError(() => new Error(`${error.message}`));
     }
-    return this._stripe.confirmPayment({
-      clientSecret,
-      elements,
-      redirect: 'if_required',
-    });
   }
 
   get stripe() {

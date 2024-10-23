@@ -1,3 +1,4 @@
+import { CartService } from 'src/app/orders/cart.service';
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import {
@@ -5,7 +6,6 @@ import {
   PersonalInformationModel,
 } from 'src/app/shared/models/customer.model';
 import { DineroModel } from 'src/app/shared/models/product.model';
-import { CartService } from '../cart.service';
 import { CartItemModel } from '../models/cartItem.model';
 import { Observable, Subscription, take } from 'rxjs';
 import { Ecommerce } from 'ckh-typings';
@@ -15,18 +15,12 @@ import { newOrderModel } from '../models/order.model';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { Router, ActivatedRoute } from '@angular/router';
 import {
-  StripeCardElementOptions,
   StripeElementsOptions,
   StripePaymentElementOptions,
 } from '@stripe/stripe-js';
-import {
-  StripeCardComponent,
-  StripeElementsDirective,
-  StripeFactoryService,
-  StripePaymentElementComponent,
-  injectStripe,
-} from 'ngx-stripe';
-import { ErrorService } from 'src/app/services/error.service';
+import { StripePaymentElementComponent } from 'ngx-stripe';
+
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-create-order',
@@ -40,8 +34,17 @@ export class CreateOrderComponent implements OnInit, OnDestroy {
     private orderService: OrderService,
     private router: Router,
     private route: ActivatedRoute,
-    private errorService: ErrorService
+    private store: Store
   ) {}
+
+  cartContent!: Observable<CartItemModel[]>;
+  totalPriceSubscription!: Subscription;
+  totalPrice: DineroModel = Dinero({ amount: 1, currency: 'DKK' }); //* This currency is only set to defined the object, it is being dynamically set by each product;
+  disableDisplay: boolean = false;
+  displayAddress: AddressModel = new AddressModel();
+  orderComplete: boolean = false;
+  paymentIntentSubscription!: Subscription;
+  paymentLoading: boolean = false;
 
   @ViewChild('paymentElement')
   paymentElement!: StripePaymentElementComponent;
@@ -51,6 +54,7 @@ export class CreateOrderComponent implements OnInit, OnDestroy {
     locale: 'en',
     clientSecret: '',
   };
+
   paymentElementOptions: StripePaymentElementOptions = {
     layout: {
       type: 'tabs',
@@ -59,12 +63,6 @@ export class CreateOrderComponent implements OnInit, OnDestroy {
       spacedAccordionItems: false,
     },
   };
-  cartContent: Observable<CartItemModel[]> | undefined = undefined;
-  totalPriceSubscription!: Subscription;
-  totalPrice: DineroModel = Dinero({ amount: 1, currency: 'DKK' }); //* This currency is only set to defined the object, it is being dynamically set by each product;
-  disableDisplay: boolean = false;
-  displayAddress: AddressModel = new AddressModel();
-  paymentLoading: boolean = false;
 
   personalInformation: PersonalInformationModel =
     new PersonalInformationModel();
@@ -115,18 +113,18 @@ export class CreateOrderComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     if (!this.paymentElement) {
-      return;
+      throw new Error(`Payment failed - Please try again!`);
     }
     const { clientSecret } = this.elementsOptions;
     if (!clientSecret) {
-      return;
+      throw new Error(`Payment failed - Please try again!`);
     }
-
     this.paymentLoading = true;
+
     this.orderService
-      .processPayment(clientSecret, this.paymentElement.elements)
-      ?.subscribe(({ paymentIntent }) => {
-        console.log(paymentIntent);
+      .confirmPayment(this.paymentElement.elements)
+      .pipe(take(1))
+      .subscribe(({ paymentIntent }) => {
         if (
           paymentIntent &&
           (paymentIntent.status === 'succeeded' ||
@@ -146,15 +144,23 @@ export class CreateOrderComponent implements OnInit, OnDestroy {
                 orderCurrency: this.totalPrice.getCurrency(),
                 orderNotes: this.newOrderForm.get('orderNotes')?.value,
                 orderStatus: Ecommerce.OrderStatus.RECEIVED,
+                paymentStatus: paymentIntent.status,
+                paymentId: paymentIntent.id,
               } as newOrderModel;
+              this.orderComplete = true;
               this.orderService.dispatchNewOrder(newOrder);
               this.cartService.clearCart();
+              this.router.navigate(['completed'], { relativeTo: this.route });
             });
-          this.router.navigate(['completed'], { relativeTo: this.route });
         } else {
+          this.paymentLoading = false;
           throw new Error(
             `Payment failed due to: ${paymentIntent?.last_payment_error}`
           );
+        }
+        if (!paymentIntent) {
+          this.paymentLoading = false;
+          throw new Error(`Payment failed - Please try again!`);
         }
       });
   }
@@ -179,16 +185,19 @@ export class CreateOrderComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.cartContent = this.cartService.cartContent();
-
     this.calculateTotalPrice();
-    this.orderService
-      .getPaymentIntent(this.totalPrice.getCurrency(), this.cartContent)
-      .subscribe((paymentIntent) => {
-        this.elementsOptions.clientSecret = paymentIntent.clientSecret;
-      });
+    if (!this.orderComplete) {
+      this.paymentIntentSubscription = this.orderService
+        .createPaymentIntent(this.totalPrice.getCurrency(), this.cartContent)
+        .pipe(take(1))
+        .subscribe((paymentIntent) => {
+          this.elementsOptions.clientSecret = paymentIntent.client_secret!;
+        });
+    }
   }
 
   ngOnDestroy(): void {
     this.totalPriceSubscription.unsubscribe();
+    this.paymentIntentSubscription.unsubscribe();
   }
 }
